@@ -1,0 +1,127 @@
+/* Space out content a bit */
+.container {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#db0000+0,960002+100 */
+	
+}
+
+
+
+body {
+	background: #db0000; /* Old browsers */
+	background: -moz-linear-gradient(top, #db0000 0%, #960002 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #db0000 0%,#960002 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #db0000 0%,#960002 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#db0000', endColorstr='#960002',GradientType=0 ); /* IE6-9 */
+	background-image: url("../images/background.png");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	display: block;
+	height: 800px;
+	left: 0;
+	position: fixed;
+	right: 0;
+	z-index: -10;
+}
+
+
+/* Make the masthead heading the same height as the navigation */
+.header-img {
+  
+  
+  max-width:190px; margin-top: -7px;
+}
+
+.leadImage {
+	min-width: 100%;
+}
+
+.navbar-right {
+	margin-left: 0px;
+}
+
+
+/* Customize container*/
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+  padding: 14px 24px;
+  font-size: 21px;
+}
+
+.footer {
+	padding: 3px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+#navbar   li   a {
+	color: #ffffff;
+	display: block;
+	border-radius: 4px;
+	background-color: #F30503;
+	margin: 3px;
+}
+
+#navbar   li.active   a, #navbar   li   a:focus {
+	color: #ffffff;
+	background-color: #8D0401;
+}
+
+#navbar   li   a:hover {
+	background-color: #8D0401;
+	color:#ffffff;
+}
+
+#navbar  li.active   a:hover {
+	background-color: #8D0401;
+	color:#ffffff;
+}
+
+.jumbotron {
+	background-color: #f9f9f9;
+	
+}
+
+.navbar {
+	background-color: rgba(0,0,0,0.00);
+	border: 0px;
+}
+
+@media (max-width: 769px) {
+	.jumbotron {
+		padding: 5px!important;
+	}
+}
+
+.footer {
+	padding: 10px !important;
+	text-align: center;
+}

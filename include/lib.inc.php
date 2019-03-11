@@ -1,0 +1,623 @@
+<?php
+header('Content-Type: text/html; charset=UTF-8');
+define( "WEIHNACHTSTAG", 24 );
+session_start();
+date_default_timezone_set( "Europe/Berlin" );
+setlocale( LC_TIME, "de_DE.utf8" );
+//echo date_default_timezone_get();
+//echo phpinfo();
+$loggedin = ( isset( $_SESSION[ "loggedin" ] ) && $_SESSION[ "loggedin" ] == true ) ? true : false;
+
+function alert( $type, $message ) {
+	echo "	<div class='alert alert-$type'>
+					$message
+				</div>";
+}
+
+function getTimeObjBetween( $startDate, $endDate ) {
+	$ONE_SECOND = 1000;
+	$ONE_MINUTE = 60 * $ONE_SECOND;
+	$ONE_HOUR = 60 * $ONE_MINUTE;
+	$ONE_DAY = 24 * $ONE_HOUR;
+
+	$resultObject = new stdClass();
+	$resultObject->totalDays = 0;
+	$resultObject->hours = 0;
+	$resultObject->minutes = 0;
+	$resultObject->seconds = 0;
+
+
+	$timespan = $endDate - $startDate;
+
+	$dayCount = $timespan / $ONE_DAY;
+	$resultObject->totalDays = floor( $dayCount );
+
+	$hours = ( $dayCount - $resultObject->totalDays ) * 24;
+	$resultObject->hours = floor( $hours );
+
+	$minutes = ( $hours - $resultObject->hours ) * 60;
+	$resultObject->minutes = floor( $minutes );
+
+	$seconds = ( $minutes - $resultObject->minutes ) * 60;
+	$resultObject->seconds = floor( $seconds );
+
+	return $resultObject;
+}
+
+function getTasks( $db, $mode ) {
+	//echo $round;
+	/*$oneHTML = "";
+	$color = "";
+	if ($round == "gruppen") {
+		$query = 'SELECT *, TIMESTAMPDIFF(SECOND,CURRENT_TIMESTAMP(),`date`) AS timeleft FROM `matches` WHERE korunde=0 ORDER BY `group` ASC, `date` ASC';
+		//echo "gruppen";
+	} else {
+		if ($round == "platz3") {
+			$query = "SELECT *, TIMESTAMPDIFF(SECOND,CURRENT_TIMESTAMP(),`date`) AS timeleft FROM `matches` WHERE `group` = 'Spiel um Platz 3'";
+			$oneHTML = "centreBox ";
+			$color = "blue";
+		} else if ($round != "finale") {
+			$query = "SELECT *, TIMESTAMPDIFF(SECOND,CURRENT_TIMESTAMP(),`date`) AS timeleft FROM `matches` WHERE `group` LIKE '%$round"."finale%' ORDER BY `date` ASC";
+			if ($round == "halb") {
+				$color = "green";
+			} else if ($round == "viertel") {
+				$color = "red";
+			} 
+			//echo $query;
+		} else {
+			$query = "SELECT *, TIMESTAMPDIFF(SECOND,CURRENT_TIMESTAMP(),`date`) AS timeleft FROM `matches` WHERE `group` LIKE 'Finale'";
+			$oneHTML = "centreBox ";
+			$color = "yellow";
+			
+		}
+	}*/
+	$query = 'SELECT * FROM `days` ORDER BY `day` ASC';
+	$res = $db->query( $query );
+	$userid = $_SESSION[ "userid" ];
+	$res2 = $db->query( "SELECT * FROM tipps WHERE userid=$userid" )->fetch_all(MYSQLI_ASSOC);
+	$tipps = [];
+	foreach ($res2 as $tipp) {
+		$tipps[$tipp["day"]] = $tipp["tipp"];
+	}
+	//var_dump($tipps);
+	//echo $db->error;
+	if ( !$res ) {
+		alert( "danger", "Es wurden keine Aufgaben gefunden!" );
+	} else {
+		$res = $res->fetch_all( MYSQLI_ASSOC );
+		if ( !$res ) {
+			alert( "danger", "Es wurden keine Aufgaben gefunden!" );
+		} else {
+			if ( $mode == "list" ) {
+				$tasks = array();
+
+				$keys = array_keys( $res );
+				shuffle( $keys );
+
+				foreach ( $keys as $key ) {
+					$tasks[ $key ] = $res[ $key ];
+				}
+				foreach ( $tasks as $day ) {
+					echo "<div class='day'><a href='./aufgabe.php?a=" . $day[ "day" ] . "'>";
+					$allow = checkForDate($day["day"]);
+					if ($allow=="today") {
+						echo "<img class='present' src='./images/presentToday.png'>";
+					} else  {
+						if ($allow == "past") {
+							$alternatives = array_map("strtoupper", explode("-",$day[ "alternatives" ]));
+							if (isset($tipps[$day["day"]]) AND strtoupper($day["word"]) == strtoupper($tipps[$day["day"]])) {
+								echo "<img class='overlay' src='./images/right.png'>";
+							} else if (isset($tipps[$day["day"]]) AND in_array(strtoupper($tipps[$day["day"]]), $alternatives) AND !empty($tipps[$day["day"]])){
+								echo "<img class='overlay' src='./images/half.png'>";
+							} else {
+								echo "<img class='overlay' src='./images/wrong.png'>";
+							}
+						}
+						echo "<img class='present' src='./images/present.png'>";
+					}
+					
+					
+					echo "<p class='number'>" . $day[ "day" ] . "</p>";
+					echo "</a></div>";
+				}
+			} else if ( $mode == "list" ) {
+				echo "bild";
+			}
+		}
+	}
+}
+
+function updatePoints() {
+	$db = connect();
+	$res = $db->query( "SELECT * FROM users" );
+	if ( !$res ) {
+		alert( "danger", "Es wurden keine Benutzer gefunden!" );
+		die();
+	} else {
+		$res = $res->fetch_all( MYSQLI_ASSOC );
+		if ( !$res ) {
+			alert( "danger", "Es wurden keine Benutzer gefunden!" );
+			die();
+		} else {
+			$users = $res;
+		}
+	}
+
+	$res = $db->query( "SELECT * FROM days" );
+	if ( !$res ) {
+		alert( "danger", "Es wurden keine Aufgaben gefunden!" );
+		die();
+	} else {
+		$res = $res->fetch_all( MYSQLI_ASSOC );
+		if ( !$res ) {
+			alert( "danger", "Es wurden keine Aufgaben gefunden!" );
+			die();
+		}
+	}
+	$days = [];
+	foreach ( $res as $day ) {
+		$days[ $day[ "day" ] ] = $day;
+	}
+
+	$res = $db->query( "SELECT * FROM tipps" );
+	if ( !$res ) {
+		alert( "danger", "Es wurden keine Tipps gefunden!" );
+		die();
+	} else {
+		$res = $res->fetch_all( MYSQLI_ASSOC );
+		if ( !$res ) {
+			alert( "danger", "Es wurden keine Tipps gefunden!" );
+			die();
+		} else {
+			$tipps = $res;
+		}
+	}
+
+	// Finde Weltmeister
+	/*$res = $db->query( "SELECT * FROM matches WHERE `group`='Finale'" );
+	if ( $res ) {
+		$res = $res->fetch_all( MYSQLI_ASSOC );
+		if ( $res ) {
+			$res = $res[ 0 ];
+			if ( $res ) {
+				if ( $res[ "goalsTeam1" ] > $res[ "goalsTeam2" ] ) {
+					$weltmeister = $res[ "team1" ];
+				} else {
+					$weltmeister = $res[ "team2" ];
+				}
+			} else {
+				$weltmeister = false;
+			}
+		} else {
+			$weltmeister = false;
+		}
+	} else {
+		$weltmeister = false;
+	}*/
+	//var_dump($weltmeister);
+	//echo $db->error;
+	$userPoints = [];
+	$champions = [];
+	foreach ( $users as $user ) {
+		$userpoints[ $user[ "id" ] ] = 0;
+		//echo "Der Benutzer ".$user["name"]." hat die ID ".$user["id"]."<br>";
+		//$champions[$user["id"]] = $user["worldchampion"];
+		/*if ( $weltmeister ) {
+			if ( $user[ "worldchampion" ] == $weltmeister ) {
+				$userpoints[ $user[ "id" ] ] += 80;
+				//echo "points added!";
+				//echo $user["id"]." hat 80 Punkte für den Weltmeister bekommen<br>";
+			} else {
+				//var_dump($tippedChampion);
+				//var_dump($weltmeister);
+			}
+		} else {
+			//echo "no wm<br>";
+		}*/
+	}
+	echo "<br>";
+	foreach ( $tipps as $tipp ) {
+		//echo "tipp<br>";
+		$userid = $tipp[ "userid" ];
+		$day = $tipp[ "day" ];
+		if (checkForDate($day)=="past") {
+			$tipp = strtoupper($tipp[ "tipp" ]);
+			$solution = strtoupper($days[ $day ][ "word" ]);
+			$alternatives = array_map("strtoupper", explode("-",$days[ $day ][ "alternatives" ]));
+
+			if ($tipp == $solution) {
+				
+				if ($day == WEIHNACHTSTAG) {
+					$userpoints[ $userid ] += 60;
+				} else {
+					if (intval($day) < 8) {
+						$userpoints[ $userid ] += 10;
+					} else if (intval($day) < 15) {
+						$userpoints[ $userid ] += 20;
+					} else if (intval($day) < 24) {
+						$userpoints[ $userid ] += 30;
+					}
+					
+				}
+
+			} else if (in_array($tipp, $alternatives) AND !empty($tipp)) {
+				//echo "alternative used: $tipp<br>";
+				if (intval($day) < 8) {
+					$userpoints[ $userid ] += 5;
+				} else if (intval($day) < 15) {
+					$userpoints[ $userid ] += 10;
+				} else if (intval($day) < 24) {
+					$userpoints[ $userid ] += 15;
+				}
+			}
+		}
+		
+		
+		// Weltmeistercheck:
+
+		
+
+
+
+
+	}
+	//echo "<pre>";
+	//var_dump($userpoints[16]);
+	//echo "</pre>";
+
+	foreach ( $userpoints as $id => $points ) {
+		$id = $db->real_escape_string( $id );
+		$points = $db->real_escape_string( $points );
+		$db->query( "UPDATE users SET points=$points WHERE id=$id" );
+		//echo "$id hat $points<br>";
+		echo $db->error;
+	}
+}
+
+function createBestenliste( $query, $whereami ) {
+	$html = "";
+	$db = connect();
+	//updatePoints();
+	
+	
+	
+	if ( $query != "grades" ) {
+		$res = $db->query( $query );
+		//echo $db->error;
+		if ( !$res ) {
+			alert( "danger", "Es wurden keine Benutzer gefunden!<br>Fehler: " . $db->error );
+
+		} else {
+			$res = $res->fetch_all( MYSQLI_ASSOC );
+			if ( !$res ) {
+				alert( "warning", "Es haben noch keine Spieler am AG-Ventskalender teilgenommen!" );
+			} else {
+				$counter = 0;
+				$html .= "<table class='table table-responsive table-striped table-hover'><thead><th>Rang</th><th>Punkte</th><th>Klasse</th><th>Nickname</th></thead><tbody>";
+				$letztePunkte = -1;
+				$gesamtcounter = 0;
+				foreach ( $res as $user ) {
+					$nickname = htmlspecialchars( $user[ "nickname" ] );
+					$grade = htmlspecialchars( $user[ "grade" ] );
+					$points = htmlspecialchars( $user[ "points" ] );
+
+					if ( $letztePunkte != ( int )$user[ "points" ] ) {
+						$counter++;
+						$letztePunkte = ( int )$user[ "points" ];
+					}
+
+					$html .= "<tr";
+					if ( $whereami == true and $user[ "id" ] == $_SESSION[ "userid" ]) {
+						
+						$meinplatz = $counter;
+						$html .= " class='success' id='me'";
+					}
+					$html .= "><td>$counter</td><td>$points</td><td>$grade</td><td>$nickname</td></tr>";
+					//echo $letztePunkte."---".$user["points"]."<br>";
+					$gesamtcounter++;
+				}
+				$html .= "</tbody></table>";
+			}
+		}
+	} else {
+		$res = $db->query( "SELECT * FROM users  WHERE `hideInScores`!=1" );
+		//echo $db->error;
+		if ( !$res ) {
+			alert( "danger", "Es wurden keine Benutzer gefunden!<br>Fehler: " . $db->error );
+
+		} else {
+			$res = $res->fetch_all( MYSQLI_ASSOC );
+			if ( !$res ) {
+				alert( "warning", "Es haben noch keine Spieler am AG-Ventskalender teilgenommen!" );
+			} else {
+				$grades = [];
+				$letztePunkte = -1;
+				foreach ( $res as $user ) {
+					if ( !isset( $grades[ $user[ "grade" ] ] ) ) {
+
+						$grades[ $user[ "grade" ] ] = array();
+						$grades[ $user[ "grade" ] ][ "count" ] = 1;
+						$grades[ $user[ "grade" ] ][ "points" ] = intval( $user[ "points" ] );
+					} else {
+						$grades[ $user[ "grade" ] ][ "count" ] += 1;
+						$grades[ $user[ "grade" ] ][ "points" ] += intval( $user[ "points" ] );
+					}
+
+				}
+
+				foreach ( $grades as $key => $grade ) {
+					$grades[ $key ] = round( $grade[ "points" ] / $grade[ "count" ], 1 );
+
+
+				}
+
+				arsort( $grades );
+
+				//echo "<pre>";
+				//var_dump($grades);
+				//echo "</pre>";
+
+				$counter = 0;
+				$html .= "<table class='table table-responsive table-striped table-hover'><thead><th>Rang</th><th>Durchschnittliche Punktzahl</th><th>Klasse</th></thead><tbody>";
+				foreach ( $grades as $name => $grade ) {
+					$gradename = ( $name == "Lehrer/in" ) ? "Lehrer" : htmlspecialchars( $name );
+					$points = htmlspecialchars( $grade );
+					if ( $letztePunkte != ( int )$points ) {
+						$counter++;
+						$letztePunkte = ( int )$points;
+					}
+					$html .= "<tr><td>$counter</td><td>$points</td><td>$gradename</td></tr>";
+					//$counter ++;
+
+				}
+				$html .= "</tbody></table>";
+			}
+		}
+
+
+	}
+	if ( $whereami and isset($meinplatz) ) {
+		echo "<br><br>";
+		alert( "info", "Du bist aktuell auf dem $meinplatz. Platz von $gesamtcounter Teilnehmern!" );
+	}
+	echo $html;
+}
+
+function getHead() {
+	echo '<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+    <!-- Die 3 Meta-Tags oben *müssen* zuerst im head stehen; jeglicher sonstiger head-Inhalt muss *nach* diesen Tags kommen -->
+	
+	
+	
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="./images/favicon.png">
+	
+    <title>AG - AG-Ventskalender</title>
+
+    <!-- Bootstrap-CSS -->
+    <link href="./include/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="./include/lib/schnee.js"></script>
+    <!-- Besondere Stile für diese Vorlage -->
+    <link href="./styles/main.css" rel="stylesheet">
+	
+   <style>
+	@media (min-width: 768px) {
+		.container {
+		max-width: 730px;
+		}
+	} 
+	</style>
+
+    <!-- Unterstützung für Media Queries und HTML5-Elemente in IE8 über HTML5 shim und Respond.js -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]--><script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	';
+}
+
+function getNav( $current ) {
+	global $loggedin;
+	echo '<nav class="navbar navbar-default">
+	<div class="container-fluid">
+	  <div class="navbar-header">
+		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		  <span class="sr-only">Navigation ein-/ausblenden</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a href="#" class="navbar-left"><img style="height: 46px" src="./images/header.png"></a>
+	  </div>
+	  <div id="navbar" class="navbar-collapse collapse navbar-right">
+		<ul class="nav navbar-nav">
+		  <li role="presentation" ' . ( $current == "index" ? 'class="active"' : "" ) . '><a href="./index.php">Home</a></li>';
+	if ( !$loggedin ) {
+		echo '<li role="presentation" ' . ( $current == "login" ? 'class="active"' : "" ) . '><a href="./login.php">Einloggen</a></li>
+            <li role="presentation" ' . ( $current == "neuer_benutzer" ? 'class="active"' : "" ) . '><a href="./neuer_benutzer.php">Registrieren</a></li>';
+	} else {
+		echo '<li role="presentation" ' . ( $current == "logout" ? 'class="active"' : "" ) . '><a href="./logout.php">Abmelden</a></li>
+			<li role="presentation" ' . ( $current == "aufgaben" ? 'class="active"' : "" ) . '><a href="./aufgaben.php#tab1">Aufgaben</a></li>';
+	}
+	echo '<li role="presentation" ' . ( $current == "bestenliste" ? 'class="active"' : "" ) . '><a href="./bestenliste.php#tab4">Bestenliste</a></li>
+            <li role="presentation" ' . ( $current == "regeln" ? 'class="active"' : "" ) . '><a href="./regeln.php">Regeln</a></li>
+		  
+		</ul>
+		
+	  </div>
+	</div>
+</nav>';
+}
+
+function checkForDate($dayid) {
+	date_default_timezone_set( 'Europe/Berlin' );
+	$dev = false;
+	if ($dev) {
+		$now = new DateTime(file_get_contents("/srv/www/advent.allgaeu-gymnasium.de/nfAGMdwskeOwdi/heutigerTag.txt").".12.2018");
+		$todayday = file_get_contents("/srv/www/advent.allgaeu-gymnasium.de/nfAGMdwskeOwdi/heutigerTag.txt");
+		$current = $now->getTimestamp();
+		$date = strtotime("2018-12-$dayid");
+		
+	} else {
+		
+		$now = new DateTime("TODAY");
+		$todayday = strftime("%e");
+		$current = $now->getTimestamp();
+		$date = strtotime("2018-12-$dayid");
+	}
+	//echo "Today: "+strftime("%A, %e.%m.%Y", $current);
+	//echo "Date: "+strftime("%A, %e.%m.%Y", $date);
+	
+	$wochentag = date("w", $current);
+	$datediff = $date - $current;
+	$differance = floor( $datediff / ( 60 * 60 * 24 ) );
+
+	/*if ( $differance == 0 ) {
+		return "today";
+	} else if ( $differance > 0 ) {
+		return "future";
+	} else if ( $differance < 0 ) {
+		return "past";
+	}*/
+	if ($todayday == 26 && $dayid == WEIHNACHTSTAG) {
+		return "today";
+	} 
+	
+	
+	$zurueckliegend = null;
+	switch ($wochentag) {
+		case 0: // Sonntag
+			$zurueckliegend = 3;
+			break;
+		case 1: // Montag
+			$zurueckliegend = 4;
+			break;
+		case 2: // Dienstag
+			$zurueckliegend = 4;
+			break;
+		case 3: // Mittwoch
+			$zurueckliegend = 2;
+			break;
+		case 4: // Donnerstag
+			$zurueckliegend = 2;
+			break;
+		case 5: // Freitag
+			$zurueckliegend = 2;
+			break;
+		case 6: // Samstag
+			$zurueckliegend = 2;
+			break;
+		
+			
+	}
+	if ( -$zurueckliegend < $differance AND $differance <= 0) {
+		return "today";
+	} else if ( $differance > 0 ) {
+		return "future";
+	} else if ( $differance <= -$zurueckliegend ) {
+		return "past";
+	}
+	
+}
+
+function getUserPoints() {
+	$db = connect();
+	$res = $db->query( "SELECT * FROM users" );
+	if ( !$res ) {
+		alert( "danger", "Es wurden keine Benutzer gefunden!" );
+		die();
+	} else {
+		$res = $res->fetch_all( MYSQLI_ASSOC );
+		if ( !$res ) {
+			alert( "danger", "Es wurden keine Benutzer gefunden!" );
+			die();
+		} else {
+			$users = $res;
+		}
+	}
+
+	$res = $db->query( "SELECT * FROM days" );
+	if ( !$res ) {
+		alert( "danger", "Es wurden keine Aufgaben gefunden!" );
+		die();
+	} else {
+		$res = $res->fetch_all( MYSQLI_ASSOC );
+		if ( !$res ) {
+			alert( "danger", "Es wurden keine Aufgaben gefunden!" );
+			die();
+		}
+	}
+	$days = [];
+	foreach ( $res as $day ) {
+		$days[ $day[ "day" ] ] = $day;
+	}
+
+	$res = $db->query( "SELECT * FROM tipps" );
+	if ( !$res ) {
+		alert( "danger", "Es wurden keine Tipps gefunden!" );
+		die();
+	} else {
+		$res = $res->fetch_all( MYSQLI_ASSOC );
+		if ( !$res ) {
+			alert( "danger", "Es wurden keine Tipps gefunden!" );
+			die();
+		} else {
+			$tipps = $res;
+		}
+	}
+
+	$userPoints = [];
+	$champions = [];
+	$currentUser = $_SESSION["userid"];
+	$currentUserPoints = 0;
+	
+	foreach ( $tipps as $tipp ) {
+		//echo "tipp<br>";
+		$userid = $tipp[ "userid" ];
+		$day = $tipp[ "day" ];
+		$alternatives = array_map("strtoupper", explode("-",$days[ $day ][ "alternatives" ]));
+		if (checkForDate($day)=="past" AND $userid == $currentUser ) {
+			$tipp = strtoupper($tipp[ "tipp" ]);
+			$solution = strtoupper($days[ $day ][ "word" ]);
+
+			if ($tipp == $solution) {
+				
+				if ($day == WEIHNACHTSTAG) {
+					$currentUserPoints += 60;
+				} else {
+					if (intval($day) < 8) {
+						$currentUserPoints += 10;
+					} else if (intval($day) < 15) {
+						$currentUserPoints += 20;
+					} else if (intval($day) < 24) {
+						$currentUserPoints += 30;
+					}
+					
+				}
+
+			} else if (in_array($tipp, $alternatives)) {
+				//echo "alternative used: $tipp<br>";
+				if (intval($day) < 8) {
+					$currentUserPoints += 5;
+				} else if (intval($day) < 15) {
+					$currentUserPoints += 10;
+				} else if (intval($day) < 24) {
+					$currentUserPoints += 15;
+				}
+			}
+		}
+	}
+	return $currentUserPoints;
+}
+
+function getFooter() {
+	echo '<footer class="well footer">
+			<p>&copy; AG-Multimedia des Allgäu-Gymnasiums 2018. Alle Rechte vorbehalten. </p>
+		</footer>';
+}
+?>
