@@ -79,7 +79,6 @@
 			$(".image").css("width", height/2);
 			$(".image").css("height", height/2);
 			$(".header").css("height", height);
-			//console.log(height);
 		}
 	</script>
 

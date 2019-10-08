@@ -15,7 +15,6 @@ if (isset($_POST["submit"])) {
 		!empty(trim($_POST["username"])) &&
 		!empty(trim($_POST["password"]))
 	) {
-		//die("angekommen!!!");
 		$db = connect();
 
 		$username = $db->real_escape_string($_POST["username"]);
@@ -36,12 +35,10 @@ if (isset($_POST["submit"])) {
 					$status = password_verify($_POST["password"], $password);
 
 					if ($status) {
-						// erfolgreich eingeloggt!!!
 						$_SESSION["adminLoggedin"] = true;
 						$_SESSION["adminusername"] = $res["username"];
 						$_SESSION["adminuserid"] = $res["id"];
 						$loggedin = true;
-						//alert("success", "Erfolgreich eingeloggt!");
 					} else {
 						alert("danger", "Bitte überprüfe dein Passwort!");
 					}
@@ -95,7 +92,6 @@ if (isset($_POST["submit"])) {
 		}
 	</style>
 
-	<!-- Unterstützung für Media Queries und HTML5-Elemente in IE8 über HTML5 shim und Respond.js -->
 	<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -151,19 +147,12 @@ if (isset($_POST["submit"])) {
 
 					<?php $action = (isset($_GET["a"])) ? $_GET["a"] : "dashboard";
 
-						if ($action == "dashboard") { /////////////////////////////////////////////////////////////////////////////////////////////
+						if ($action == "dashboard") {
 							?>
 
 
 						<h1 class="page-header">Bedienungsanleitung</h1>
-						<!--<ul>
-				<li>Im Menüpunkt "Spielergebnisse" können Sie die Ergebnisse der einzelnen Spiele eingeben und auch nachträglich ändern.</li>
-				<li>Bei "Mannschaften K.O. Runde" können Sie die Mannschaften der Achtel-, Viertel-, Halbfinal-, Finalspiele und des Spiels um Platz 3 eintragen. Bitte geben Sie nur die 3-Stelligen Kürzel an, die finden Sie nach einem Klick auf den Link, der Ihnen dort ebenfalls angezeigt wird. </li>
-				<li>Bei "Anzeigeeinstellungen" können Sie auswählen, welche Teile des Spielplan angezeigt werden sollen. Ich würde empfehlen, die einzelnen Spiele dann freizuschalten, wenn die Mannschaften feststehen oder immer einen festen Zeitraum vor Spielbeginn, beispielsweise 2 Wochen. </li>
-				<li>Im Reiter "Benutzer" sehen Sie 3 Tabellen. In der obersten Tabelle sind die neuen Benutzer aufgelistet. Wenn sie einen Benutzer verifizieren, hat das für diesen keine Auswirkungen, er wird nur im Backend nicht mehr als neuer Benutzer angezeigt. Wenn Sie ihn jedoch blockieren, kann er nicht mehr weiter spielen. Das ist beispielsweise für Leute gedacht, die nicht ihren echten Namen angeben.  </li>
-				<li>Wenn Sie auf "Daten exportieren" klicken, bekommen Sie eine .sql Datei als Download. Diese eignen sich sehr gut als Backup. </li>
-				<li>Um die Datei wieder einzuspielen, gehen Sie auf "Daten importieren" und laden die Datei hoch. Achtung: Alle Daten, die sich seit dem Download der sql Datei verändert haben, gehen bei einem Import verloren!!!. Deshalb sollten die Daten nur bei einem kompletten Verlust der Datenbank oder bei einem schwerwiegendem Fehler neu importiert werden. </li>
-			</ul>-->Eigentlich ist alles selbsterklärend ;-)<br>
+						Eigentlich ist alles selbsterklärend ;-)<br>
 						<br>
 						Viel Spaß mit dem AG-Ventskalender!
 
@@ -185,7 +174,6 @@ if (isset($_POST["submit"])) {
 							<?php
 									$db = connect();
 									for ($i = 1; $i < 24; $i++) {
-										//echo "<td>$i</td>";
 
 										$res = $db->query("SELECT DISTINCT tipp FROM tipps WHERE day=$i")->fetch_all(MYSQLI_ASSOC);
 										echo $db->error;
@@ -203,7 +191,7 @@ if (isset($_POST["submit"])) {
 						</table>
 
 
-					<?php } else if ($action == "users") { ///////////////////////////////////////////////////////////////////////////////////////////// 
+					<?php } else if ($action == "users") { 
 							?>
 						<h1 class="page-header">Benutzer</h1>
 
@@ -255,7 +243,6 @@ if (isset($_POST["submit"])) {
 									</tr>";
 										}
 										echo "</tbody></table>";
-										/////
 										echo "<h3>Verifizierte Benutzer</h3>
 									<table class='table table-striped table-responsive'>
 									  <thead>
@@ -275,7 +262,6 @@ if (isset($_POST["submit"])) {
 									</tr>";
 										}
 										echo "</tbody></table>";
-										/////
 										echo "<h3>Blockierte Benutzer</h3>
 									<table class='table table-striped table-responsive'>
 									  <thead>
@@ -305,7 +291,7 @@ if (isset($_POST["submit"])) {
 
 
 
-					<?php } else if ($action == "koround") { /////////////////////////////////////////////////////////////////////////////////////////////
+					<?php } else if ($action == "koround") {
 							?>
 						<h1>K.O.-Runden Mannschaften</h1>
 						<br>
@@ -325,7 +311,7 @@ if (isset($_POST["submit"])) {
 						<div class="clearfix">&nbsp;</div>
 
 				</div>
-			<?php } else if ($action == "results") { /////////////////////////////////////////////////////////////////////////////////////////////
+			<?php } else if ($action == "results") {
 					?>
 				<div class="jumbotron text-center"><?php
 															if (isset($_POST["submit"]) && isset($_POST["matchid"])) {
@@ -351,8 +337,6 @@ if (isset($_POST["submit"])) {
 																		$matchid = $db->real_escape_string($_POST["matchid"]);
 
 
-																		//var_dump($existing);
-
 																		$db->query("UPDATE matches SET goalsTeam1=$tippTeam1, goalsTeam2=$tippTeam2 WHERE id=$matchid");
 
 																		alert("success", "Das Ergebnis wurde erfolgreich gespeichert!");
@@ -367,19 +351,11 @@ if (isset($_POST["submit"])) {
 																	alert("danger", "Du hast leider nicht alle Felder ausgefüllt.0001");
 																}
 															} else if (!isset($_GET["s"])) {
-																//var_dump($_POST);
-																//die();
 																header("Location: administrator.php");
 															}
 
 															$db = connect();
 															$id = $db->real_escape_string($_GET["s"]);
-															//$uid = $db->real_escape_string($_SESSION["userid"]);
-
-
-
-
-
 
 															$res = $db->query("SELECT * FROM `matches` WHERE id=$id");
 															if (!$res) {
@@ -446,7 +422,6 @@ if (isset($_POST["submit"])) {
 																		echo "<h2><img class='teamIcon' src='./images/teams/$kuerzel1.jpg'>&nbsp;$team1 vs. $team2&nbsp;<img class='teamIcon' src='./images/teams/$kuerzel2.jpg'></h2>";
 
 																		echo "<div class='infoblock'>";
-																		//var_dump($tipp);
 
 																		echo $wochentag . ", $tag.$monat.$jahr um $uhr Uhr";
 																		echo "<br>in $stadt";
@@ -485,8 +460,8 @@ if (isset($_POST["submit"])) {
 
 
 				</div>
-			<?php } else if ($action == "koroundteams") { /////////////////////////////////////////////////////////////////////////////////////////////
-					?>
+			<?php } else if ($action == "koroundteams") { 
+									?>
 				<div class="jumbotron text-center"><?php
 
 															if (isset($_POST["submit"]) && isset($_POST["matchid"])) {
@@ -504,9 +479,6 @@ if (isset($_POST["submit"])) {
 
 																	$matchid = $db->real_escape_string($_POST["matchid"]);
 
-
-																	//var_dump($existing);
-
 																	$db->query("UPDATE `matches` SET `team1` = '$nameTeam1', `team2` = '$nameTeam2' WHERE `matches`.`id` = $matchid ");
 																	echo $db->error;
 																	alert("success", "Die Mannschaften wurde erfolgreich gespeichert!");
@@ -517,8 +489,6 @@ if (isset($_POST["submit"])) {
 																	alert("danger", "Du hast leider nicht alle Felder ausgefüllt.");
 																}
 															} else if (!isset($_GET["s"])) {
-																//var_dump($_POST);
-																//die();
 																header("Location: administrator.php");
 															}
 
@@ -596,7 +566,6 @@ if (isset($_POST["submit"])) {
 																		echo "<h2><img class='teamIcon' src='./images/teams/$kuerzel1.jpg'>&nbsp;$team1 vs. $team2&nbsp;<img class='teamIcon' src='./images/teams/$kuerzel2.jpg'></h2>";
 
 																		echo "<div class='infoblock'>";
-																		//var_dump($tipp);
 
 																		echo $wochentag . ", $tag.$monat.$jahr um $uhr Uhr";
 																		echo "<br>in $stadt";
@@ -607,7 +576,6 @@ if (isset($_POST["submit"])) {
 																		}
 																		$val1 = $match["team1"];
 																		$val2 = $match["team2"];
-																		//var_dump($match);
 																		echo '</div><br><br><form class="form-inline" method="post">
 						<input type="hidden" id="matchid" name="matchid" value="' . $_GET["s"] . '">
 						<div class="form-group">
@@ -634,7 +602,7 @@ if (isset($_POST["submit"])) {
 
 
 				</div>
-			<?php } else if ($action == "logout") { /////////////////////////////////////////////////////////////////////////////////////////////
+			<?php } else if ($action == "logout") {
 					?>
 				<h1>AGventskalender <?php echo date("Y"); ?></h1>
 				<br>
@@ -647,7 +615,6 @@ if (isset($_POST["submit"])) {
 								setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
 							}
 
-							// Zum Schluß, löschen der Session.
 							session_destroy();
 							alert("success", "Du wurdest erfolgreich ausgeloggt!");
 							header("Location: ./administrator.php");
@@ -656,15 +623,6 @@ if (isset($_POST["submit"])) {
 							header("Location: ./administrator.php");
 						} else {
 
-
-
-
-
-
-
-							//echo "<pre>";
-							//var_dump($_REQUEST);
-							//echo "</pre>";
 							?>
 
 
@@ -685,7 +643,7 @@ if (isset($_POST["submit"])) {
 
 
 				<?php  } ?>
-			<?php } else if ($action == "importData") { /////////////////////////////////////////////////////////////////////////////////////////////
+			<?php } else if ($action == "importData") {
 					?>
 				<h1>Daten importieren</h1>
 				<br>
@@ -703,25 +661,18 @@ if (isset($_POST["submit"])) {
 					$target_file = $target_dir . "database.sql";
 					$uploadOk = 1;
 					$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-					// Check if image file is a actual image or fake image
 
 
-
-					// Check if file already exists
 					if (file_exists($target_file)) {
 						alert("danger", "Entschuldigung, die Datei existiert bereits. <a href='./include/importdb.php?del' class='btn btn-warning'>Hochgeladene Datei löschen</a>");
 						$uploadOk = 0;
 					}
-
-					// Allow certain file formats
 					if ($imageFileType != "sql") {
 						alert("danger", "Entschuldigung, es sind nur *.sql Dateien erlaubt.");
 						$uploadOk = 0;
 					}
-					// Check if $uploadOk is set to 0 by an error
 					if ($uploadOk == 0) {
 						alert("danger", "Die Datei wurde nicht hochgeladen.");
-						// if everything is ok, try to upload file
 					} else {
 						if (move_uploaded_file($_FILES["dbfile"]["tmp_name"], $target_file)) {
 							alert("success", "Die Datei " . basename($_FILES["dbfile"]["name"]) . " wurde erfolgreich hochgeladen.<a href='./include/importdb.php' class='btn btn-primary'>Gleich importieren</a>");
@@ -730,7 +681,7 @@ if (isset($_POST["submit"])) {
 						}
 					}
 				}
-			} else { ///////////////////////////////////////////////////////////////////////////////////////////// 
+			} else {
 				?>
 			<div class="container">
 
@@ -744,11 +695,10 @@ if (isset($_POST["submit"])) {
 					<button class="btn btn-lg btn-primary btn-block" name="submit" type="submit">Anmelden</button>
 				</form>
 
-			</div> <!-- /container -->
+			</div>
 		<?php } ?>
 
 		<script src="../include/lib/bootstrap/jquery.min.js"></script>
 		<script src="../include/lib/bootstrap/bootstrap.min.js"></script>
 </body>
-
 </html>

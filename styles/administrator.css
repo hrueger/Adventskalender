@@ -1,35 +1,18 @@
-/*
- * Base structure
- */
 
-/* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
 }
 
-
-/*
- * Global add-ons
- */
 
 .sub-header {
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
 }
 
-/*
- * Top navigation
- * Hide default border to remove 1px line.
- */
 .navbar-fixed-top {
   border: 0;
 }
 
-/*
- * Sidebar
- */
-
-/* Hide for mobile, show later */
 .sidebar {
   display: none;
 }
@@ -43,15 +26,14 @@ body {
     display: block;
     padding: 20px;
     overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    overflow-y: auto;
     background-color: #f5f5f5;
     border-right: 1px solid #eee;
   }
 }
 
-/* Sidebar navigation */
 .nav-sidebar {
-  margin-right: -21px; /* 20px padding + 1px border */
+  margin-right: -21px;
   margin-bottom: 20px;
   margin-left: -20px;
 }
@@ -66,11 +48,6 @@ body {
   background-color: #428bca;
 }
 
-
-/*
- * Main content
- */
-
 .main {
   padding: 20px;
 }
@@ -84,10 +61,6 @@ body {
   margin-top: 0;
 }
 
-
-/*
- * Placeholder dashboard ideas
- */
 
 .placeholders {
   margin-bottom: 30px;
@@ -126,8 +99,8 @@ body {
   position: relative;
   height: auto;
   -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   padding: 10px;
   font-size: 16px;
 }
@@ -145,90 +118,81 @@ body {
   border-top-right-radius: 0;
 }
 
-
-
 /*//////////////////////////////////////*/
-		.spielplan {
-			margin-left: auto;
-			margin-right: auto;
-			
-			
-		}
-		
-		td, th {
-			padding: 5px;
-			
-		}
-   
-		
-   
-   
-		.logoNameLeft, .logoNameRight {
-			width: 150px;
-		}
-		
-		.result {
-			width: 80px;
-		}
-   
-		.group {
-			
-			float: left;
-			margin: 5px;
-		}
-		
-		.group thead {
-			background-color: #bababa;
-		}	
-		
-		.group {
-			margin: 10px;
-		}
-		
-		.groupname {
-			color: #FFFFFF;
-			font-weight: bold;
-		}
-		
-		.teamIcon {
-			height: 32px;
-			width: 32px;
-			border-radius: 16px;
-		}
-		
-		.logoNameLeft {
-			text-align: left;
-		}
-		.logoNameRight {
-			text-align: right;
-		}
-		
-		.match {
-			cursor: pointer;
-			padding: 5px;
-		}
-		.match:hover{
-			background-color: #cccccc;
-		}
-		
-		.match a {
-			color: black;
-			text-decoration: none;
-			display: block;
-		}
-		
-		.match span {
-			color: green;
-		}
-		
-		.centreBox {
-			float: none;
-			margin: auto;
-			margin-bottom: 10px;
-		}
-		
-		
-		
-		.centreBox thead {
-			background-color: #bababa;
-		}	
+.spielplan {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td,
+th {
+  padding: 5px;
+}
+
+.logoNameLeft,
+.logoNameRight {
+  width: 150px;
+}
+
+.result {
+  width: 80px;
+}
+
+.group {
+  float: left;
+  margin: 5px;
+}
+
+.group thead {
+  background-color: #bababa;
+}
+
+.group {
+  margin: 10px;
+}
+
+.groupname {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.teamIcon {
+  height: 32px;
+  width: 32px;
+  border-radius: 16px;
+}
+
+.logoNameLeft {
+  text-align: left;
+}
+.logoNameRight {
+  text-align: right;
+}
+
+.match {
+  cursor: pointer;
+  padding: 5px;
+}
+.match:hover {
+  background-color: #cccccc;
+}
+
+.match a {
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+
+.match span {
+  color: green;
+}
+
+.centreBox {
+  float: none;
+  margin: auto;
+  margin-bottom: 10px;
+}
+
+.centreBox thead {
+  background-color: #bababa;
+}

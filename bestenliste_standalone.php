@@ -71,9 +71,6 @@ require_once("./include/db.inc.php");
 
 		<?php echo getFooter(); ?>
 
-	</div> <!-- /container -->
-
-
+	</div>
 </body>
-
 </html>

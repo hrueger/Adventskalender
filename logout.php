@@ -5,13 +5,6 @@ require_once("./include/login.inc.php");
 
 if (isset($_POST["logout"])) {
 
-	//if (ini_get("session.use_cookies")) {
-	//	$params = session_get_cookie_params();
-	//	setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
-	//}
-
-	// Zum Schluß, löschen der Session.
-	//session_destroy();
 	$_SESSION["loggedin"] = false;
 	$_SESSION["userid"] = null;
 
@@ -63,9 +56,7 @@ if (isset($_POST["logout"])) {
 			</div>
 			<?php getFooter(); ?>
 
-		</div> <!-- /container -->
-
-
+		</div>
 	</body>
 
 	</html>

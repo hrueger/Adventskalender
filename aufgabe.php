@@ -108,9 +108,6 @@ require_once("./include/login.inc.php");
 
 		<div class="jumbotron text-center">
 			<?php
-
-			//var_dump($_POST);
-			//die();
 			if ((isset($_POST["submit"]) && isset($_POST["dayid"])) || (isset($_POST["solution"]) && isset($_POST["dayid"]))) {
 
 
@@ -123,7 +120,6 @@ require_once("./include/login.inc.php");
 
 				if ($res) {
 					$res = $res->fetch_all(MYSQLI_ASSOC);
-					//var_dump($res);
 					if ($res) {
 						$res = $res[0];
 						if ($res) {
@@ -139,10 +135,10 @@ require_once("./include/login.inc.php");
 				}
 				$res = $db->query("SELECT * FROM days WHERE day=$day");
 				echo $db->error;
-				//echo $db->error;
+				
 				if ($res) {
 					$res = $res->fetch_all(MYSQLI_ASSOC);
-					//var_dump($res);
+					
 					if ($res) {
 						$res = $res[0];
 						if ($res) {
@@ -160,8 +156,6 @@ require_once("./include/login.inc.php");
 					die();
 				}
 				$allow = checkForDate($day);
-				//echo "///////////////////////////////////////////////////////////////////////////";
-				//var_dump($existing);
 				$word = "";
 				if ($task["day"] == WEIHNACHTSTAG) {
 					$word = $_POST["solution"];
@@ -170,12 +164,8 @@ require_once("./include/login.inc.php");
 						if (substr($key, 0, 4) === "char") {
 							$word .= $entry;
 						}
-						/* else {
-												//echo "Übersprungen $entry<br>";
-											}*/
 					}
 				}
-				//echo $word;
 				$userid = $db->real_escape_string($userid);
 				$word = $db->real_escape_string($word);
 				$day = $db->real_escape_string($day);
@@ -195,7 +185,6 @@ require_once("./include/login.inc.php");
 
 					die();
 				}
-				//echo $word;
 				if (!$db->error) {
 					echo '<meta http-equiv="refresh" content="0; url=aufgaben.php?s">';
 					die();
@@ -207,8 +196,6 @@ require_once("./include/login.inc.php");
 
 				die();
 			} else if (!isset($_GET["a"])) {
-				//var_dump($_POST);
-				//die();
 				echo '<meta http-equiv="refresh" content="0; url=aufgaben.php">';
 				die();
 			}
@@ -243,30 +230,25 @@ require_once("./include/login.inc.php");
 				} else {
 					$task = $res[0];
 					$allow = checkForDate($task["day"]);
-					//echo $allow;
 					if (
 						$allow == "today"
 						or $allow == "past"
 					) {
 
 						$wochentage = array("Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag");
-						//var_dump( $allow );
 						$nummer = (intval($task["day"]) < 10 ? '0' . $task["day"] : $task["day"]);
 						setlocale(LC_TIME, "de_DE.utf8");
 						$tag = $nummer . ". Dezember 2018";
 						$tag = $wochentage[date("w", strtotime($nummer . ".12.2018"))] . ", " . $tag;
-						//$id = $match["id"];
 						echo "<h4>$tag</h4><br>";
 						$dontEchoChristmasForm = false;
 						if ($allow == "today") {
 							if ($task["day"] != WEIHNACHTSTAG) {
-								//echo "<img class='img img-fluid taskimg' src='./images/getImage.php?d=$nummer&m=a'/>";
 								echo "<img class='img img-fluid taskimg' src='./images/getImage.php?d=$nummer&m=a'/>";
 							}
 						} else {
 							if ($task["day"] != WEIHNACHTSTAG) {
 								echo "<h4 class='solution'>LÖSUNG</h4><img class='img img-fluid taskimg' src='./images/getImage.php?d=$nummer&m=l'/>";
-								//echo "<h4 class='solution'>LÖSUNG</h4><img class='img img-fluid taskimg' src='./images/getImage.php?d=$nummer&m=l'/>";
 							} else {
 								$dontEchoChristmasForm = true;
 
@@ -283,7 +265,6 @@ require_once("./include/login.inc.php");
 						if (!$dontEchoChristmasForm) {
 
 							echo "<br><br><p class='lead'>" . $task["text"] . "</p>";
-							//var_dump($tipp);
 
 							$solution = preg_split('/(?!^)(?=.)/u', $task["word"]);
 							if (empty($tipp)) {
@@ -294,7 +275,6 @@ require_once("./include/login.inc.php");
 								$buttonname = "Lösung ändern";
 								$tipp = preg_split('/(?!^)(?=.)/u', $tipp[0]["tipp"]);
 							}
-							//var_dump( $solution );
 							if ($task["day"] != WEIHNACHTSTAG) {
 								echo '<form class="form-inline" method="post">
 							<input type="hidden" id="dayid" name="dayid" value="' . $_GET["a"] . '">
@@ -304,7 +284,6 @@ require_once("./include/login.inc.php");
 
 
 							if ($task["day"] == WEIHNACHTSTAG) {
-								///////////////////////////////   Weihnachten      //////////////////////////////////
 								?>
 								<link href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/css/base/jquery.ui.all.css" rel="stylesheet">
 								<link href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/css/lightness/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
@@ -315,12 +294,8 @@ require_once("./include/login.inc.php");
 													echo '<form action="./aufgabe.php" id="submitSolution" class="form-inline" method="post">
 										<input type="hidden" id="dayid" name="dayid" value="' . $_GET["a"] . '"><input type="hidden" id="solution" name="solution" value=""></form>';
 													$counter = "A";
-													//$res = $db->query("SELECT word, letter FROM days")->fetch_all(MYSQLI_ASSOC);
-													//foreach ($res as $day) {
 													$word = preg_split('/(?!^)(?=.)/u', $task["word"]);
-													//var_dump($word);
 													shuffle($word);
-													//var_dump($word);
 													if (($key = array_search('A', $word)) !== false) {
 														unset($word[$key]);
 													}
@@ -329,10 +304,7 @@ require_once("./include/login.inc.php");
 													}
 
 													foreach ($word as $letter) {
-														//var_dump($day);
 														if ($letter != " ") {
-															//echo $day[ "word" ]."<br><br><br>";
-															//$letter = ;
 															echo '<div class="draggable dndletter" data-id=' . $counter . ' data-letter="' . $letter . '"><p>' . $letter . '</p></div>';
 															$counter++;
 														}
@@ -349,7 +321,6 @@ require_once("./include/login.inc.php");
 													$letters = preg_split('/(?!^)(?=.)/u', $task["word"]);
 													$counter = 0;
 													foreach ($letters as $letter) {
-														//var_dump($day);
 														if ($letter == " ") {
 															echo '<div class="dndspace" data-letterSubmit=" ">&nbsp</div>';
 														} else {
@@ -374,28 +345,12 @@ require_once("./include/login.inc.php");
 											snap: ".droppable",
 
 											drag: function(event, ui) {
-												//var el = document.elementFromPoint(ui.originalPosition.top, ui.originalPosition.left);
-												//console.log(el);
-												//$(el).removeClass("full");
 
 											}
 										});
 										$(".droppable").droppable({
 											drop: function(event, ui) {
-												//console.log(event);
-												//console.log(ui);
-												//var draggableId = ;
-												//var droppableId = $(this).attr("id");
-												//ui.draggable.removeClass("draggable");
-												//ui.draggable.detach().appendTo($(this));
-												//ui.draggable.css("position", "absolute");
-												//ui.draggable.css("top", $(this).offset().top);
-												//ui.draggable.css("left", $(this).offset().left);
 												var id = ui.draggable.data("id");
-												//console.log("*[data-containsid='"+id+"']");
-												//console.log($("*[data-containsid='"+id+"']"));
-												//console.log($("*[data-test]"));
-												//$("[data-containsid='"+id+"']").removeClass("full").data("containsid", "");
 												$("[data-containsid]").each(function() {
 													if ($(this).data("containsid") == id) {
 														$(this).removeClass("full");
@@ -412,13 +367,10 @@ require_once("./include/login.inc.php");
 										$("#submitBtn").on("click", function() {
 											var text = "";
 											$("[data-letterSubmit]").each(function() {
-												//console.log("iterating through "+$(this));
 												if (typeof $(this).data("letterSubmit") !== "undefined" || $(this).data("letterSubmit") == "") {
 													text += $(this).data("letterSubmit");
 												} else {
-													//console.log("hat kein letterSubmit");
 													if ($(this).hasClass("dndprefilled")) {
-														//console.log("hasClass prefilled!");
 														if ($(this).attr("id") == "8") {
 															text += "N";
 														} else if ($(this).attr("id") == "27") {
@@ -427,14 +379,12 @@ require_once("./include/login.inc.php");
 
 														}
 													} else {
-														//console.log("doesnt have class prefilled!");
 														text += " ";
 													}
 
 												}
 
 											});
-											//alert("go..");
 											$("#solution").val(text);
 											$("#submitSolution").submit();
 										});
@@ -464,11 +414,6 @@ require_once("./include/login.inc.php");
 																				$usedletters[$letter] = 1;
 																			}
 																			echo '
-
-							//draggable = $(".draggable:contains(\'' . $letter . '\'):eq(' . $lettercounter . ')");
-
-
-							
 							draggable = null;
 							var counter = 1;
 							$(".draggable:contains(\'' . $letter . '\')").each(function() {
@@ -480,7 +425,6 @@ require_once("./include/login.inc.php");
 
 
 							if (draggable) {
-								//console.log(draggable);
 								droppable = $("#box' . $counter . '");
 								droppableOffset = droppable.offset();
 								draggableOffset = draggable.offset();
@@ -507,7 +451,6 @@ require_once("./include/login.inc.php");
 									});
 								</script>
 				<?php
-									//var_dump($usedletters);	
 									alert("info", "Sortiere dieBuchstaben mithilfe von Drag and Drop in die freien Kästchen, sodass ein Lösungssatz herauskommt. Zwei Buchstaben sind bereits vorgegeben.");
 									alert("warning", "Bis Mittwoch, den 26.12.2018 um 23:59 Uhr kannst du eine Lösung abgeben und ändern.");
 
@@ -520,22 +463,16 @@ require_once("./include/login.inc.php");
 									echo "<br>";
 									echo "<br>";
 								} else {
-									///////////////////////////////    normale Aufgabe //////////////////////////////////
 									$counter = 1;
 									if ($allow != "today") {
 										echo "<br><h4 class='solutionHint'>Lösung: " . implode("", $solution) . "</h4><br><b>Dein Tipp:</b><br>";
 									}
 									foreach ($solution as $key => $unused) {
-										//if ( $allow == "today" ) {
 										if (!empty($tipp) && isset($tipp[$key])) {
 											$val = $tipp[$key];
 										} else {
 											$val = "";
 										}
-										/// Nicht mehr die Lösung, sondern den Tipp anzeigen
-										//} else {
-										//	$val = $solution[ $key ];
-										//}
 
 										if ($task["letter"] == $counter) {
 											echo "<input class='form-control inputChar important' maxlength='1' size='1' type='text' value='$val' name='char" . $counter . "'>";
@@ -563,25 +500,25 @@ require_once("./include/login.inc.php");
 										$wochentag = date("w", strtotime("$tag.12.2018"));
 
 										switch ($wochentag) {
-											case 0: // Sonntag
+											case 0:
 												$bis += 2;
 												break;
-											case 1: // Montag
+											case 1:
 												$bis += 1;
 												break;
-											case 2: // Dienstag
+											case 2:
 												$bis += 1;
 												break;
-											case 3: // Mittwoch
+											case 3:
 												$bis += 1;
 												break;
-											case 4: // Donnerstag
+											case 4:
 												$bis += 1;
 												break;
-											case 5: // Freitag
+											case 5:
 												$bis += 3;
 												break;
-											case 6: // Samstag
+											case 6:
 												$bis += 3;
 												break;
 										}
@@ -648,13 +585,8 @@ require_once("./include/login.inc.php");
 							$(this).prev('.inputChar').select();
 						}
 				});
-
-
 			});
 		</script>
 	</div>
-	<!-- /container -->
-
 </body>
-
 </html>

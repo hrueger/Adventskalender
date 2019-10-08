@@ -2,8 +2,6 @@
 require_once("./include/lib.inc.php");
 require_once("./include/db.inc.php");
 
-//updatePoints();
-
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -90,9 +88,6 @@ require_once("./include/db.inc.php");
 	
 		<?php getFooter(); ?>
 
-	</div> <!-- /container -->
-
-
+	</div>
 </body>
-
 </html>

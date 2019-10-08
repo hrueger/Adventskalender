@@ -4,8 +4,6 @@ define("WEIHNACHTSTAG", 24);
 session_start();
 date_default_timezone_set("Europe/Berlin");
 setlocale(LC_TIME, "de_DE.utf8");
-//echo date_default_timezone_get();
-//echo phpinfo();
 $loggedin = (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] == true) ? true : false;
 
 function alert($type, $message)
@@ -48,32 +46,7 @@ function getTimeObjBetween($startDate, $endDate)
 
 function getTasks($db, $mode)
 {
-	//echo $round;
-	/*$oneHTML = "";
-	$color = "";
-	if ($round == "gruppen") {
-		$query = 'SELECT *, TIMESTAMPDIFF(SECOND,CURRENT_TIMESTAMP(),`date`) AS timeleft FROM `matches` WHERE korunde=0 ORDER BY `group` ASC, `date` ASC';
-		//echo "gruppen";
-	} else {
-		if ($round == "platz3") {
-			$query = "SELECT *, TIMESTAMPDIFF(SECOND,CURRENT_TIMESTAMP(),`date`) AS timeleft FROM `matches` WHERE `group` = 'Spiel um Platz 3'";
-			$oneHTML = "centreBox ";
-			$color = "blue";
-		} else if ($round != "finale") {
-			$query = "SELECT *, TIMESTAMPDIFF(SECOND,CURRENT_TIMESTAMP(),`date`) AS timeleft FROM `matches` WHERE `group` LIKE '%$round"."finale%' ORDER BY `date` ASC";
-			if ($round == "halb") {
-				$color = "green";
-			} else if ($round == "viertel") {
-				$color = "red";
-			} 
-			//echo $query;
-		} else {
-			$query = "SELECT *, TIMESTAMPDIFF(SECOND,CURRENT_TIMESTAMP(),`date`) AS timeleft FROM `matches` WHERE `group` LIKE 'Finale'";
-			$oneHTML = "centreBox ";
-			$color = "yellow";
-			
-		}
-	}*/
+	
 	$query = 'SELECT * FROM `days` ORDER BY `day` ASC';
 	$res = $db->query($query);
 	$userid = $_SESSION["userid"];
@@ -82,8 +55,6 @@ function getTasks($db, $mode)
 	foreach ($res2 as $tipp) {
 		$tipps[$tipp["day"]] = $tipp["tipp"];
 	}
-	//var_dump($tipps);
-	//echo $db->error;
 	if (!$res) {
 		alert("danger", "Es wurden keine Aufgaben gefunden!");
 	} else {
@@ -177,51 +148,15 @@ function updatePoints()
 		}
 	}
 
-	// Finde Weltmeister
-	/*$res = $db->query( "SELECT * FROM matches WHERE `group`='Finale'" );
-	if ( $res ) {
-		$res = $res->fetch_all( MYSQLI_ASSOC );
-		if ( $res ) {
-			$res = $res[ 0 ];
-			if ( $res ) {
-				if ( $res[ "goalsTeam1" ] > $res[ "goalsTeam2" ] ) {
-					$weltmeister = $res[ "team1" ];
-				} else {
-					$weltmeister = $res[ "team2" ];
-				}
-			} else {
-				$weltmeister = false;
-			}
-		} else {
-			$weltmeister = false;
-		}
-	} else {
-		$weltmeister = false;
-	}*/
-	//var_dump($weltmeister);
-	//echo $db->error;
+	
 	$userPoints = [];
 	$champions = [];
 	foreach ($users as $user) {
 		$userpoints[$user["id"]] = 0;
-		//echo "Der Benutzer ".$user["name"]." hat die ID ".$user["id"]."<br>";
-		//$champions[$user["id"]] = $user["worldchampion"];
-		/*if ( $weltmeister ) {
-			if ( $user[ "worldchampion" ] == $weltmeister ) {
-				$userpoints[ $user[ "id" ] ] += 80;
-				//echo "points added!";
-				//echo $user["id"]." hat 80 Punkte für den Weltmeister bekommen<br>";
-			} else {
-				//var_dump($tippedChampion);
-				//var_dump($weltmeister);
-			}
-		} else {
-			//echo "no wm<br>";
-		}*/
+		
 	}
 	echo "<br>";
 	foreach ($tipps as $tipp) {
-		//echo "tipp<br>";
 		$userid = $tipp["userid"];
 		$day = $tipp["day"];
 		if (checkForDate($day) == "past") {
@@ -243,7 +178,6 @@ function updatePoints()
 					}
 				}
 			} else if (in_array($tipp, $alternatives) and !empty($tipp)) {
-				//echo "alternative used: $tipp<br>";
 				if (intval($day) < 8) {
 					$userpoints[$userid] += 5;
 				} else if (intval($day) < 15) {
@@ -255,23 +189,12 @@ function updatePoints()
 		}
 
 
-		// Weltmeistercheck:
-
-
-
-
-
 
 	}
-	//echo "<pre>";
-	//var_dump($userpoints[16]);
-	//echo "</pre>";
-
 	foreach ($userpoints as $id => $points) {
 		$id = $db->real_escape_string($id);
 		$points = $db->real_escape_string($points);
 		$db->query("UPDATE users SET points=$points WHERE id=$id");
-		//echo "$id hat $points<br>";
 		echo $db->error;
 	}
 }
@@ -280,13 +203,11 @@ function createBestenliste($query, $whereami)
 {
 	$html = "";
 	$db = connect();
-	//updatePoints();
 
 
 
 	if ($query != "grades") {
 		$res = $db->query($query);
-		//echo $db->error;
 		if (!$res) {
 			alert("danger", "Es wurden keine Benutzer gefunden!<br>Fehler: " . $db->error);
 		} else {
@@ -315,7 +236,6 @@ function createBestenliste($query, $whereami)
 						$html .= " class='success' id='me'";
 					}
 					$html .= "><td>$counter</td><td>$points</td><td>$grade</td><td>$nickname</td></tr>";
-					//echo $letztePunkte."---".$user["points"]."<br>";
 					$gesamtcounter++;
 				}
 				$html .= "</tbody></table>";
@@ -323,7 +243,6 @@ function createBestenliste($query, $whereami)
 		}
 	} else {
 		$res = $db->query("SELECT * FROM users  WHERE `hideInScores`!=1");
-		//echo $db->error;
 		if (!$res) {
 			alert("danger", "Es wurden keine Benutzer gefunden!<br>Fehler: " . $db->error);
 		} else {
@@ -351,9 +270,6 @@ function createBestenliste($query, $whereami)
 
 				arsort($grades);
 
-				//echo "<pre>";
-				//var_dump($grades);
-				//echo "</pre>";
 
 				$counter = 0;
 				$html .= "<table class='table table-responsive table-striped table-hover'><thead><th>Rang</th><th>Durchschnittliche Punktzahl</th><th>Klasse</th></thead><tbody>";
@@ -365,7 +281,6 @@ function createBestenliste($query, $whereami)
 						$letztePunkte = (int) $points;
 					}
 					$html .= "<tr><td>$counter</td><td>$points</td><td>$gradename</td></tr>";
-					//$counter ++;
 
 				}
 				$html .= "</tbody></table>";
@@ -385,7 +300,6 @@ function getHead()
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-    <!-- Die 3 Meta-Tags oben *müssen* zuerst im head stehen; jeglicher sonstiger head-Inhalt muss *nach* diesen Tags kommen -->
 	
 	
 	
@@ -395,10 +309,8 @@ function getHead()
 	
     <title>AG - AG-Ventskalender</title>
 
-    <!-- Bootstrap-CSS -->
     <link href="./include/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
     <script src="./include/lib/schnee.js"></script>
-    <!-- Besondere Stile für diese Vorlage -->
     <link href="./styles/main.css" rel="stylesheet">
 	
    <style>
@@ -409,7 +321,6 @@ function getHead()
 	} 
 	</style>
 
-    <!-- Unterstützung für Media Queries und HTML5-Elemente in IE8 über HTML5 shim und Respond.js -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -463,20 +374,11 @@ function checkForDate($dayid)
 		$current = $now->getTimestamp();
 		$date = strtotime("2018-12-$dayid");
 	}
-	//echo "Today: "+strftime("%A, %e.%m.%Y", $current);
-	//echo "Date: "+strftime("%A, %e.%m.%Y", $date);
 
 	$wochentag = date("w", $current);
 	$datediff = $date - $current;
 	$differance = floor($datediff / (60 * 60 * 24));
 
-	/*if ( $differance == 0 ) {
-		return "today";
-	} else if ( $differance > 0 ) {
-		return "future";
-	} else if ( $differance < 0 ) {
-		return "past";
-	}*/
 	if ($todayday == 26 && $dayid == WEIHNACHTSTAG) {
 		return "today";
 	}
@@ -484,25 +386,25 @@ function checkForDate($dayid)
 
 	$zurueckliegend = null;
 	switch ($wochentag) {
-		case 0: // Sonntag
+		case 0:
 			$zurueckliegend = 3;
 			break;
-		case 1: // Montag
+		case 1:
 			$zurueckliegend = 4;
 			break;
-		case 2: // Dienstag
+		case 2:
 			$zurueckliegend = 4;
 			break;
-		case 3: // Mittwoch
+		case 3:
 			$zurueckliegend = 2;
 			break;
-		case 4: // Donnerstag
+		case 4:
 			$zurueckliegend = 2;
 			break;
-		case 5: // Freitag
+		case 5:
 			$zurueckliegend = 2;
 			break;
-		case 6: // Samstag
+		case 6:
 			$zurueckliegend = 2;
 			break;
 	}
@@ -568,7 +470,6 @@ function getUserPoints()
 	$currentUserPoints = 0;
 
 	foreach ($tipps as $tipp) {
-		//echo "tipp<br>";
 		$userid = $tipp["userid"];
 		$day = $tipp["day"];
 		$alternatives = array_map("strtoupper", explode("-", $days[$day]["alternatives"]));
@@ -590,7 +491,6 @@ function getUserPoints()
 					}
 				}
 			} else if (in_array($tipp, $alternatives)) {
-				//echo "alternative used: $tipp<br>";
 				if (intval($day) < 8) {
 					$currentUserPoints += 5;
 				} else if (intval($day) < 15) {

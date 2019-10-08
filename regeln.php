@@ -119,7 +119,7 @@ require_once("./include/db.inc.php");
 			<?php getFooter(); ?>
 
 		</div>
-		<!-- /container -->
+		
 
 </body>
 

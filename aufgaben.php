@@ -143,15 +143,8 @@ require_once("./include/login.inc.php");
 
 			?>
 
-
-			<!--<ul class="menu nav nav-tabs">
-				<li><a href="#tab1">Im Bild</a></li>
-				<li><a href="#tab2">Als Liste</a></li>
-				
-			</ul>-->
 			<br>
 
-			<!--<div id="tab1" class="tab-content">-->
 			<?php alert("info", "<h3>Farbcodes:</h3><table class='colorcodes'>
 						<tr><td class='green'>Grün:</td><td>Richtig, volle Punkzahl</td></tr>
 						<tr><td class='red'>Rot:</td><td>Falsch, keine Punkte</td></tr>

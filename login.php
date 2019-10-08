@@ -54,7 +54,6 @@ require_once("./include/db.inc.php");
 								$status = password_verify($_POST["password"], $password);
 
 								if ($status) {
-									// erfolgreich eingeloggt!!!
 									if ($res["checked"] == -1) {
 										alert("warning", "<b>Dein Account wurde leider blockiert.</b><br>Bitte registriere dich erneut mit deinem richtigen Namen und deiner echten Klasse.<br>Du kannst nur teilnehmen, wenn du Schüler oder Lehrer des Allgäu-Gymnasiums bist.");
 										die();
@@ -122,9 +121,6 @@ require_once("./include/db.inc.php");
 
 		<?php getFooter(); ?>
 
-	</div> <!-- /container -->
-
-
+	</div>
 </body>
-
 </html>

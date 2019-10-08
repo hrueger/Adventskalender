@@ -10,4 +10,3 @@ function connect()
 	$db->query("SET NAMES utf8");
 	return $db;
 }
-	//echo "connected to database!";
