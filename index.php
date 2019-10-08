@@ -10,7 +10,6 @@
   </head>
 
   <body>
-	<div class="bgimgdiv"></div>
     <div class="container">
       <?php echo getNav("index"); ?>
 
