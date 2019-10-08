@@ -216,7 +216,7 @@ function createBestenliste($query, $whereami)
 				alert("warning", "Es haben noch keine Spieler am AG-Ventskalender teilgenommen!");
 			} else {
 				$counter = 0;
-				$html .= "<table class='table table-responsive table-striped table-hover'><thead><th>Rang</th><th>Punkte</th><th>Klasse</th><th>Nickname</th></thead><tbody>";
+				$html .= "<table class='table table-striped table-hover'><thead><th>Rang</th><th>Punkte</th><th>Klasse</th><th>Nickname</th></thead><tbody>";
 				$letztePunkte = -1;
 				$gesamtcounter = 0;
 				foreach ($res as $user) {
@@ -272,7 +272,7 @@ function createBestenliste($query, $whereami)
 
 
 				$counter = 0;
-				$html .= "<table class='table table-responsive table-striped table-hover'><thead><th>Rang</th><th>Durchschnittliche Punktzahl</th><th>Klasse</th></thead><tbody>";
+				$html .= "<table class='table table-striped table-hover'><thead><th>Rang</th><th>Durchschnittliche Punktzahl</th><th>Klasse</th></thead><tbody>";
 				foreach ($grades as $name => $grade) {
 					$gradename = ($name == "Lehrer/in") ? "Lehrer" : htmlspecialchars($name);
 					$points = htmlspecialchars($grade);
