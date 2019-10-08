@@ -114,7 +114,7 @@ td {
 	<div class="container">
 		<?php getNav("aufgaben"); ?>
 
-		<div class="jumbotron">
+		<div class="jumbotron text-center">
 			<h1>Aufgaben</h1>
 			<br>
 
@@ -273,9 +273,5 @@ td {
 
 	</div>
 	<!-- /container -->
-
-
-	<!-- IE10-Anzeigefenster-Hack für Fehler auf Surface und Desktop-Windows-8 -->
-	<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

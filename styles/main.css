@@ -6,6 +6,10 @@
 	
 }
 
+.card.panel {
+	padding: 1rem;
+	margin-top: 1rem;
+}
 
 
 body {
@@ -51,10 +55,11 @@ body {
 
 /* Main marketing message and sign up button */
 .jumbotron {
-  text-align: center;
   border-bottom: 1px solid #e5e5e5;
 }
-.jumbotron .btn {
+
+
+.big-btn {
   padding: 14px 24px;
   font-size: 21px;
 }
@@ -81,8 +86,8 @@ body {
     border-bottom: 0;
   }
 }
-
-#navbar   li   a {
+/*
+.navbar .navbar-nav .nav-item a.nav-link {
 	color: #ffffff;
 	display: block;
 	border-radius: 4px;
@@ -90,30 +95,26 @@ body {
 	margin: 3px;
 }
 
-#navbar   li.active   a, #navbar   li   a:focus {
+.navbar .navbar-nav .nav-item a.nav-link:focus {
 	color: #ffffff;
 	background-color: #8D0401;
 }
 
-#navbar   li   a:hover {
+.navbar .navbar-nav .nav-item a.nav-link:hover {
 	background-color: #8D0401;
 	color:#ffffff;
 }
+.navbar .navbar-nav .nav-item.active a.nav-link {
+	background-color: rgb(158, 3, 0);
+	color:#ffffff;
+}
+*/
 
-#navbar  li.active   a:hover {
-	background-color: #8D0401;
-	color:#ffffff;
-}
 
 .jumbotron {
 	background-color: #f9f9f9;
 	
-}
-
-.navbar {
-	background-color: rgba(0,0,0,0.00);
-	border: 0px;
-}
+}	
 
 @media (max-width: 769px) {
 	.jumbotron {

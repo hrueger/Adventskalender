@@ -36,7 +36,7 @@
     <div class="container">
      <?php getNav("logout"); ?>
 
-      <div class="jumbotron">
+      <div class="jumbotron text-center">
         <h1>Der AGventskalender</h1> 
 		<br>
 		<?php
@@ -108,7 +108,5 @@
     </div> <!-- /container -->
 
 
-    <!-- IE10-Anzeigefenster-Hack für Fehler auf Surface und Desktop-Windows-8 -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>

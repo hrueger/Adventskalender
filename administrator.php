@@ -72,7 +72,6 @@
 		$res = $db->query("UPDATE users SET checked=-1 WHERE id=$user");
 	}
 	
-	//echo "bhasjkdbnaskljdhsnadkjfhasokjdhskldbjchasdrukjhnsadiojsanhdfiousaderif".var_dump($loggedin);
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -80,17 +79,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Die 3 Meta-Tags oben *müssen* zuerst im head stehen; jeglicher sonstiger head-Inhalt muss *nach* diesen Tags kommen -->
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
     <title>Administrator - AG-AG-Ventskalender</title>
 
-    <!-- Bootstrap-CSS -->
     <link href="./include/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Besondere Stile für diese Vorlage -->
     <link href="./styles/administrator.css" rel="stylesheet">
 
     <style>
@@ -119,8 +115,6 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <!--<a class="navbar-brand" href="#">Projekt-Titel</a>-->
-		   <!--<h3 class="text-muted">Projekt-Titel</h3>-->
 			<img class="header" src="./images/header.png">
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -241,8 +235,8 @@
 							alert("success", "Es gibt ".count($uncheckedUsers)." neue Benutzer!");
 							alert("info", "Es gibt ".count($checkedUsers)." verifizierte Benutzer!");
 							alert("warning", "Es gibt ".count($blockedUsers)." blockierte Benutzer!");
-							echo "<h3>Neue Benutzer</h3><div class='table-responsive'>
-									<table class='table table-striped'>
+							echo "<h3>Neue Benutzer</h3>
+									<table class='table table-striped table-responsive'>
 									  <thead>
 										<tr>
 										  <th>Klasse</th>
@@ -262,10 +256,10 @@
 										<td><a href='./administrator.php?a=users&b=".$user["id"]."'>Blockieren</a></td>
 									</tr>";
 							}
-							echo "</tbody></table></div>";
+							echo "</tbody></table>";
 							/////
-							echo "<h3>Verifizierte Benutzer</h3><div class='table-responsive'>
-									<table class='table table-striped'>
+							echo "<h3>Verifizierte Benutzer</h3>
+									<table class='table table-striped table-responsive'>
 									  <thead>
 										<tr>
 										  <th>Klasse</th>
@@ -282,10 +276,10 @@
 										<td>".$user["name"]."</td>
 									</tr>";
 							}
-							echo "</tbody></table></div>";
+							echo "</tbody></table>";
 							/////
-							echo "<h3>Blockierte Benutzer</h3><div class='table-responsive'>
-									<table class='table table-striped'>
+							echo "<h3>Blockierte Benutzer</h3>
+									<table class='table table-striped table-responsive'>
 									  <thead>
 										<tr>
 										  <th>Klasse</th>
@@ -302,7 +296,7 @@
 										<td>".$user["name"]."</td>
 									</tr>";
 							}
-							echo "</tbody></table></div>";
+							echo "</tbody></table>";
 						}
 						
 					}
@@ -334,7 +328,7 @@
 		
 			</div>
 			<?php } else if ($action == "results") { /////////////////////////////////////////////////////////////////////////////////////////////?>
-			<div class="jumbotron"><?php
+			<div class="jumbotron text-center"><?php
 		if (isset($_POST["submit"]) && isset($_POST["matchid"])) {
 			if (isset($_POST["goalsTeam1"]) &&
 			isset($_POST["goalsTeam2"]) &&
@@ -493,7 +487,7 @@
 		
       </div>
 		<?php } else if ($action == "koroundteams") { /////////////////////////////////////////////////////////////////////////////////////////////?>
-			<div class="jumbotron"><?php
+			<div class="jumbotron text-center"><?php
 				
 		if (isset($_POST["submit"]) && isset($_POST["matchid"])) {
 			if (isset($_POST["nameTeam1"]) &&
@@ -646,7 +640,7 @@
 		
       </div>
 			<?php } else if ($action == "logout") { /////////////////////////////////////////////////////////////////////////////////////////////?>
-			<h1>Das AG tippt`s!</h1> 
+			<h1>AGventskalender <?php echo date("Y"); ?></h1> 
 		<br>
 		<?php
 			
@@ -757,15 +751,7 @@
     </div> <!-- /container -->
 	<?php } ?>
 	
-	
-    <!-- Bootstrap-JavaScript
-    ================================================== -->
-    <!-- Am Ende des Dokuments platziert, damit Seiten schneller laden -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- Nur, um unsere Platzhalter-Bilder zum Laufen zu bringen. Die nächste Zeile nicht wirklich kopieren! -->
-    <script src="../../assets/js/vendor/holder.min.js"></script>
-    <!-- IE10-Anzeigefenster-Hack für Fehler auf Surface und Desktop-Windows-8 -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="../include/lib/bootstrap/jquery.min.js"></script>
+    <script src="../include/lib/bootstrap/bootstrap.min.js"></script>
   </body>
 </html>

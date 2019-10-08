@@ -14,12 +14,12 @@
     <div class="container">
       <?php echo getNav("index"); ?>
 
-      <div class="jumbotron">
-        <!--<h1>Das AG tippt`s!</h1>-->
+      <div class="jumbotron text-center">
+        
 		
         
 		<h4>Der etwas andere</h4><h2>AG-Ventskalender</h2><h3>des Allgäu-Gymnasiums</h3>
-<img class="leadImage img-responsive" src="./images/banner.jpg"><br>
+		<img class="leadImage img-fluid" src="./images/banner.jpg"><br>
 		
 		<?php
 		if ($loggedin) {
@@ -116,7 +116,5 @@
     </div> <!-- /container -->
 
 
-    <!-- IE10-Anzeigefenster-Hack für Fehler auf Surface und Desktop-Windows-8 -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>

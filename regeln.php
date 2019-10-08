@@ -30,9 +30,8 @@ require_once( "./include/db.inc.php" );
 			<!--<h3 class="text-muted">Projekt-Titel</h3>-->
 
 
-			<div class="jumbotron text-normal">
-				<!--<h1>Das AG tippt`s!</h1>-->
-				<!--<img class="img img-responsive" src="./images/logo_big.jpg"><br>-->
+			<div class="jumbotron text-justify">
+				<!--<img class="img img-fluid" src="./images/logo_big.jpg"><br>-->
 
 				<h2>Der etwas andere AGventskalender</h2>
 				<h4>Das Schulhaus-Tippspiel des Allgäu-Gymnasiums Kempten</h4>
@@ -48,15 +47,15 @@ require_once( "./include/db.inc.php" );
 					<br>
 					<br>
 					<h4>Noch ein paar Regeln:</h4>
-					<div class="well">
+					<div class="card panel">
 						<b>Wer kann am AGventskalender teilnehmen?</b><br>
 						<p class="text-left regeln text-normal">Alle Schülerinnen und Schüler sowie alle Lehrkräfte des Allgäu-Gymnasiums dürfen am Tippspiel teilnehmen.</p>
 					</div>
-					<div class="well">
+					<div class="card panel">
 						<b>Wie melde ich mich an?</b>
 						<p class="text-left regeln text-normal">Bitte melde dich zunächst an (<i>„Registrieren“</i>). Außer deinem Namen und deiner Klasse musst du keine personenbezogenen Daten angeben. Diese werden absolut vertraulich behandelt. Wenn du im Sommer am WM-Tippspiel teilgenommen hast, kannst du einfach deine Anmeldung von damals per Klick übernehmen. Bitte notiere dir deine angegebenen Zugangsdaten, dein Nickname und dein Passwort. (Bei Verlust dieser Daten müsstest du dich neu anmelden und würdest so bereits erreichte Punkte verlieren.) Bitte melde dich mit deinem richtigen Namen und deiner richtigen Klasse an. Jede Anmeldung wird von uns genau überprüft. Existiert kein Schüler oder Lehrer mit dem angegeben Namen an unserer Schule, wird die Anmeldung gelöscht.</p>
 					</div>
-					<div class="well">
+					<div class="card panel">
 						<b>Wann kann ich die Lösungen eintragen?</b>
 						<p class="text-left regeln text-normal">Die Tabelle sagt dir, bis wann du die Lösung eingeben kannst.</p>
 
@@ -97,7 +96,7 @@ require_once( "./include/db.inc.php" );
 						<br> Nach dieser Frist ist die Eingabe nicht mehr möglich und du kannst die Lösung des jeweiligen Bilderrätsels ansehen.<br>
 						<br> Die aktuellen Bilderrätsel kannst du auch in der Schule an den Info-Screens sehen. <br>
 					</div>
-					<div class="well"><b>Wie viele Punkte kann ich erzielen?</b><br>
+					<div class="card panel"><b>Wie viele Punkte kann ich erzielen?</b><br>
 						<p class="text-left regeln text-normal">Für jedes richtige Lösung eines Bilder-Rätsels der
 							<ul>
 								<li><strong>ersten</strong> Adventswoche (01. – 07.12.) bekommst du <strong>10 Punkte</strong></li>
@@ -122,8 +121,5 @@ require_once( "./include/db.inc.php" );
 		</div>
 		<!-- /container -->
 
-
-		<!-- IE10-Anzeigefenster-Hack für Fehler auf Surface und Desktop-Windows-8 -->
-		<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-</body>
+	</body>
 </html>

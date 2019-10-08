@@ -105,7 +105,7 @@ require_once( "./include/login.inc.php" );
 	<div class="container">
 		<?php getNav("aufgabe"); ?>
 		
-		<div class="jumbotron">
+		<div class="jumbotron text-center">
 			<?php
 
 			//var_dump($_POST);
@@ -263,16 +263,16 @@ require_once( "./include/login.inc.php" );
 						$dontEchoChristmasForm = false;
 						if ( $allow == "today" ) {
 							if ( $task[ "day" ] != WEIHNACHTSTAG ) {
-								//echo "<img class='img img-responsive taskimg' src='./images/getImage.php?d=$nummer&m=a'/>";
-								echo "<img class='img img-responsive taskimg' src='./images/getImage.php?d=$nummer&m=a'/>";
+								//echo "<img class='img img-fluid taskimg' src='./images/getImage.php?d=$nummer&m=a'/>";
+								echo "<img class='img img-fluid taskimg' src='./images/getImage.php?d=$nummer&m=a'/>";
 									
 							}
 									
 
 						} else {
 							if ( $task[ "day" ] != WEIHNACHTSTAG ) {
-								echo "<h4 class='solution'>LÖSUNG</h4><img class='img img-responsive taskimg' src='./images/getImage.php?d=$nummer&m=l'/>";
-								//echo "<h4 class='solution'>LÖSUNG</h4><img class='img img-responsive taskimg' src='./images/getImage.php?d=$nummer&m=l'/>";
+								echo "<h4 class='solution'>LÖSUNG</h4><img class='img img-fluid taskimg' src='./images/getImage.php?d=$nummer&m=l'/>";
+								//echo "<h4 class='solution'>LÖSUNG</h4><img class='img img-fluid taskimg' src='./images/getImage.php?d=$nummer&m=l'/>";
 							} else {
 								$dontEchoChristmasForm = true;
 
@@ -315,12 +315,12 @@ require_once( "./include/login.inc.php" );
 							if ( $task[ "day" ] == WEIHNACHTSTAG ) {
 								///////////////////////////////   Weihnachten      //////////////////////////////////
 								?>
-			<link href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/css/base/jquery.ui.all.css" rel="stylesheet">
-			<link href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/css/lightness/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
-			<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-			<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
-			<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-simulate/1.0.1/jquery.simulate.min.js"></script>
-			<?php 
+								<link href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/css/base/jquery.ui.all.css" rel="stylesheet">
+								<link href="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.2/css/lightness/jquery-ui-1.10.2.custom.min.css" rel="stylesheet">
+								<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+								<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.2/jquery.ui.touch-punch.min.js"></script>
+								<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-simulate/1.0.1/jquery.simulate.min.js"></script>
+								<?php 
 								echo '<form action="./aufgabe.php" id="submitSolution" class="form-inline" method="post">
 							<input type="hidden" id="dayid" name="dayid" value="' . $_GET[ "a" ] . '"><input type="hidden" id="solution" name="solution" value=""></form>';
 								$counter = "A";
@@ -673,8 +673,5 @@ require_once( "./include/login.inc.php" );
 	</div>
 	<!-- /container -->
 
-
-	<!-- IE10-Anzeigefenster-Hack für Fehler auf Surface und Desktop-Windows-8 -->
-	<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

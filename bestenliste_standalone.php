@@ -39,8 +39,8 @@
     <div class="container">
       
 
-      <div class="jumbotron">
-		  <img src="images/header_lang.png" class="img img-responsive">
+      <div class="jumbotron text-center">
+		  <img src="images/header_lang.png" class="img img-fluid">
         <h1>Bestenliste<br><small>des AG-ventskalenders</small></h1>
 		  
 		<br>
@@ -64,7 +64,7 @@
 		
       </div>
 		<br>
-		  	<div class="well"><h4><?php echo "Stand: ".strftime("%A").", ".date('d.m.o \u\m H:i:s')." Uhr"; ?></h4></div>
+		  	<div class="card"><h4><?php echo "Stand: ".strftime("%A").", ".date('d.m.o \u\m H:i:s')." Uhr"; ?></h4></div>
 	
 
       <?php echo getFooter(); ?>

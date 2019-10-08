@@ -416,41 +416,36 @@ function getHead() {
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]--><script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<![endif]-->
+	<script src="./include/lib/bootstrap/jquery.min.js"></script>
+	<script src="./include/lib/bootstrap/bootstrap.min.js"></script>
 	';
 }
 
 function getNav( $current ) {
 	global $loggedin;
-	echo '<nav class="navbar navbar-default">
-	<div class="container-fluid">
-	  <div class="navbar-header">
-		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-		  <span class="sr-only">Navigation ein-/ausblenden</span>
-		  <span class="icon-bar"></span>
-		  <span class="icon-bar"></span>
-		  <span class="icon-bar"></span>
-		</button>
-		<a href="#" class="navbar-left"><img style="height: 46px" src="./images/header.png"></a>
-	  </div>
-	  <div id="navbar" class="navbar-collapse collapse navbar-right">
-		<ul class="nav navbar-nav">
-		  <li role="presentation" ' . ( $current == "index" ? 'class="active"' : "" ) . '><a href="./index.php">Home</a></li>';
+	echo '<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+	<a class="navbar-brand" href="/"><img style="height: 46px" src="./images/header.png"></a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse " id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+		  <li ' . ( $current == "index" ? 'class="nav-item active"' : "class='nav-item'" ) . '><a class="nav-link" href="./index.php">Start</a></li>';
 	if ( !$loggedin ) {
-		echo '<li role="presentation" ' . ( $current == "login" ? 'class="active"' : "" ) . '><a href="./login.php">Einloggen</a></li>
-            <li role="presentation" ' . ( $current == "neuer_benutzer" ? 'class="active"' : "" ) . '><a href="./neuer_benutzer.php">Registrieren</a></li>';
+		echo '<li ' . ( $current == "login" ? 'class="nav-item active"' : "class='nav-item'" ) . '><a class="nav-link" href="./login.php">Einloggen</a></li>
+            <li ' . ( $current == "neuer_benutzer" ? 'class="nav-item active"' : "class='nav-item'" ) . '><a class="nav-link" href="./neuer_benutzer.php">Registrieren</a></li>';
 	} else {
-		echo '<li role="presentation" ' . ( $current == "logout" ? 'class="active"' : "" ) . '><a href="./logout.php">Abmelden</a></li>
-			<li role="presentation" ' . ( $current == "aufgaben" ? 'class="active"' : "" ) . '><a href="./aufgaben.php#tab1">Aufgaben</a></li>';
+		echo '<li ' . ( $current == "logout" ? 'class="nav-item active"' : "class='nav-item'" ) . '><a class="nav-link" href="./logout.php">Abmelden</a></li>
+			<li ' . ( $current == "aufgaben" ? 'class="nav-item active"' : "class='nav-item'" ) . '><a class="nav-link" href="./aufgaben.php#tab1">Aufgaben</a></li>';
 	}
-	echo '<li role="presentation" ' . ( $current == "bestenliste" ? 'class="active"' : "" ) . '><a href="./bestenliste.php#tab4">Bestenliste</a></li>
-            <li role="presentation" ' . ( $current == "regeln" ? 'class="active"' : "" ) . '><a href="./regeln.php">Regeln</a></li>
+	echo '<li ' . ( $current == "bestenliste" ? 'class="nav-item active"' : "class='nav-item'" ) . '><a class="nav-link" href="./bestenliste.php#tab4">Bestenliste</a></li>
+            <li ' . ( $current == "regeln" ? 'class="nav-item active"' : "class='nav-item'" ) . '><a class="nav-link" href="./regeln.php">Regeln</a></li>
 		  
 		</ul>
 		
 	  </div>
-	</div>
 </nav>';
 }
 
@@ -616,7 +611,7 @@ function getUserPoints() {
 }
 
 function getFooter() {
-	echo '<footer class="well footer">
+	echo '<footer class="card footer">
 			<p>&copy; AG-Multimedia des Allgäu-Gymnasiums 2018. Alle Rechte vorbehalten. </p>
 		</footer>';
 }
