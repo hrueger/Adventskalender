@@ -17,7 +17,7 @@
 	$day = file_get_contents("heutigerTag.txt");
 	?>
 	
-<form method="post" id="carform">
+<form method="post" id="">
   
 <select name="tag">
   

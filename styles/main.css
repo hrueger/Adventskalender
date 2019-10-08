@@ -2,62 +2,31 @@
 .container {
   padding-top: 20px;
   padding-bottom: 20px;
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#db0000+0,960002+100 */
-	
+}
+
+.bgimg {
+  background-image: url(../images/banner.jpg);
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.fullheight {
+  height: calc(100vh - 72px);
 }
 
 .card.panel {
-	padding: 1rem;
-	margin-top: 1rem;
+  padding: 1rem;
+  margin-top: 1rem;
 }
 
-
-body {
-	background: #db0000; /* Old browsers */
-	background: -moz-linear-gradient(top, #db0000 0%, #960002 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top, #db0000 0%,#960002 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom, #db0000 0%,#960002 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#db0000', endColorstr='#960002',GradientType=0 ); /* IE6-9 */
-	background-image: url("../images/background.png");
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: cover;
-	display: block;
-	height: 800px;
-	left: 0;
-	position: fixed;
-	right: 0;
-	z-index: -10;
+.blackborder {
+  text-shadow: 2px 2px 2px black;
 }
 
-
-/* Make the masthead heading the same height as the navigation */
-.header-img {
-  
-  
-  max-width:190px; margin-top: -7px;
-}
-
-.leadImage {
-	min-width: 100%;
-}
-
-.navbar-right {
-	margin-left: 0px;
-}
-
-
-/* Customize container*/
-
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
 .jumbotron {
-  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 0;
 }
-
 
 .big-btn {
   padding: 14px 24px;
@@ -65,7 +34,8 @@ body {
 }
 
 .footer {
-	padding: 3px;
+  padding: 3px;
+  color: white;
 }
 
 /* Responsive: Portrait tablets and up */
@@ -86,43 +56,8 @@ body {
     border-bottom: 0;
   }
 }
-/*
-.navbar .navbar-nav .nav-item a.nav-link {
-	color: #ffffff;
-	display: block;
-	border-radius: 4px;
-	background-color: #F30503;
-	margin: 3px;
-}
-
-.navbar .navbar-nav .nav-item a.nav-link:focus {
-	color: #ffffff;
-	background-color: #8D0401;
-}
-
-.navbar .navbar-nav .nav-item a.nav-link:hover {
-	background-color: #8D0401;
-	color:#ffffff;
-}
-.navbar .navbar-nav .nav-item.active a.nav-link {
-	background-color: rgb(158, 3, 0);
-	color:#ffffff;
-}
-*/
-
-
-.jumbotron {
-	background-color: #f9f9f9;
-	
-}	
-
-@media (max-width: 769px) {
-	.jumbotron {
-		padding: 5px!important;
-	}
-}
 
 .footer {
-	padding: 10px !important;
-	text-align: center;
+  padding: 10px !important;
+  text-align: center;
 }

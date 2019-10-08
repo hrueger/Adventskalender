@@ -1,3 +1,3 @@
-# Adventskalender
+# AGventskalender
 
-Der AGventskalender vom Allgäu-Gymnasium für Weihnachten 2018
+Der neue AGventskalender vom Allgäu-Gymnasium für Weihnachten 2019

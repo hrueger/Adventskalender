@@ -1,10 +1,11 @@
 <?php
-require_once( "./include/lib.inc.php" );
-require_once( "./include/db.inc.php" );
+require_once("./include/lib.inc.php");
+require_once("./include/db.inc.php");
 
 ?>
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
 	<?php getHead(); ?>
 	<style>
@@ -13,7 +14,7 @@ require_once( "./include/db.inc.php" );
 			font-weight: normal !important;
 			text-align: left;
 		}
-		
+
 		.bigger {
 			font-size: 22px !important;
 			font-weight: normal !important;
@@ -22,28 +23,26 @@ require_once( "./include/db.inc.php" );
 	</style>
 </head>
 
-<body>
+<body class="bgimg">
 
 	<div class="container">
 		<div class="header clearfix">
 			<?php getNav("regeln"); ?>
-			<!--<h3 class="text-muted">Projekt-Titel</h3>-->
-
-
 			<div class="jumbotron text-justify">
-				<!--<img class="img img-fluid" src="./images/logo_big.jpg"><br>-->
-
 				<h2>Der etwas andere AGventskalender</h2>
 				<h4>Das Schulhaus-Tippspiel des Allgäu-Gymnasiums Kempten</h4>
 				<br>
+				<div class="alert alert-danger">
+					<h1>Outdated!</h1>
+				</div>
 				<p class="text-left regeln text-normal">
 					<br>
 					<p class="bigger">Liebe Schülerinnen und Schüler, Lehrerinnen und Lehrer des Allgäu-Gymnasiums,</p>
 
 					<i>willkommen beim AGventskalender, dem Schulhaus-Tippspiel unseres Gymnasiums zur Adventszeit! <br>
-					<br> Wie gut kennst du deine Schule? Jeden Tag kannst du ein Geschenk öffnen und dein Wissen testen. Du wirst Bilder von Orten und Objekten in unserem Schulhaus sehen. Was wurde fotografiert? Gib die Buchstaben des entsprechenden Worts in die dafür vorgesehenen Kästchen ein. Solltest du Probleme mit den Objekten oder den Begriffen haben, dann mache dich auf ins und ums Schulgebäude und suche die Stellen. Schau dich dort genau um. Manchmal findest du Hilfe vor Ort. Du hast jeweils mindestens zwei Tage Zeit. <br> Jedes Lösungswort enthält einen Buchstaben, den du brauchst, um den Lösungssatz am Ende des AGventskalenders herauszufinden.<br> Falls du an einem Tag die Lösung nicht findest, sei nicht traurig, sondern spiele am nächsten Tag einfach weiter. Jede Woche gibt es mehr Punkte auf eine richtige Lösung. <br> Die Teilnahme an diesem Tippspiel ist natürlich kostenlos.<br> Neben der Freude, zu den besten AG-Experten der Schulfamilie zu gehören, warten auf die Erstplatzierten kleine Preise.<br>
-					<br> Viel Spaß beim Schulhaus-Erforschen, Knobeln, Rätseln und Gewinnen!<br>
-					<br> Die Arbeitsgemeinschaft Multimedia des Allgäu-Gymnasiums<br></i>
+						<br> Wie gut kennst du deine Schule? Jeden Tag kannst du ein Geschenk öffnen und dein Wissen testen. Du wirst Bilder von Orten und Objekten in unserem Schulhaus sehen. Was wurde fotografiert? Gib die Buchstaben des entsprechenden Worts in die dafür vorgesehenen Kästchen ein. Solltest du Probleme mit den Objekten oder den Begriffen haben, dann mache dich auf ins und ums Schulgebäude und suche die Stellen. Schau dich dort genau um. Manchmal findest du Hilfe vor Ort. Du hast jeweils mindestens zwei Tage Zeit. <br> Jedes Lösungswort enthält einen Buchstaben, den du brauchst, um den Lösungssatz am Ende des AGventskalenders herauszufinden.<br> Falls du an einem Tag die Lösung nicht findest, sei nicht traurig, sondern spiele am nächsten Tag einfach weiter. Jede Woche gibt es mehr Punkte auf eine richtige Lösung. <br> Die Teilnahme an diesem Tippspiel ist natürlich kostenlos.<br> Neben der Freude, zu den besten AG-Experten der Schulfamilie zu gehören, warten auf die Erstplatzierten kleine Preise.<br>
+						<br> Viel Spaß beim Schulhaus-Erforschen, Knobeln, Rätseln und Gewinnen!<br>
+						<br> Die Arbeitsgemeinschaft Multimedia des Allgäu-Gymnasiums<br></i>
 					<br>
 					<br>
 					<h4>Noch ein paar Regeln:</h4>
@@ -103,11 +102,12 @@ require_once( "./include/db.inc.php" );
 								<li><strong>zweiten</strong> Adventswoche (08. – 14.12.) bekommst du <strong>20 Punkte</strong></li>
 								<li><strong>dritten</strong> Adventswoche (15. – 23.12.) bekommst du <strong>30 Punkte</strong></li>
 								<li>Für die richtige Lösung am <strong>Heiligabend</strong> bekommst du <strong>60 Punkte</strong></li>
-						</ul> </p>
+							</ul>
+						</p>
 						<br> Unter „Bestenliste“ kannst du jederzeit nachsehen, wie viele Punkte du bisher erhalten hast und auf welchem Platz du momentan stehst.<br> <br>Auch kannst du sehen, wie gut deine Klasse bisher abgeschnitten hat. <br> Die Preisträger des Tippspiels werden dann benachrichtigt.<br>
 					</div>
-			<hr>
-					<br><strong> Technische Realisierung:</strong><br> Hannes Rüger (9a) <br>
+					<hr>
+					<br><strong> Technische Realisierung:</strong><br> Hannes Rüger (10a) <br>
 					<br><strong> Spielleitung:</strong>
 					<br> Andreas Herz, StD<br>
 
@@ -121,5 +121,6 @@ require_once( "./include/db.inc.php" );
 		</div>
 		<!-- /container -->
 
-	</body>
+</body>
+
 </html>
