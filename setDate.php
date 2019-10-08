@@ -5,7 +5,7 @@
 <title>Heutigen Tag setzen</title>
 </head>
 
-<body>
+<body class="bgimg">
 	
 	
 <?php 

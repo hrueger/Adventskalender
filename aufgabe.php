@@ -101,7 +101,7 @@ require_once("./include/login.inc.php");
 	</style>
 </head>
 
-<body>
+<body class="bgimg">
 
 	<div class="container">
 		<?php getNav("aufgabe"); ?>

@@ -30,7 +30,7 @@ require_once("./include/db.inc.php");
 						$db = connect();
 						$userid = $db->real_escape_string($_SESSION["userid"]);
 						?>
-						<h2 class="coolcolor">Willkommen <?php echo $_SESSION["nickname"]; ?></h2><br>
+						<h2 class="coolcolor">Willkommen, <i><?php echo $_SESSION["nickname"]; ?></i>!</h2><br>
 
 						<p><a class="btn btn-lg btn-primary" href="aufgaben.php#tab1" role="button">Aufgaben &amp; Lösungen</a></p>
 						<p><a class="btn btn-lg btn-success" href="./bestenliste.php#tab4" role="button">Bestenliste</a></p>

@@ -34,7 +34,7 @@ require_once("./include/db.inc.php");
 
 </head>
 
-<body>
+<body class="bgimg">
 
 	<div class="container">
 

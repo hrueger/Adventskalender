@@ -23,7 +23,7 @@ if (isset($_POST["logout"])) {
 		<?php getHead(); ?>
 	</head>
 
-	<body>
+	<body class="bgimg">
 
 		<div class="container">
 			<?php getNav("logout"); ?>
