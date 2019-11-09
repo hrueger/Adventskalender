@@ -115,91 +115,9 @@ require_once("./include/db.inc.php");
 					alert("danger", "Du hast nicht alle Felder ausgefüllt!");
 					$ok = false;
 				}
-			} else if (isset($_POST["submitReuse"])) {
-				if (
-					isset($_POST["username"]) &&
-					isset($_POST["password"]) &&
-					!empty(trim($_POST["username"])) &&
-					!empty(trim($_POST["password"]))
-				) {
-					$ok = true;
-					$db = connect();
+			
 
-					$nickname = $db->real_escape_string($_POST["username"]);
-					$res = $db->query("SELECT * FROM wmusers WHERE nickname='$nickname'");
-
-					if (!$res) {
-						alert("danger", "Bitte überprüfe deinen Benutzernamen!");
-						$ok = false;
-					} else {
-						$res = $res->fetch_all(MYSQLI_ASSOC);
-						if (!$res) {
-							alert("danger", "Bitte überprüfe deinen Benutzernamen!");
-							$ok = false;
-						} else {
-							$res = $res[0];
-							if (!$res) {
-								alert("danger", "Bitte überprüfe deinen Benutzernamen!");
-								$ok = false;
-							} else {
-								$password = $res["password"];
-								$status = password_verify($_POST["password"], $password);
-
-								if ($status) {
-									// erfolgreich eingeloggt!!!
-									if ($res["checked"] == -1) {
-										alert("warning", "<b>Dein Account wurde schon beim Tippspiel blockiert.</b><a href=''./neuer_benutzer.php?mode=new'>Erstelle einfach einen neuen Account</a><br>");
-										die();
-									}
-
-
-									$_SESSION["username"] = $res["nickname"];
-									$_SESSION["name"] = $res["name"];
-									$_SESSION["grade"] = $res["grade"];
-									$_SESSION["userid"] = $res["id"];
-									$_SESSION["password"] = $password;
-
-									header("Location: neuer_benutzer.php?step2");
-								} else {
-									alert("danger", "Bitte überprüfe dein Passwort!");
-									$ok = false;
-								}
-							}
-						}
-					}
-				} else {
-					alert("danger", "Du hast nicht alle Felder ausgefüllt!");
-					$ok = false;
-				}
-			} else if (isset($_POST["submitReuse2"])) {
-				if (
-					isset($_POST["username"]) &&
-					!empty(trim($_POST["username"]))
-				) {
-					$_SESSION["username"] = $_POST["username"];
-					header("Location: neuer_benutzer.php?step3");
-				}
-			} else if (isset($_POST["submitReuse3"])) {
-				if (
-					isset($_POST["grade"]) &&
-					!empty(trim($_POST["grade"]))
-				) {
-					$db = connect();
-					$password = $db->real_escape_string($_SESSION["password"]);
-					$name = $db->real_escape_string($_SESSION["name"]);
-					$nickname = $db->real_escape_string($_SESSION["username"]);
-					$grade = $db->real_escape_string($_POST["grade"]);
-					$res = $db->query("INSERT INTO `users` (`name`, `nickname`, `grade`, `password`, `checked`, `points`) VALUES ('$name', '$nickname', '$grade', '$password', '0', '0')");
-					if (!$res) {
-						die("Fehler: " . $db->error);
-					}
-
-
-					header("Location: login.php?success");
-				}
 			}
-
-
 
 			if (!$ok) {
 				$firstname = (isset($_POST["firstname"])) ? $_POST["firstname"] : "";
@@ -214,131 +132,7 @@ require_once("./include/db.inc.php");
 				?>
 				<br>
 
-				<?php if (isset($_GET["step2"])) {
-						$reuseusername = $_SESSION["username"];
-						alert("info", "Wenn du magst, kannst du hier deinen Benutzernamen anpassen"); ?>
-
-					<form class="" method="post">
-						<div class="forn-group row">
-
-
-
-							<input type="text" name="username" required autofocus class="form-control" id="username" value="<?php echo $reuseusername; ?>" placeholder="Vorname">
-							<div class="alert alert-info text-left" role="alert">Bitte gib hier deinen Benutzernamen vom Tippspiel an.</div>
-
-						</div>
-
-
-						<div class="forn-group row">
-							<div class="pull-right">
-								<input type="submit" name="submitReuse2" value="Weiter" class="btn btn-primary">
-							</div>
-						</div>
-
-					</form>
-				<?php } else if (isset($_GET["step3"])) {
-						$grade = $_SESSION["grade"];
-						alert("info", "Bitte passe deine Klasse an"); ?>
-
-					<form class="form-horizontal" method="post">
-						<div class="forn-group row">
-
-
-							<select name="grade" required class="form-control" id="grade">
-								<optgroup label="Lehrer/in">
-									<option name="grade" <?php if ($grade == "Lehrer/in") echo " selected "; ?>value="Lehrer/in">Lehrer/in</option>
-									<option name="grade" <?php if ($grade == "Studienseminar 17/19") echo " selected "; ?>value="Studienseminar 17/19">Studienseminar 17/19</option>
-									<option name="grade" <?php if ($grade == "Studienseminar 20/18") echo " selected "; ?>value="Studienseminar 18/20">Studienseminar 18/20</option>
-
-								</optgroup>
-								<optgroup label="Jahrgangsstufe 5">
-									<option name="grade" <?php if ($grade == "5a" or !$grade) echo " selected "; ?>value="5a">5a</option>
-									<option name="grade" <?php if ($grade == "5b") echo " selected "; ?>value="5b">5b</option>
-									<option name="grade" <?php if ($grade == "5c") echo " selected "; ?>value="5c">5c</option>
-									<option name="grade" <?php if ($grade == "5d") echo " selected "; ?>value="5d">5d</option>
-									<option name="grade" <?php if ($grade == "5e") echo " selected "; ?>value="5e">5e</option>
-								</optgroup>
-								<optgroup label="Jahrgangsstufe 6">
-									<option name="grade" <?php if ($grade == "6a") echo " selected "; ?>value="6a">6a</option>
-									<option name="grade" <?php if ($grade == "6b") echo " selected "; ?>value="6b">6b</option>
-									<option name="grade" <?php if ($grade == "6c") echo " selected "; ?>value="6c">6c</option>
-									<option name="grade" <?php if ($grade == "6d") echo " selected "; ?>value="6d">6d</option>
-									<option name="grade" <?php if ($grade == "6e") echo " selected "; ?>value="6e">6e</option>
-								</optgroup>
-								<optgroup label="Jahrgangsstufe 7">
-									<option name="grade" <?php if ($grade == "7a") echo " selected "; ?>value="7a">7a</option>
-									<option name="grade" <?php if ($grade == "7b") echo " selected "; ?>value="7b">7b</option>
-									<option name="grade" <?php if ($grade == "7c") echo " selected "; ?>value="7c">7c</option>
-									<option name="grade" <?php if ($grade == "7d") echo " selected "; ?>value="7d">7d</option>
-									<option name="grade" <?php if ($grade == "7e") echo " selected "; ?>value="7e">7e</option>
-								</optgroup>
-
-								<optgroup label="Jahrgangsstufe 8">
-									<option name="grade" <?php if ($grade == "8a") echo " selected "; ?>value="8a">8a</option>
-									<option name="grade" <?php if ($grade == "8b") echo " selected "; ?>value="8b">8b</option>
-									<option name="grade" <?php if ($grade == "8c") echo " selected "; ?>value="8c">8c</option>
-									<option name="grade" <?php if ($grade == "8d") echo " selected "; ?>value="8d">8d</option>
-								</optgroup>
-								<optgroup label="Jahrgangsstufe 9">
-									<option name="grade" <?php if ($grade == "9a") echo " selected "; ?>value="9a">9a</option>
-									<option name="grade" <?php if ($grade == "9b") echo " selected "; ?>value="9b">9b</option>
-									<option name="grade" <?php if ($grade == "9c") echo " selected "; ?>value="9c">9c</option>
-									<option name="grade" <?php if ($grade == "9d") echo " selected "; ?>value="9d">9d</option>
-								<optgroup label="Jahrgangsstufe 10">
-									<option name="grade" <?php if ($grade == "10a") echo " selected "; ?>value="10a">10a</option>
-									<option name="grade" <?php if ($grade == "10b") echo " selected "; ?>value="10b">10b</option>
-									<option name="grade" <?php if ($grade == "10c") echo " selected "; ?>value="10c">10c</option>
-									<option name="grade" <?php if ($grade == "10d") echo " selected "; ?>value="10d">10d</option>
-								</optgroup>
-								<optgroup label="Jahrgangsstufe 11">
-									<option name="grade" <?php if ($grade == "Q11") echo " selected "; ?>value="Q11">Q11</option>
-								</optgroup>
-								<optgroup label="Jahrgangsstufe 12">
-									<option name="grade" <?php if ($grade == "Q12") echo " selected "; ?>value="Q12">Q12</option>
-								</optgroup>
-							</select>
-
-						</div>
-
-
-						<div class="forn-group row">
-							<div class="pull-right">
-								<input type="submit" name="submitReuse3" value="Fertig" class="btn btn-primary">
-							</div>
-						</div>
-
-					</form>
-				<?php } else if (!isset($_GET["mode"])) { ?>
-					<a href="./neuer_benutzer.php?mode=reuse" type="button" class="btn btn-primary btn-lg btn-block">Account vom WM-Tippspiel weiterverwenden</a>
-					<a href="./neuer_benutzer.php?mode=new" type="button" class="btn btn-success btn-lg btn-block">Neuen Account erstellen</a>
-				<?php } else if ($_GET["mode"] == "reuse") { ?>
-					<div class="alert alert-success" role="alert">Wenn du deinen Benutzernamen und dein Passwort vom Tippspiel noch weißt, kannst deinen Account wiederverwenden.</div>
-					<br>
-					<form class="form-horizontal" method="post">
-						<div class="forn-group row">
-							<label for="firstname" class="col-sm-2 control-label">Benutzername</label>
-							<div class="col-sm-10">
-
-								<input type="text" name="username" required autofocus class="form-control" id="username" value="<?php echo $username; ?>" placeholder="Nickname">
-								<div class="alert alert-info text-left" role="alert">Bitte gib hier deinen Benutzernamen vom Tippspiel an.</div>
-							</div>
-						</div>
-						<div class="forn-group row">
-							<label for="password" class="col-sm-2 control-label">Passwort wiederholen</label>
-							<div class="col-sm-10">
-								<input type="password" class="form-control" required id="password" name="password" placeholder="Passwort eingeben">
-								<div class="alert alert-info text-left" role="alert">Bitte gib hier dein Passwort vom Tippspiel an. Du weißt es nicht mehr? Kein Problem: <a href="./neuer_benutzer.php?mode=new">Erstelle einfach einen neuen Account</a></div>
-							</div>
-						</div>
-
-						<div class="forn-group row">
-							<div class="pull-right">
-								<input type="submit" name="submitReuse" value="Weiter" class="btn btn-primary">
-							</div>
-						</div>
-
-					</form>
-				<?php } else if ($_GET["mode"] == "new") { ?>
+				
 
 					<div class="alert alert-success" role="alert">Beim AG-Ventskalender können alle Schülerinnen und Schüler sowie alle Lehrerinnen und Lehrer des Allgäu-Gymnasiums teilnehmen.</div>
 					<br>
@@ -457,12 +251,6 @@ require_once("./include/db.inc.php");
 						</div>
 
 					</form>
-
-
-				<?php } else {
-						alert("danger", "Unbekannter Fehler. Bitte wende dich an Hannes Rüger, Klasse 9a.");
-					} ?>
-
 
 			<?php } ?>
 
