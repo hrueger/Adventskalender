@@ -361,18 +361,19 @@ function getNav($current)
 function checkForDate($dayid)
 {
 	date_default_timezone_set('Europe/Berlin');
+	$year = date("Y");
 	$dev = false;
 	if ($dev) {
-		$now = new DateTime(file_get_contents("/srv/www/advent.allgaeu-gymnasium.de/nfAGMdwskeOwdi/heutigerTag.txt") . ".12.2018");
+		$now = new DateTime(file_get_contents("/srv/www/advent.allgaeu-gymnasium.de/nfAGMdwskeOwdi/heutigerTag.txt") . ".12.$year");
 		$todayday = file_get_contents("/srv/www/advent.allgaeu-gymnasium.de/nfAGMdwskeOwdi/heutigerTag.txt");
 		$current = $now->getTimestamp();
-		$date = strtotime("2018-12-$dayid");
+		$date = strtotime("$year-12-$dayid");
 	} else {
 
 		$now = new DateTime("TODAY");
 		$todayday = strftime("%e");
 		$current = $now->getTimestamp();
-		$date = strtotime("2018-12-$dayid");
+		$date = strtotime("$year-12-$dayid");
 	}
 
 	$wochentag = date("w", $current);
