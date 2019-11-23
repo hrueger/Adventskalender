@@ -10,14 +10,6 @@ require_once("./include/db.inc.php");
 	<?php getHead(); ?>
 
 	<style>
-		.tab-content {
-			display: none;
-		}
-
-		.tab-content:target {
-			display: block;
-		}
-
 		th {
 			text-align: center;
 		}
@@ -40,17 +32,17 @@ require_once("./include/db.inc.php");
 		<div class="jumbotron text-center">
 			<h1>Bestenliste</h1>
 			<br>
-			<ul class="nav nav-tabs">
-				<li class="nav-item"><a class="nav-link" data-toggle="tab" role="tab" href="#tab1">Alle Schüler</a></li>
-				<li class="nav-item"><a class="nav-link" data-toggle="tab" role="tab" href="#tab2">Alle Lehrer</a></li>
-				<li class="nav-item"><a class="nav-link" data-toggle="tab" role="tab" href="#tab3">Alle Klassen (durchschnittlich)</a></li>
-				<li class="nav-item"><a class="nav-link active" data-toggle="tab" role="tab" href="#tab4">Bestenliste (alle Teilnehmer)</a></li>
+			<ul class="nav nav-tabs mb-4">
+				<li class="nav-item"><a class="nav-link" data-toggle="tab" role="tab" href="#tab1">Schüler</a></li>
+				<li class="nav-item"><a class="nav-link" data-toggle="tab" role="tab" href="#tab2">Lehrer</a></li>
+				<li class="nav-item"><a class="nav-link" data-toggle="tab" role="tab" href="#tab3">Klassen (durchschnittlich)</a></li>
+				<li class="nav-item"><a class="nav-link active" data-toggle="tab" role="tab" href="#tab4">Alle Teilnehmer</a></li>
 			</ul>
 
-			<h5><b><?php echo "Stand: " . strftime("%A") . ", " . date('d.m.o \u\m H:i:s') . " Uhr"; ?></b></h5>
 			<div class="tab-content">
 				<div id="tab1" role="tabpanel" class="tab-pane fade show active">
 					<h3>Alle Schüler</h3>
+					<h6><b><?php echo "Stand: " . strftime("%A") . ", " . date('d.m.o \u\m H:i:s') . " Uhr"; ?></b></h6>
 					<?php
 					createBestenliste("SELECT * FROM users WHERE grade NOT IN ('Lehrer/in', 'Studienseminar 17/19', 'Studienseminar 18/20') AND `checked`!=-1 AND `hideInScores`!=1  ORDER BY `points` DESC", false);
 					?>
