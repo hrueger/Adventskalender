@@ -18,8 +18,8 @@ require_once("./include/login.inc.php");
 			float: none;
 			border: 5px solid #4A1C19;
 			border-radius: 3px;
+			image-orientation: from-image;
 		}
-
 
 		.inputChar {
 			text-align: center;
@@ -55,6 +55,8 @@ require_once("./include/login.inc.php");
 			border: 1px solid rgba(0, 124, 255, 1.00);
 			background-color: #d9edf7;
 			border-radius: 3px;
+			height: 40px;
+			width: 40px;
 		}
 
 		.dndletter p {
@@ -276,7 +278,7 @@ require_once("./include/login.inc.php");
 								$tipp = preg_split('/(?!^)(?=.)/u', $tipp[0]["tipp"]);
 							}
 							if ($task["day"] != WEIHNACHTSTAG) {
-								echo '<form class="form-inline" method="post">
+								echo '<form class="form justify-content-center" method="post">
 							<input type="hidden" id="dayid" name="dayid" value="' . $_GET["a"] . '">
 							<div class="form-group">';
 							}
@@ -414,31 +416,31 @@ require_once("./include/login.inc.php");
 																				$usedletters[$letter] = 1;
 																			}
 																			echo '
-							draggable = null;
-							var counter = 1;
-							$(".draggable:contains(\'' . $letter . '\')").each(function() {
-								if (counter == ' . $lettercounter . ') {
-									draggable = $(this);
-								}
-								counter++;
-							});
+																			draggable = null;
+																			var counter = 1;
+																			$(".draggable:contains(\'' . $letter . '\')").each(function() {
+																				if (counter == ' . $lettercounter . ') {
+																					draggable = $(this);
+																				}
+																				counter++;
+																			});
 
 
-							if (draggable) {
-								droppable = $("#box' . $counter . '");
-								droppableOffset = droppable.offset();
-								draggableOffset = draggable.offset();
-								dx = droppableOffset.left - draggableOffset.left+20;
-								dy = droppableOffset.top - draggableOffset.top+20;
+																			if (draggable) {
+																				droppable = $("#box' . $counter . '");
+																				droppableOffset = droppable.offset();
+																				draggableOffset = draggable.offset();
+																				dx = droppableOffset.left - draggableOffset.left+20;
+																				dy = droppableOffset.top - draggableOffset.top+20;
 
-								draggable.simulate("drag", {
-									dx: dx,
-									dy: dy
-								});
-							}
-							
-							
-							';
+																				draggable.simulate("drag", {
+																					dx: dx,
+																					dy: dy
+																				});
+																			}
+																			
+																			
+																			';
 																		}
 																		$counter++;
 																	}
@@ -451,22 +453,24 @@ require_once("./include/login.inc.php");
 									});
 								</script>
 				<?php
-									alert("info", "Sortiere dieBuchstaben mithilfe von Drag and Drop in die freien Kästchen, sodass ein Lösungssatz herauskommt. Zwei Buchstaben sind bereits vorgegeben.");
+									echo "<br><br>";
+									alert("info", "Sortiere die Buchstaben mithilfe von Drag and Drop in die freien Kästchen, sodass ein Lösungssatz herauskommt. Zwei Buchstaben sind bereits vorgegeben.");
 									alert("warning", "Bis Mittwoch, den 26.12.2018 um 23:59 Uhr kannst du eine Lösung abgeben und ändern.");
 
-									echo '<br><br><br>';
+									echo '<br><br>';
 									if ($allow == "today") {
 										echo '<button id="submitBtn" name="submit" type="submit" class="btn btn-success">' . $buttonname . '</button>';
 									} else {
 										echo '<button class="btn btn-success disabled">Zu spät...</button>';
 									}
 									echo "<br>";
-									echo "<br>";
 								} else {
+									// kein Weihnachten
 									$counter = 1;
 									if ($allow != "today") {
-										echo "<br><h4 class='solutionHint'>Lösung: " . implode("", $solution) . "</h4><br><b>Dein Tipp:</b><br>";
+										echo "<div><h4 class='solutionHint d-block'>Lösung: " . implode("", $solution) . "</h4></div><div><b>Dein Tipp:</b></div><br>";
 									}
+									echo "<div>";
 									foreach ($solution as $key => $unused) {
 										if (!empty($tipp) && isset($tipp[$key])) {
 											$val = $tipp[$key];
@@ -482,12 +486,13 @@ require_once("./include/login.inc.php");
 
 										$counter++;
 									}
+									echo "</div>";
 									if ($allow == "past") {
 										$alternatives = implode(",<br>", explode("-", $task["alternatives"]));
 										if ($alternatives) {
-											$alternatives = "<br><br>Auch akzeptiert wird/werden: <br>" . $alternatives;
+											$alternatives = "<div><p>Auch akzeptiert wird/werden: <br>" . $alternatives . "</p></div>";
 										}
-										echo "<br><h4 class='solutionHint'>" . $task["solutionHint"] . "$alternatives</h4><br>";
+										echo "<div><h4 class='solutionHint'>" . $task["solutionHint"] . "$alternatives</h4><div>";
 									}
 
 									echo '</div><br><br>';
@@ -532,7 +537,8 @@ require_once("./include/login.inc.php");
 
 										echo '<button class="btn btn-success disabled">Zu spät...</button>';
 									}
-									echo '</form>';
+									echo '</form></div>
+									</div>';
 								}
 							}
 							echo "<br>";
