@@ -298,12 +298,12 @@ require_once("./include/login.inc.php");
 													$counter = "A";
 													$word = preg_split('/(?!^)(?=.)/u', $task["word"]);
 													shuffle($word);
-													if (($key = array_search('A', $word)) !== false) {
+													if (($key = array_search(',', $word)) !== false) {
 														unset($word[$key]);
 													}
-													if (($key = array_search('N', $word)) !== false) {
+													/*if (($key = array_search('N', $word)) !== false) {
 														unset($word[$key]);
-													}
+													}*/
 
 													foreach ($word as $letter) {
 														if ($letter != " ") {
@@ -326,10 +326,10 @@ require_once("./include/login.inc.php");
 														if ($letter == " ") {
 															echo '<div class="dndspace" data-letterSubmit=" ">&nbsp</div>';
 														} else {
-															if ($counter == 8) {
-																echo '<div class="dndprefilled" id="8" data-containsid="-1" data-letterSubmit="N"><p>N</p></div>';
-															} else if ($counter == 27) {
-																echo '<div class="dndprefilled" id="27" data-containsid="-1" data-letterSubmit="A"><p>A</p></div>';
+															if ($counter == 7) {
+																echo '<div class="dndprefilled" id="8" data-containsid="-1" data-letterSubmit=","><p>,</p></div>';
+															/*} else if ($counter == 27) {
+																echo '<div class="dndprefilled" id="27" data-containsid="-1" data-letterSubmit="A"><p>A</p></div>';*/
 															} else {
 																echo '<div class="droppable dndfree" id="box' . $counter . '" data-containsid="" data-letterSubmit=""><p>&nbsp</p></div>';
 															}
@@ -374,9 +374,9 @@ require_once("./include/login.inc.php");
 												} else {
 													if ($(this).hasClass("dndprefilled")) {
 														if ($(this).attr("id") == "8") {
-															text += "N";
-														} else if ($(this).attr("id") == "27") {
-															text += "A";
+															text += ",";
+														/*} else if ($(this).attr("id") == "27") {
+															text += "A";*/
 														} else {
 
 														}
