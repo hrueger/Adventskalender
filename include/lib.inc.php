@@ -169,20 +169,20 @@ function updatePoints()
 				if ($day == WEIHNACHTSTAG) {
 					$userpoints[$userid] += 60;
 				} else {
-					if (intval($day) < 8) {
+					if (intval($day) <= 8) {
 						$userpoints[$userid] += 10;
-					} else if (intval($day) < 15) {
+					} else if (intval($day) <= 15) {
 						$userpoints[$userid] += 20;
-					} else if (intval($day) < 24) {
+					} else if (intval($day) <= 23) {
 						$userpoints[$userid] += 30;
 					}
 				}
 			} else if (in_array($tipp, $alternatives) and !empty($tipp)) {
-				if (intval($day) < 8) {
+				if (intval($day) <= 8) {
 					$userpoints[$userid] += 5;
-				} else if (intval($day) < 15) {
+				} else if (intval($day) <= 15) {
 					$userpoints[$userid] += 10;
-				} else if (intval($day) < 24) {
+				} else if (intval($day) <= 23) {
 					$userpoints[$userid] += 15;
 				}
 			}
@@ -369,7 +369,7 @@ function checkForDate($dayid)
 		$current = $now->getTimestamp();
 		$date = strtotime("$year-12-$dayid");
 	} else {
-
+		
 		$now = new DateTime("TODAY");
 		$todayday = strftime("%e");
 		$current = $now->getTimestamp();
@@ -380,7 +380,7 @@ function checkForDate($dayid)
 	$datediff = $date - $current;
 	$differance = floor($datediff / (60 * 60 * 24));
 
-	if ($todayday == 26 && $dayid == WEIHNACHTSTAG) {
+	if (($todayday == 25 || $todayday == 26) && $dayid == WEIHNACHTSTAG) {
 		return "today";
 	}
 
