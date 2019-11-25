@@ -91,59 +91,65 @@ if (isset($_POST["submit"])) {
 			height: 45px;
 		}
 	</style>
-
-	<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body>
 	<?php if ($loggedin) { ?>
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="true" aria-controls="navbar">
-						<span class="sr-only">Navigation ein-/ausblenden</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<img class="header" src="./images/header.png">
-				</div>
-				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="./index.php" target="_blanc">AG-Ventskalender</a></li>
-						<li><a href="./administrator.php?a=logout">Ausloggen</a></li>
-
-					</ul>
-
-				</div>
-			</div>
+		<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+			<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="./" target="_blank">AG-Ventskalender</a>
+			<ul class="navbar-nav px-3">
+				<li class="nav-item text-nowrap">
+					<a class="nav-link" href="./administrator.php?a=logout">Ausloggen</a>
+				</li>
+			</ul>
 		</nav>
 
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-sm-3 col-md-2 sidebar">
-					<ul class="nav nav-sidebar">
-						<li><a href="./administrator.php?a=dashboard">Anleitung</a></li>
-					</ul>
-					<ul class="nav nav-sidebar">
-						<li><a href="./administrator.php?a=suggestions">Vorschläge</a></li>
-					</ul>
-					<ul class="nav nav-sidebar">
+		
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link <?php if (!isset($_GET["a"]) || $_GET["a"] == "dashboard") echo "active";?> " href="./administrator.php?a=dashboard">
+              Anleitung
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?php if (isset($_GET["a"]) && $_GET["a"] == "suggestions") echo "active";?> " href="./administrator.php?a=suggestions">
+              Vorschläge
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?php if (isset($_GET["a"]) && $_GET["a"] == "users") echo "active";?> " href="./administrator.php?a=users">
+              Benutzer
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?php if (isset($_GET["a"]) && $_GET["a"] == "points") echo "active";?> " href="./administrator.php?a=points">
+              Punkte aktualisieren
+            </a>
+          </li>
+        </ul>
 
-						<li><a href="./administrator.php?a=users">Benutzer</a></li>
-						<li><a href="./administrator.php?a=points">Punkte aktualisieren</a></li>
-					</ul>
-					<ul class="nav nav-sidebar">
-						<li><a href="./include/exportdb.php">Daten exportieren</a></li>
-						<li><a href="./administrator.php?a=importData">Daten importieren</a></li>
-
-					</ul>
-
-				</div>
-				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Sicherung</span>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="./include/exportdb.php">
+              Exportieren
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?php if (isset($_GET["a"]) && $_GET["a"] == "importData") echo "active";?> " href="./administrator.php?a=importData">
+              Imporieren
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+				<div class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
 					<?php $action = (isset($_GET["a"])) ? $_GET["a"] : "dashboard";
 
@@ -169,8 +175,14 @@ if (isset($_POST["submit"])) {
 
 					<?php } else if ($action == "suggestions") { ?>
 						<h1 class="page-header">Vorschläge</h1>
-						<table class="table table-responsive table-striped">
-
+						<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Tag</th>
+									<th>Vorschläge</th>
+								</tr>
+							</thead>
 							<?php
 									$db = connect();
 									for ($i = 1; $i < 24; $i++) {
@@ -189,7 +201,7 @@ if (isset($_POST["submit"])) {
 									?>
 
 						</table>
-
+						</div>
 
 					<?php } else if ($action == "users") { 
 							?>
@@ -222,7 +234,8 @@ if (isset($_POST["submit"])) {
 										alert("info", "Es gibt " . count($checkedUsers) . " verifizierte Benutzer!");
 										alert("warning", "Es gibt " . count($blockedUsers) . " blockierte Benutzer!");
 										echo "<h3>Neue Benutzer</h3>
-									<table class='table table-striped table-responsive'>
+										<div class='table-responsive'>
+									<table class='table table-striped'>
 									  <thead>
 										<tr>
 										  <th>Klasse</th>
@@ -242,9 +255,11 @@ if (isset($_POST["submit"])) {
 										<td><a href='./administrator.php?a=users&b=" . $user["id"] . "'>Blockieren</a></td>
 									</tr>";
 										}
-										echo "</tbody></table>";
+										echo "</tbody></table></div>";
 										echo "<h3>Verifizierte Benutzer</h3>
-									<table class='table table-striped table-responsive'>
+										
+										<div class='table-responsive'>
+									<table class='table table-striped'>
 									  <thead>
 										<tr>
 										  <th>Klasse</th>
@@ -261,9 +276,11 @@ if (isset($_POST["submit"])) {
 										<td>" . $user["name"] . "</td>
 									</tr>";
 										}
-										echo "</tbody></table>";
+										echo "</tbody></table></div>";
 										echo "<h3>Blockierte Benutzer</h3>
-									<table class='table table-striped table-responsive'>
+										
+										<div class='table-responsive'>
+									<table class='table table-striped'>
 									  <thead>
 										<tr>
 										  <th>Klasse</th>
@@ -280,7 +297,7 @@ if (isset($_POST["submit"])) {
 										<td>" . $user["name"] . "</td>
 									</tr>";
 										}
-										echo "</tbody></table>";
+										echo "</tbody></table></div>";
 									}
 								}
 
@@ -290,25 +307,6 @@ if (isset($_POST["submit"])) {
 
 
 
-
-					<?php } else if ($action == "koround") {
-							?>
-						<h1>K.O.-Runden Mannschaften</h1>
-						<br>
-
-						<?php
-								$db = connect();
-
-								getSpielplan($db, "./administrator.php?a=koroundteams&s=", false, "finale");
-								getSpielplan($db, "./administrator.php?a=koroundteams&s=", false, "platz3");
-								getSpielplan($db, "./administrator.php?a=koroundteams&s=", false, "halb");
-								getSpielplan($db, "./administrator.php?a=koroundteams&s=", false, "viertel");
-								getSpielplan($db, "./administrator.php?a=koroundteams&s=", false, "achtel");
-								getSpielplan($db, "./administrator.php?a=koroundteams&s=", false, "gruppen");
-
-								?>
-
-						<div class="clearfix">&nbsp;</div>
 
 				</div>
 			<?php } else if ($action == "results") {
@@ -451,148 +449,6 @@ if (isset($_POST["submit"])) {
 
 
 																		echo "<a class='btn btn-primary' href='./administrator.php?a=matches'>Abbrechen und zurück zum Spielplan</a>";
-																	}
-																}
-															}
-
-															?>
-
-
-
-				</div>
-			<?php } else if ($action == "koroundteams") { 
-									?>
-				<div class="jumbotron text-center"><?php
-
-															if (isset($_POST["submit"]) && isset($_POST["matchid"])) {
-																if (
-																	isset($_POST["nameTeam1"]) &&
-																	isset($_POST["nameTeam2"]) &&
-																	trim($_POST["nameTeam1"]) != "" &&
-																	trim($_POST["nameTeam2"]) != ""
-																) {
-																	$nameTeam1 = $_POST["nameTeam1"];
-																	$nameTeam2 = $_POST["nameTeam2"];
-
-																	$db = connect();
-
-
-																	$matchid = $db->real_escape_string($_POST["matchid"]);
-
-																	$db->query("UPDATE `matches` SET `team1` = '$nameTeam1', `team2` = '$nameTeam2' WHERE `matches`.`id` = $matchid ");
-																	echo $db->error;
-																	alert("success", "Die Mannschaften wurde erfolgreich gespeichert!");
-
-																	echo "<br><a class='btn btn-primary' href='./administrator.php?a=koround'>Zurück zum K.O.-Runden-Spielplan</a>";
-																	die();
-																} else {
-																	alert("danger", "Du hast leider nicht alle Felder ausgefüllt.");
-																}
-															} else if (!isset($_GET["s"])) {
-																header("Location: administrator.php");
-															}
-
-															$db = connect();
-															$id = $db->real_escape_string($_GET["s"]);
-
-															alert("info", "Bitte gib hier die 3-stelligen Kürzel der Mannschaften ein! Du findest Sie unter <br><a target='_blanc' href='http://de.fifa.com/worldcup/teams/index.html'>http://de.fifa.com/worldcup/teams/index.html</a>");
-
-
-
-
-
-															$res = $db->query("SELECT * FROM `matches` WHERE id=$id");
-															if (!$res) {
-																alert("danger", "Es wurde kein Spiel gefunden!");
-															} else {
-																$res = $res->fetch_all(MYSQLI_ASSOC);
-																if (!$res) {
-																	alert("danger", "Es wurde kein Spiel gefunden!");
-																} else {
-																	$match = $res[0];
-
-																	$short1 = $db->real_escape_string($match["team1"]);
-																	$short2 = $db->real_escape_string($match["team2"]);
-																	$res = $db->query("SELECT * FROM teams WHERE short='$short1' or short='$short2'");
-																	if (!$res) {
-																		alert("danger", "Es wurden keine Teams gefunden!");
-																	} else {
-																		if (strlen($short1) != 3 or strlen($short1) != 3) {
-																			$team1 = $short1;
-																			$team2 = $short2;
-																		} else {
-																			$res = $res->fetch_all(MYSQLI_ASSOC);
-																			if ($res[0]["short"] == $match["team1"]) {
-																				$team1 = $res[0]["name"];
-																				$team2 = $res[1]["name"];
-																			} else {
-																				$team1 = $res[1]["name"];
-																				$team2 = $res[0]["name"];
-																			}
-																		}
-																		$monate = array(
-																			1 => "Januar",
-																			2 => "Februar",
-																			3 => "M&auml;rz",
-																			4 => "April",
-																			5 => "Mai",
-																			6 => "Juni",
-																			7 => "Juli",
-																			8 => "August",
-																			9 => "September",
-																			10 => "Oktober",
-																			11 => "November",
-																			12 => "Dezember"
-																		);
-																		$tage = array("Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag");
-																		$date = strtotime($match["date"]);
-																		$tag = date("j", $date);
-																		$monat = date("m", $date);
-																		$jahr = date("Y", $date);
-																		$uhr =  date("H:i", $date);
-																		$stadt = $match["place"];
-																		$wochentag = $tage[date("w", $date)];
-																		$goalsTeam1 = $match["goalsTeam1"];
-																		$goalsTeam2 = $match["goalsTeam2"];
-																		if ($goalsTeam1 < 0 and $goalsTeam2 < 0) {
-																			$goalsTeam1 = "--";
-																			$goalsTeam2 = "--";
-																		}
-																		$id = $match["id"];
-
-																		$kuerzel1 = ($match["team1"] == "?" or strlen($match["team1"]) != 3) ? "unknown" : $match["team1"];
-																		$kuerzel2 = ($match["team2"] == "?" or strlen($match["team2"]) != 3) ? "unknown" : $match["team2"];
-
-																		echo "<h2><img class='teamIcon' src='./images/teams/$kuerzel1.jpg'>&nbsp;$team1 vs. $team2&nbsp;<img class='teamIcon' src='./images/teams/$kuerzel2.jpg'></h2>";
-
-																		echo "<div class='infoblock'>";
-
-																		echo $wochentag . ", $tag.$monat.$jahr um $uhr Uhr";
-																		echo "<br>in $stadt";
-																		if (strlen($match["team1"]) > 3 and strlen($match["team2"]) > 3) {
-																			$buttonname = "Mannschaften speichern";
-																		} else {
-																			$buttonname = "Mannschaften ändern";
-																		}
-																		$val1 = $match["team1"];
-																		$val2 = $match["team2"];
-																		echo '</div><br><br><form class="form-inline" method="post">
-						<input type="hidden" id="matchid" name="matchid" value="' . $_GET["s"] . '">
-						<div class="form-group">
-							
-							<input type="text" class="form-control" id="nameTeam1" name="nameTeam1" value="' . $val1 . '" placeholder="' . $team1 . '">
-						</div>
-						<b>&nbsp;vs.&nbsp;</b>
-						<div class="form-group">
-							
-							<input type="text" class="form-control" id="nameTeam2" name="nameTeam2" value="' . $val2 . '" placeholder="' . $team2 . '">
-						</div><br><br><br><br>
-				<button name="submit" type="submit" class="btn btn-success">' . $buttonname . '</button>
-					</form><br>';
-
-
-
-																		echo "<a class='btn btn-primary' href='./administrator.php?a=koround'>Abbrechen und zurück zum K.O.-Runden-Spielplan</a>";
 																	}
 																}
 															}
