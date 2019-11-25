@@ -95,8 +95,14 @@ if (isset($_POST["submit"])) {
 
 <body>
 	<?php if ($loggedin) { ?>
-		<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-			<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="./" target="_blank">AG-Ventskalender</a>
+		<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow navbar-expand-lg">
+		
+			
+			<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="./" target="_blank">
+			<button class="navbar-toggler" type="button">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			AG-Ventskalender</a>
 			<ul class="navbar-nav px-3">
 				<li class="nav-item text-nowrap">
 					<a class="nav-link" href="./administrator.php?a=logout">Ausloggen</a>
@@ -107,7 +113,7 @@ if (isset($_POST["submit"])) {
 		
 <div class="container-fluid">
   <div class="row">
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <nav id="sidebar" class="col-md-2 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -554,7 +560,18 @@ if (isset($_POST["submit"])) {
 			</div>
 		<?php } ?>
 
-		<script src="../include/lib/bootstrap/jquery.min.js"></script>
-		<script src="../include/lib/bootstrap/bootstrap.min.js"></script>
+		<script src="./include/lib/bootstrap/jquery.min.js"></script>
+		<script src="./include/lib/bootstrap/bootstrap.min.js"></script>
+		<script>
+			$(document).ready(() => {
+				$(".navbar-toggler").click((event) => {
+					console.log("toggle");
+					$("#sidebar").toggleClass("d-none");
+					$("#sidebar").toggleClass("mt-5");
+					event.preventDefault();
+					event.stopPropagation();
+				});
+			});
+		</script>
 </body>
 </html>
