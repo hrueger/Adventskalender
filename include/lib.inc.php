@@ -367,19 +367,20 @@ function checkForDate($dayid)
 		$todayday = $_SESSION["heutigerTag"];
 		$current = $now->getTimestamp();
 		$date = strtotime("$year-12-$dayid");
+		$month = 12;
 	} else {
-		
 		$now = new DateTime("TODAY");
 		$todayday = strftime("%e");
 		$current = $now->getTimestamp();
 		$date = strtotime("$year-12-$dayid");
+		$month = strftime("%m");
 	}
 
 	$wochentag = date("w", $current);
 	$datediff = $date - $current;
 	$differance = floor($datediff / (60 * 60 * 24));
 
-	if (($todayday == 25 || $todayday == 26) && $dayid == WEIHNACHTSTAG) {
+	if ((($todayday == 25 || $todayday == 26) && $dayid == WEIHNACHTSTAG) && $month == 12) {
 		return "today";
 	}
 
