@@ -362,10 +362,9 @@ function checkForDate($dayid)
 {
 	date_default_timezone_set('Europe/Berlin');
 	$year = date("Y");
-	$dev = false;
-	if ($dev) {
-		$now = new DateTime(file_get_contents("/srv/www/advent.allgaeu-gymnasium.de/nfAGMdwskeOwdi/heutigerTag.txt") . ".12.$year");
-		$todayday = file_get_contents("/srv/www/advent.allgaeu-gymnasium.de/nfAGMdwskeOwdi/heutigerTag.txt");
+	if (isset($_SESSION["heutigerTag"])) {
+		$now = new DateTime($_SESSION["heutigerTag"] . ".12.$year");
+		$todayday = $_SESSION["heutigerTag"];
 		$current = $now->getTimestamp();
 		$date = strtotime("$year-12-$dayid");
 	} else {
