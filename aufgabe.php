@@ -240,8 +240,8 @@ require_once("./include/login.inc.php");
 						$wochentage = array("Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag");
 						$nummer = (intval($task["day"]) < 10 ? '0' . $task["day"] : $task["day"]);
 						setlocale(LC_TIME, "de_DE.utf8");
-						$tag = $nummer . ". Dezember 2018";
-						$tag = $wochentage[date("w", strtotime($nummer . ".12.2018"))] . ", " . $tag;
+						$tag = $nummer . ". Dezember 2019";
+						$tag = $wochentage[date("w", strtotime($nummer . ".12.2019"))] . ", " . $tag;
 						echo "<h4>$tag</h4><br>";
 						$dontEchoChristmasForm = false;
 						if ($allow == "today") {
@@ -455,7 +455,7 @@ require_once("./include/login.inc.php");
 				<?php
 									echo "<br><br>";
 									alert("info", "Sortiere die Buchstaben mithilfe von Drag and Drop in die freien Kästchen, sodass ein Lösungssatz herauskommt. Zwei Buchstaben sind bereits vorgegeben.");
-									alert("warning", "Bis Mittwoch, den 26.12.2018 um 23:59 Uhr kannst du eine Lösung abgeben und ändern.");
+									alert("warning", "Bis Donnerstag, den 26.12.2019 um 23:59 Uhr kannst du eine Lösung abgeben und ändern.");
 
 									echo '<br><br>';
 									if ($allow == "today") {
@@ -502,7 +502,7 @@ require_once("./include/login.inc.php");
 										$tag = $task["day"];
 										$bis = $tag;
 
-										$wochentag = date("w", strtotime("$tag.12.2018"));
+										$wochentag = date("w", strtotime("$tag.12.2019"));
 
 										switch ($wochentag) {
 											case 0:
@@ -529,8 +529,8 @@ require_once("./include/login.inc.php");
 										}
 
 
-										$tagname = $wochentage[date("w", strtotime($bis . ".12.2018"))];
-										alert("warning", "Bis <b>$tagname, den $bis.12.2018 um 23:59 Uhr</b> kannst du eine Lösung abgeben und ändern.");
+										$tagname = $wochentage[date("w", strtotime($bis . ".12.2019"))];
+										alert("warning", "Bis <b>$tagname, den $bis.12.2019 um 23:59 Uhr</b> kannst du eine Lösung abgeben und ändern.");
 										echo "<br><br>";
 										echo '<button name="submit" type="submit" class="btn btn-success">' . $buttonname . '</button>';
 									} else {
