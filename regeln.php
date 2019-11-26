@@ -104,7 +104,7 @@ require_once("./include/db.inc.php");
 								<li><strong>dritten</strong> Adventswoche (16. – 23.12.) bekommst du <strong>30 Punkte</strong></li>
 								<li>Für die richtige Lösung am <strong>Heiligabend</strong> bekommst du <strong>60 Punkte</strong></li>
 							</ul>
-							<p>Unter <a class="d-inline" href="./bestenliste.php">Bestenliste</a> kannst du jederzeit nachsehen, wie viele Punkte du bisher erhalten hast und auf welchem Platz du momentan stehst.<br> <br>Auch kannst du sehen, wie gut deine Klasse bisher abgeschnitten hat. <br> Die Preisträger des Tippspiels werden dann benachrichtigt.<br></p>
+							<p>Bei der <a class="d-inline" href="./bestenliste.php">Bestenliste</a> kannst du jederzeit nachsehen, wie viele Punkte du bisher erhalten hast und auf welchem Platz du momentan stehst.<br> <br>Auch kannst du sehen, wie gut deine Klasse bisher abgeschnitten hat. <br> Die Preisträger des Tippspiels werden dann benachrichtigt.<br></p>
 						</p>
 					</div>
 					<hr>
