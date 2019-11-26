@@ -65,6 +65,17 @@ if (isset($_POST["submit"])) {
 	$user = $db->real_escape_string($_GET["b"]);
 
 	$res = $db->query("UPDATE users SET checked=-1 WHERE id=$user");
+} else if (isset($_POST["saveAlternatives"])) {
+	$db = connect();
+	$res = $db->query("UPDATE days SET `alternatives`=''");
+	foreach ($_POST as $key => $value) {
+		if (strpos($key, 'day_') === 0) {
+			$day = str_replace("day_", "", $key);
+			$alternatives = implode("-", $value);
+			$res = $db->query("UPDATE days SET `alternatives`='$alternatives' WHERE day=$day");
+		 }
+	}
+	updatePoints();
 }
 
 ?>
@@ -182,31 +193,48 @@ if (isset($_POST["submit"])) {
 					<?php } else if ($action == "suggestions") { ?>
 						<h1 class="page-header">Vorschläge</h1>
 						<div class="table-responsive">
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Tag</th>
-									<th>Vorschläge</th>
-								</tr>
-							</thead>
-							<?php
+						<form method="POST">
+							
+							<button type="submit" class="btn btn-primary" name="saveAlternatives">Speichern</button>
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th>Tag</th>
+										<th>Lösung</th>
+										<th>Vorschläge</th>
+									</tr>
+								</thead>
+								<?php
 									$db = connect();
 									for ($i = 1; $i < 24; $i++) {
 
 										$res = $db->query("SELECT DISTINCT tipp FROM tipps WHERE day=$i")->fetch_all(MYSQLI_ASSOC);
 										echo $db->error;
-
+										$alternatives = $db->query("SELECT word, alternatives FROM `days` WHERE `day`=$i")->fetch_all(MYSQLI_ASSOC);
+										echo $db->error;
+										$alternatives = $alternatives[0];									
+										$word = $alternatives["word"];
 										$suggestions = "";
+										$counter = 0;
+										if (!isset($alternatives) || !isset($alternatives["alternatives"])) {
+											$alternatives = [];
+											echo "SELECT word, alternatives FROM `days` WHERE `day`=$i";
+										} else {
+											$alternatives = explode("-", $alternatives["alternatives"]);
+										}
 										foreach ($res as $suggestion) {
-											$suggestions .= $suggestion["tipp"] . "<br>";
+											$counter += 1;
+											$ids = $i. $counter.random_int(0,1000);
+											$s =  (in_array($suggestion["tipp"], $alternatives) ? "checked" : "");
+											$suggestions .= "<input class='p-2' type='checkbox' id='$ids' ".$s." name='day_".$i."[]' value='".$suggestion["tipp"]. "'><label for='$ids'>".$suggestion["tipp"]. "</label><br>";
 										}
 
 
-										echo "<tr><td>$i</td><td>$suggestions</td></tr>";
+										echo "<tr><td>$i</td><td>$word</td><td>$suggestions</td></tr>";
 									}
 									?>
-
-						</table>
+								</table>
+							</form>
 						</div>
 
 					<?php } else if ($action == "users") { 
