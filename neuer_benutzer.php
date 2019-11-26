@@ -2,7 +2,19 @@
 require_once("./include/lib.inc.php");
 require_once("./include/db.inc.php");
 
-
+$allGrades = [
+	"Lehrer/in",
+	"Studienseminar 18/20",
+	"Studienseminar 19/21",
+	"5a", "5b", "5c", "5d", "5e", "5f",
+	"6a", "6b", "6c", "6d", "6e", "6f",
+	"7a", "7b", "7c", "7d", "7e", "7f",
+	"8a", "8b", "8c", "8d", "8e", "8f",
+	"9a", "9b", "9c", "9d", "9e", "9f",
+	"10a", "10b", "10c", "10d", "10e", "10f",
+	"Q11",
+	"Q12",
+];
 
 ?>
 <!DOCTYPE html>
@@ -73,6 +85,12 @@ require_once("./include/db.inc.php");
 
 						if (!preg_match("/^\p{Lu}[\p{L} '&-]*[\p{L}]$/u", $name)) {
 							alert("warning", "Bite gib deinen richtigen Namen an!");
+							$ok = false;
+						}
+
+						
+						if (!in_array($grade, $allGrades)) {
+							alert("warning", "Bitte wähle deine Klasse aus dem Auswahlfeld!");
 							$ok = false;
 						}
 
