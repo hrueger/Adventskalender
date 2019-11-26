@@ -93,6 +93,11 @@ require_once("./include/db.inc.php");
 							$ok = false;
 						}
 
+						if (strlen($nickname) > 30) {
+							alert("warning", "Der Nickname darf maximal 30 Zeichen lang sein!");
+							$ok = false;
+						}
+
 
 						//alert("info", "Test bestanden!");
 						////////////////////////////////////////////
@@ -219,7 +224,7 @@ require_once("./include/db.inc.php");
 							<label for="nickname" class="col-sm-2 control-label">Nickname</label>
 							<div class="col-sm-10">
 								<input type="text" class="form-control" required id="nickname" value="<?php echo $nickname; ?>" name="nickname" placeholder="Nickname">
-								<div class="alert alert-info text-left" role="alert">Dein Nickname soll ein erfundener Name sein, mit dem du in der Bestenliste auf der Schulhomepage angezeigt wirst, z.B. <i>Özil2</i>. Es sind nur Buchstaben, Umlaute, Zahlen, Lehrzeichen, Punkte und Unterstriche erlaubt!<br>Benutzer, deren Nicknamen eine Beleidigung enthalten oder gegen die Regeln der guten Sitten verstoßen, werden gelöscht.</div>
+								<div class="alert alert-info text-left" role="alert">Dein Nickname soll ein erfundener Name sein, mit dem du in der Bestenliste auf der Schulhomepage angezeigt wirst, z.B. <i>Özil2</i>. Es sind nur Buchstaben, Umlaute, Zahlen, Lehrzeichen, Punkte und Unterstriche erlaubt!<br>Der Nickname darf maximal 30 Zeichen lang sein.<br>Benutzer, deren Nicknamen eine Beleidigung enthalten oder gegen die Regeln der guten Sitten verstoßen, werden gelöscht.</div>
 							</div>
 						</div>
 						<div class="forn-group row">
