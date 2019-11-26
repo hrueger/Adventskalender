@@ -496,7 +496,7 @@ require_once("./include/login.inc.php");
 									}
 
 									echo '</div><br><br>';
-									alert("info", "Alle Umlaute, Sonderzeichen, etc werden <b>nicht</b> als zwei Zeichen geschrieben. Bsp.: ß wird <b>nicht</b> zu ss, sondern bleibt ß.");
+									alert("info", "Alle Umlaute, Sonderzeichen etc. werden <b>nicht</b> als zwei Zeichen geschrieben. Bsp.: ß wird <b>nicht</b> zu ss, sondern bleibt ß.");
 
 									if ($allow == "today") {
 										$tag = $task["day"];
