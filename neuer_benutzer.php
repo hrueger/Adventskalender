@@ -159,8 +159,8 @@ require_once("./include/db.inc.php");
 								<select name="grade" required class="form-control" id="grade">
 									<optgroup label="Lehrer/in">
 										<option name="grade" <?php if ($grade == "Lehrer/in") echo " selected "; ?>value="Lehrer/in">Lehrer/in</option>
-										<option name="grade" <?php if ($grade == "Studienseminar 17/19") echo " selected "; ?>value="Studienseminar 17/19">Studienseminar 17/19</option>
-										<option name="grade" <?php if ($grade == "Studienseminar 20/18") echo " selected "; ?>value="Studienseminar 18/20">Studienseminar 18/20</option>
+										<option name="grade" <?php if ($grade == "Studienseminar 18/20") echo " selected "; ?>value="Studienseminar 18/20">Studienseminar 18/20</option>
+										<option name="grade" <?php if ($grade == "Studienseminar 19/21") echo " selected "; ?>value="Studienseminar 19/21">Studienseminar 19/21</option>
 
 									</optgroup>
 									<optgroup label="Jahrgangsstufe 5">
