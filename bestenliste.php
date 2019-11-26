@@ -40,26 +40,26 @@ require_once("./include/db.inc.php");
 			</ul>
 
 			<div class="tab-content">
-				<div id="tab1" role="tabpanel" class="tab-pane fade show active">
+				<div id="tab1" role="tabpanel" class="tab-pane fade show active table-responsive">
 					<h3>Alle Schüler</h3>
 					<h6><b><?php echo "Stand: " . strftime("%A") . ", " . date('d.m.o \u\m H:i:s') . " Uhr"; ?></b></h6>
 					<?php
 					createBestenliste("SELECT * FROM users WHERE grade NOT IN ('Lehrer/in', 'Studienseminar 17/19', 'Studienseminar 18/20') AND `checked`!=-1 AND `hideInScores`!=1  ORDER BY `points` DESC", false);
 					?>
 				</div>
-				<div id="tab2" role="tabpanel" class="tab-pane fade">
+				<div id="tab2" role="tabpanel" class="tab-pane fade table-responsive">
 					<h3>Alle Lehrer</h3>
 					<?php
 					createBestenliste("SELECT * FROM users WHERE grade IN ('Lehrer/in', 'Studienseminar 17/19', 'Studienseminar 18/20') AND `checked`!=-1 AND `hideInScores`!=1 ORDER BY `points` DESC", false);
 					?>
 				</div>
-				<div id="tab3" role="tabpanel" class="tab-pane fade">
+				<div id="tab3" role="tabpanel" class="tab-pane fade table-responsive">
 					<h3>Alle Klassen (durchschnittlich)</h3>
 					<?php
 					createBestenliste("grades", false);
 					?>
 				</div>
-				<div id="tab4" role="tabpanel" class="tab-pane fade">
+				<div id="tab4" role="tabpanel" class="tab-pane fade table-responsive">
 					<h3>Bestenliste (alle Teilnehmer)</h3>
 					<?php
 					if (isset($_SESSION["userid"])) {
