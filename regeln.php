@@ -51,7 +51,7 @@ require_once("./include/db.inc.php");
 					</div>
 					<div class="card panel">
 						<b>Wie melde ich mich an?</b>
-						<p class="text-left regeln text-normal">Bitte melde dich zunächst an (<a href="./neuer_benutzer.php">Registrieren</a>). Außer deinem Namen und deiner Klasse musst du keine personenbezogenen Daten angeben. Diese werden absolut vertraulich behandelt. Wenn du im Sommer am WM-Tippspiel teilgenommen hast, kannst du einfach deine Anmeldung von damals per Klick übernehmen. Bitte notiere dir deine angegebenen Zugangsdaten, deinen Nicknamen und dein Passwort. (Bei Verlust dieser Daten müsstest du dich neu anmelden und würdest so bereits erreichte Punkte verlieren.) Bitte melde dich mit deinem richtigen Namen und deiner richtigen Klasse an. Jede Anmeldung wird von uns genau überprüft. Existiert kein Schüler oder Lehrer mit dem angegeben Namen an unserer Schule, wird die Anmeldung gelöscht.</p>
+						<p class="text-left regeln text-normal">Bitte melde dich zunächst an (<a href="./neuer_benutzer.php">Registrieren</a>). Außer deinem Namen und deiner Klasse musst du keine personenbezogenen Daten angeben. Diese werden absolut vertraulich behandelt. Bitte notiere dir deine angegebenen Zugangsdaten, deinen Nicknamen und dein Passwort. (Bei Verlust dieser Daten müsstest du dich neu anmelden und würdest so bereits erreichte Punkte verlieren.) Bitte melde dich mit deinem richtigen Namen und deiner richtigen Klasse an. Jede Anmeldung wird von uns genau überprüft. Existiert kein Schüler oder Lehrer mit dem angegeben Namen an unserer Schule, wird die Anmeldung gelöscht.</p>
 					</div>
 					<div class="card panel">
 						<b>Wann kann ich die Lösungen eintragen?</b>
