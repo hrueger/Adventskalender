@@ -28,7 +28,7 @@ require_once("./include/db.inc.php");
 	<div class="container">
 		<div class="header clearfix">
 			<?php getNav("regeln"); ?>
-			<div class="jumbotron text-justify">
+			<div class="jumbotron text-normal">
 				<h2>Der etwas andere AGventskalender</h2>
 				<h4>Das Schulhaus-Tippspiel des Allgäu-Gymnasiums Kempten</h4>
 				<br>	
@@ -37,9 +37,11 @@ require_once("./include/db.inc.php");
 					<p class="bigger">Liebe Schülerinnen und Schüler, Lehrerinnen und Lehrer des Allgäu-Gymnasiums,</p>
 
 						<i>willkommen beim AGventskalender, dem Schulhaus-Tippspiel unseres Gymnasiums zur Adventszeit! <br>
-						<br> Wie gut kennst du deine Schule? Jeden Tag kannst du ein Geschenk öffnen und dein Wissen testen. Du wirst Bilder von Orten und Objekten in unserem Schulhaus sehen. Was wurde fotografiert? Gib die Buchstaben des entsprechenden Worts in die dafür vorgesehenen Kästchen ein. Solltest du Probleme mit den Objekten oder den Begriffen haben, dann mache dich auf ins und ums Schulgebäude und suche die Stellen. Schau dich dort genau um. Manchmal findest du Hilfe vor Ort. Du hast jeweils mindestens zwei Tage Zeit. <br> Jedes Lösungswort enthält einen Buchstaben, den du brauchst, um den Lösungssatz am Ende des AGventskalenders herauszufinden.<br> Falls du an einem Tag die Lösung nicht findest, sei nicht traurig, sondern spiele am nächsten Tag einfach weiter. Jede Woche gibt es mehr Punkte auf eine richtige Lösung. <br> Die Teilnahme an diesem Tippspiel ist natürlich kostenlos.<br> Neben der Freude, zu den besten AG-Experten der Schulfamilie zu gehören, warten auf die Erstplatzierten kleine Preise.<br>
+						<p class="text-justify">
+						<br> Wie gut kennst du deine Schule? Jeden Tag kannst du ein Geschenk öffnen und dein Wissen testen. Du wirst Bilder von Orten und Objekten in unserem Schulhaus sehen. Was wurde fotografiert? Gib die Buchstaben des entsprechenden Worts in die dafür vorgesehenen Kästchen ein. Solltest du Probleme mit den Objekten oder den Begriffen haben, dann mache dich auf ins und ums Schulgebäude und suche die Stellen. Schau dich dort genau um. Manchmal findest du Hilfe vor Ort. Du hast jeweils mindestens zwei Tage Zeit. <br> Jedes Lösungswort enthält einen Buchstaben, den du brauchst, um den Lösungssatz am Ende des AGventskalenders herauszufinden.<br> Falls du an einem Tag die Lösung nicht findest, sei nicht traurig, sondern spiele am nächsten Tag einfach weiter. Jede Woche gibt es mehr Punkte auf eine richtige Lösung. <br> Die Teilnahme an diesem Tippspiel ist natürlich kostenlos.<br> Neben der Freude, zu den besten AG-Experten der Schulfamilie zu gehören, warten auf die Erstplatzierten kleine Preise.<br></p>
 						<br> Viel Spaß beim Schulhaus-Erforschen, Knobeln, Rätseln und Gewinnen!<br>
 						<br> Die Arbeitsgemeinschaft Multimedia des Allgäu-Gymnasiums<br></i>
+
 					<br>
 					<br>
 					<h4>Noch ein paar Regeln:</h4>
