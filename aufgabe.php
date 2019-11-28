@@ -261,7 +261,7 @@ require_once("./include/login.inc.php");
 								alert("success", "<p class='lead'>Du hast $points von 480 möglichen Punkten erhalten.</p>");
 								echo "</h2><strong>Du kennst dich gut im Allgäu-Gymnasium aus.<br>Du wirst benachrichtigt, wenn du einen Preis gewonnen hast.</strong><br><br>";
 								echo "<h4 class='solution'>LÖSUNG</h4>";
-								echo "<p class='lead'>" . $task["word"] . "</p><br><br><br>";
+								echo "<p class='lead'>" . $task["word"] . "</p><br><br>".$task["solutionHint"]."<br>";
 							}
 						}
 						if (!$dontEchoChristmasForm) {
