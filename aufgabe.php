@@ -454,7 +454,7 @@ require_once("./include/login.inc.php");
 								</script>
 				<?php
 									echo "<br><br>";
-									alert("info", "Sortiere die Buchstaben mithilfe von Drag and Drop in die freien Kästchen, sodass ein Lösungssatz herauskommt. Zwei Buchstaben sind bereits vorgegeben.");
+									alert("info", "Sortiere die Buchstaben mithilfe von Drag and Drop in die freien Kästchen, sodass ein Lösungssatz herauskommt. Das Komma ist bereits vorgegeben.");
 									alert("warning", "Bis Donnerstag, den 26.12.2019 um 23:59 Uhr kannst du eine Lösung abgeben und ändern.");
 
 									echo '<br><br>';
