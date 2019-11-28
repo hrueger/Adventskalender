@@ -89,7 +89,7 @@ require_once("./include/db.inc.php");
 								<tr>
 									<td>Freitag, Samstag, Sonntag</td>
 									<td>Dienstag</td>
-									<td>23:00 Uhr</td>
+									<td>23:59 Uhr</td>
 								</tr>
 							</tbody>
 						</table>
@@ -97,7 +97,7 @@ require_once("./include/db.inc.php");
 						<br> Die aktuellen Bilderrätsel kannst du auch in der Schule an den Info-Screens sehen. <br>
 					</div>
 					<div class="card panel"><b>Wie viele Punkte kann ich erzielen?</b><br>
-						<p class="text-left regeln text-normal">Für jedes richtige Lösung eines Bilder-Rätsels der
+						<p class="text-left regeln text-normal">Für jede richtige Lösung eines Bilder-Rätsels der
 							<ul>
 								<li><strong>ersten</strong> Adventswoche (01. – 08.12.) bekommst du <strong>10 Punkte</strong></li>
 								<li><strong>zweiten</strong> Adventswoche (09. – 15.12.) bekommst du <strong>20 Punkte</strong></li>
