@@ -537,8 +537,7 @@ require_once("./include/login.inc.php");
 
 										echo '<button class="btn btn-success disabled">Zu spät...</button>';
 									}
-									echo '</form></div>
-									</div>';
+									echo '</form>';
 								}
 							}
 							echo "<br>";
