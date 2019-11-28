@@ -71,7 +71,9 @@ if (isset($_POST["submit"])) {
 	foreach ($_POST as $key => $value) {
 		if (strpos($key, 'day_') === 0) {
 			$day = str_replace("day_", "", $key);
+			$day = $db->real_escape_string($day);
 			$alternatives = implode("-", $value);
+			$alternatives = $db->real_escape_string($alternatives);
 			$res = $db->query("UPDATE days SET `alternatives`='$alternatives' WHERE day=$day");
 		 }
 	}

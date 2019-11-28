@@ -203,7 +203,7 @@ require_once("./include/login.inc.php");
 			}
 
 			$db = connect();
-			$id = $db->real_escape_string($_GET["a"]);
+			$id = $db->real_escape_string(intval($_GET["a"]));
 			$uid = $db->real_escape_string($_SESSION["userid"]);
 
 			$res = $db->query("SELECT * FROM tipps WHERE userid=$uid AND day=$id");
