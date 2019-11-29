@@ -380,7 +380,7 @@ function checkForDate($dayid)
 	$datediff = $date - $current;
 	$differance = floor($datediff / (60 * 60 * 24));
 
-	if ((($todayday == 25 || $todayday == 26) && $dayid == WEIHNACHTSTAG) && $month == 12) {
+	if ((($todayday == 25 || $todayday == 26 || $todayday == 27) && $dayid == WEIHNACHTSTAG) && $month == 12) {
 		return "today";
 	}
 

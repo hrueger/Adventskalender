@@ -98,6 +98,9 @@ require_once("./include/db.inc.php");
 								</tr>
 							</tbody>
 						</table>
+						<div class="alert alert-success">
+							Die <b>Weihnachtsaufgabe am 24.12.2019</b> kann bis zum <b>Freitag, 27.12.2019, 23:59 Uhr</b> gelöst werden.
+						</div>
 						<br> Nach dieser Frist ist die Eingabe nicht mehr möglich und du kannst die Lösung des jeweiligen Bilderrätsels ansehen.<br>
 						<br> Die aktuellen Bilderrätsel kannst du auch in der Schule an den Info-Screens sehen. <br>
 					</div>
