@@ -192,7 +192,7 @@ require_once("./include/login.inc.php");
 					die();
 					alert("success", "Deine Lösung wurde erfolgreich gespeichert!");
 				} else {
-					alert("danger", "Ein Datenbankfehler. Bitte wende dich an Hannes Rüger, Klasse 9a.");
+					alert("danger", "Ein Datenbankfehler. Bitte wende dich an Hannes Rüger, Klasse 10a.");
 					echo $db->error;
 				}
 
