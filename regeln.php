@@ -87,7 +87,12 @@ require_once("./include/db.inc.php");
 									<td>23:59 Uhr</td>
 								</tr>
 								<tr>
-									<td>Freitag, Samstag, Sonntag</td>
+									<td>Freitag</td>
+									<td>Montag</td>
+									<td>23:59 Uhr</td>
+								</tr>
+								<tr>
+									<td>Samstag, Sonntag</td>
 									<td>Dienstag</td>
 									<td>23:59 Uhr</td>
 								</tr>
