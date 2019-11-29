@@ -182,7 +182,7 @@ require_once("./include/login.inc.php");
 					if ($allow == "past") {
 						alert("warning", "Du bist leider zu spät dran. Beeile dich beim nächsten mal!");
 					} else {
-						alert("warning", "Du bist leider zu früh dran. Warte nich ein bisschen!");
+						alert("warning", "Du bist leider zu früh dran. Warte noch ein bisschen!");
 					}
 
 					die();
