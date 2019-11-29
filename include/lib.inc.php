@@ -421,88 +421,25 @@ function checkForDate($dayid)
 function getUserPoints()
 {
 	$db = connect();
-	$res = $db->query("SELECT * FROM users");
+	$uid = $db->real_escape_string($_SESSION["userid"]);
+	$res = $db->query("SELECT points FROM users WHERE id = $uid");
 	if (!$res) {
-		alert("danger", "Es wurden keine Benutzer gefunden!");
+		alert("danger", "Dein Benutzer wurde nicht gefunden!");
 		die();
 	} else {
 		$res = $res->fetch_all(MYSQLI_ASSOC);
 		if (!$res) {
-			alert("danger", "Es wurden keine Benutzer gefunden!");
+			alert("danger", "Dein Benutzer wurde nicht gefunden!");
 			die();
 		} else {
-			$users = $res;
-		}
-	}
-
-	$res = $db->query("SELECT * FROM days");
-	if (!$res) {
-		alert("danger", "Es wurden keine Aufgaben gefunden!");
-		die();
-	} else {
-		$res = $res->fetch_all(MYSQLI_ASSOC);
-		if (!$res) {
-			alert("danger", "Es wurden keine Aufgaben gefunden!");
-			die();
-		}
-	}
-	$days = [];
-	foreach ($res as $day) {
-		$days[$day["day"]] = $day;
-	}
-
-	$res = $db->query("SELECT * FROM tipps");
-	if (!$res) {
-		alert("danger", "Es wurden keine Tipps gefunden!");
-		die();
-	} else {
-		$res = $res->fetch_all(MYSQLI_ASSOC);
-		if (!$res) {
-			alert("danger", "Es wurden keine Tipps gefunden!");
-			die();
-		} else {
-			$tipps = $res;
-		}
-	}
-
-	$userPoints = [];
-	$champions = [];
-	$currentUser = $_SESSION["userid"];
-	$currentUserPoints = 0;
-
-	foreach ($tipps as $tipp) {
-		$userid = $tipp["userid"];
-		$day = $tipp["day"];
-		$alternatives = array_map("strtoupper", explode("-", $days[$day]["alternatives"]));
-		if (checkForDate($day) == "past" and $userid == $currentUser) {
-			$tipp = strtoupper($tipp["tipp"]);
-			$solution = strtoupper($days[$day]["word"]);
-
-			if ($tipp == $solution) {
-
-				if ($day == WEIHNACHTSTAG) {
-					$currentUserPoints += 60;
-				} else {
-					if (intval($day) < 8) {
-						$currentUserPoints += 10;
-					} else if (intval($day) < 15) {
-						$currentUserPoints += 20;
-					} else if (intval($day) < 24) {
-						$currentUserPoints += 30;
-					}
-				}
-			} else if (in_array($tipp, $alternatives)) {
-				if (intval($day) < 8) {
-					$currentUserPoints += 5;
-				} else if (intval($day) < 15) {
-					$currentUserPoints += 10;
-				} else if (intval($day) < 24) {
-					$currentUserPoints += 15;
-				}
+			if (isset($res[0]) && isset($res[0]["points"])) {
+				return $res[0]["points"];
+			} else {
+				alert("danger", "Irgendwas ist schief gelaufen!");
+				die();
 			}
 		}
 	}
-	return $currentUserPoints;
 }
 
 function getFooter()
