@@ -566,22 +566,22 @@ require_once("./include/login.inc.php");
 		<script>
 			$(document).ready(function() {
 				$(".inputChar").on("input", function() {
+					$('input[type=text]').val(function() {
+						var n = [""];
+						var s = $(this).val();
+						if (s.length > 1) {
+							s = s[0];
+						}
+						if (s == "ß") {
+							n = s;
+						} else {
+							n = s.toUpperCase();
+						}
+						return n;
+					});
 					if ($(this).val()) {
 						$(this).next('.inputChar').select();
 					}
-					$('input[type=text]').val(function() {
-						var n = [""];
-						var s = this.value;
-						for (var i = 0; i < s.length; i++) {
-							if (s[i] == "ß") {
-								n[i] = s[i];
-							} else {
-								n[i] = s[i].toUpperCase();
-							}
-
-						}
-						return n.join("");
-					});
 				});
 				$(".inputChar").on('keydown', function(event) {
 					var key = event.keyCode || event.charCode;
