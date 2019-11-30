@@ -18,7 +18,6 @@ require_once("./include/login.inc.php");
 			float: none;
 			border: 5px solid #4A1C19;
 			border-radius: 3px;
-			image-orientation: from-image;
 		}
 
 		.inputChar {
