@@ -24,7 +24,7 @@
 		
 	</style>
 	<link rel="stylesheet" href="include/lib/bootstrap/bootstrap.min.css">
-	<script src="./include/lib/bootstrap/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script src="./include/lib/bootstrap/jquery.min.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
