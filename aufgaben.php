@@ -18,7 +18,6 @@ require_once("./include/login.inc.php");
 			padding: 0;
 			margin: 0;
 			text-align: center;
-			float: left;
 		}
 
 		.present {
@@ -228,8 +227,9 @@ require_once("./include/login.inc.php");
 					?>
 				</tr>
 			</table>
-			<?php getTasks($db, "list"); ?>
-
+			<div>
+				<?php getTasks($db, "list"); ?>
+			</div>
 			<div class="clearfix">&nbsp;</div>
 
 		</div>
