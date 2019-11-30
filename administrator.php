@@ -72,7 +72,7 @@ if (isset($_POST["submit"])) {
 		if (strpos($key, 'day_') === 0) {
 			$day = str_replace("day_", "", $key);
 			$day = $db->real_escape_string($day);
-			$alternatives = implode("-", $value);
+			$alternatives = implode("____", $value);
 			$alternatives = $db->real_escape_string($alternatives);
 			$res = $db->query("UPDATE days SET `alternatives`='$alternatives' WHERE day=$day");
 		 }
@@ -222,7 +222,7 @@ if (isset($_POST["submit"])) {
 											$alternatives = [];
 											echo "SELECT word, alternatives FROM `days` WHERE `day`=$i";
 										} else {
-											$alternatives = explode("-", $alternatives["alternatives"]);
+											$alternatives = explode("____", $alternatives["alternatives"]);
 										}
 										foreach ($res as $suggestion) {
 											$counter += 1;

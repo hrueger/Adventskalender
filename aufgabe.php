@@ -487,7 +487,7 @@ require_once("./include/login.inc.php");
 									}
 									echo "</div>";
 									if ($allow == "past") {
-										$alternatives = implode(",<br>", explode("-", $task["alternatives"]));
+										$alternatives = implode(",<br>", explode("____", $task["alternatives"]));
 										if ($alternatives) {
 											$alternatives = "<div><p>Auch akzeptiert wird/werden: <br>" . $alternatives . "</p></div>";
 										}

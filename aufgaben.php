@@ -169,7 +169,7 @@ require_once("./include/login.inc.php");
 					foreach ($res as $day) {
 						$i = $day["day"];
 						if (checkForDate($i) == "past") {
-							$alternatives = array_map("strtoupper", explode("-", $day["alternatives"]));
+							$alternatives = array_map("strtoupper", explode("____", $day["alternatives"]));
 							if (isset($tipps[$day["day"]]) and strtoupper($day["word"]) == strtoupper($tipps[$day["day"]])) {
 								$add = " class='green'";
 							} else if (isset($tipps[$day["day"]]) and in_array(strtoupper($tipps[$day["day"]]), $alternatives) and !empty($tipps[$day["day"]])) {
@@ -200,7 +200,7 @@ require_once("./include/login.inc.php");
 						$day["letter"] -= 1;
 						$i = $day["day"];
 						if (checkForDate($i) == "past") {
-							$alternatives = array_map("strtoupper", explode("-", $day["alternatives"]));
+							$alternatives = array_map("strtoupper", explode("____", $day["alternatives"]));
 							if (isset($tipps[$day["day"]]) and strtoupper($day["word"]) == strtoupper($tipps[$day["day"]])) {
 								$add = " class='green'";
 							} else if (isset($tipps[$day["day"]]) and in_array(strtoupper($tipps[$day["day"]]), $alternatives) and !empty($tipps[$day["day"]])) {

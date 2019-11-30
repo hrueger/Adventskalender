@@ -78,7 +78,7 @@ function getTasks($db, $mode)
 						echo "<img class='present' src='./images/presentToday.png'>";
 					} else {
 						if ($allow == "past") {
-							$alternatives = array_map("strtoupper", explode("-", $day["alternatives"]));
+							$alternatives = array_map("strtoupper", explode("____", $day["alternatives"]));
 							if (isset($tipps[$day["day"]]) and strtoupper($day["word"]) == strtoupper($tipps[$day["day"]])) {
 								echo "<img class='overlay' src='./images/right.png'>";
 							} else if (isset($tipps[$day["day"]]) and in_array(strtoupper($tipps[$day["day"]]), $alternatives) and !empty($tipps[$day["day"]])) {
@@ -162,7 +162,7 @@ function updatePoints()
 		if (checkForDate($day) == "past") {
 			$tipp = strtoupper($tipp["tipp"]);
 			$solution = strtoupper($days[$day]["word"]);
-			$alternatives = array_map("strtoupper", explode("-", $days[$day]["alternatives"]));
+			$alternatives = array_map("strtoupper", explode("____", $days[$day]["alternatives"]));
 
 			if ($tipp == $solution) {
 
