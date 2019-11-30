@@ -153,7 +153,7 @@ require_once("./include/login.inc.php");
 						<tr><td class='white'>Weiß:</td><td>Noch nicht freigeschaltet</td></tr>
 						</table>
 						");
-			alert("warning", "<h3>Achtung</h3>Die Lösungen, die auch akzeptiert werden und die halbe Punkzahl geben, können sich im Nachhinein noch ändern und somit deine Punktzahl erhöhen, da die Alternativen erst diskutiert werden müssen.");
+			alert("warning", "<h3>Achtung</h3>Stimmt deine Lösung nicht mit der offiziellen Lösung überein, kann sie nachträglich dennoch mit 50 % der erreichbaren Punkte belohnt werden.<br>Bitte Geduld! Es baucht Zeit, alle alternativen Lösungen zu bewerten.");
 			?>
 			<table class='overview'>
 				<tr>
