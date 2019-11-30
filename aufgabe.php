@@ -265,7 +265,7 @@ require_once("./include/login.inc.php");
 						}
 						if (!$dontEchoChristmasForm) {
 
-							echo "<br><br><p class='lead'>" . $task["text"] . "</p>";
+							echo "<p class='lead'>" . $task["text"] . "</p>";
 
 							$solution = preg_split('/(?!^)(?=.)/u', $task["word"]);
 							if (empty($tipp)) {
