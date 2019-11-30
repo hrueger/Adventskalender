@@ -468,7 +468,7 @@ require_once("./include/login.inc.php");
 									// kein Weihnachten
 									$counter = 1;
 									if ($allow != "today") {
-										echo "<div><h4 class='solutionHint d-block'>Lösung: " . implode("", $solution) . "</h4></div><div><b>Dein Tipp:</b></div><br>";
+										echo "<div><h4 class='solutionHint d-block'>" . implode("", $solution) . "</h4></div><b>(".$task["solutionHint"].")</b><div><br><b>Dein Tipp:</b></div>";
 									}
 									echo "<div>";
 									foreach ($solution as $key => $unused) {
@@ -492,7 +492,7 @@ require_once("./include/login.inc.php");
 										if ($alternatives) {
 											$alternatives = "<div><p>Auch akzeptiert wird/werden: <br>" . $alternatives . "</p></div>";
 										}
-										echo "<div><h4 class='solutionHint'>" . $task["solutionHint"] . "$alternatives</h4><div>";
+										echo "<div><h4 class='solutionHint'>$alternatives</h4></div>";
 									}
 
 									echo '</div><br><br>';
