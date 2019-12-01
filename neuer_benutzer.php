@@ -55,8 +55,8 @@ $allGrades = [
 					$ok = true;
 					if ($_POST["password"] == $_POST["password2"]) {
 						$db = connect();
-						$name = $db->real_escape_string(trim($_POST["firstname"])) . " " . $db->real_escape_string(trim($_POST["name"]));
-						$nickname = $db->real_escape_string($_POST["nickname"]);
+						$name = trim($db->real_escape_string(trim($_POST["firstname"])) . " " . $db->real_escape_string(trim($_POST["name"])));
+						$nickname = trim($db->real_escape_string($_POST["nickname"]));
 
 						$grade = $db->real_escape_string($_POST["grade"]);
 
