@@ -225,13 +225,13 @@ if (isset($_POST["submit"])) {
 											$alternatives = explode("____", $alternatives["alternatives"]);
 										}
 										foreach ($res as $suggestion) {
-											$counter += 1;
-											$ids = $i. $counter.random_int(0,1000);
-											$s =  (in_array($suggestion["tipp"], $alternatives) ? "checked" : "");
-											$suggestions .= "<input class='p-2' type='checkbox' id='$ids' ".$s." name='day_".$i."[]' value='".$suggestion["tipp"]. "'><label for='$ids'>".$suggestion["tipp"]. "</label><br>";
+											if (trim($suggestion["tipp"]) != "" && $suggestion["tipp"] != $word) {
+												$counter += 1;
+												$ids = $i. $counter.random_int(0,1000);
+												$s =  (in_array($suggestion["tipp"], $alternatives) ? "checked" : "");
+												$suggestions .= "<input class='p-2' type='checkbox' id='$ids' ".$s." name='day_".$i."[]' value='".$suggestion["tipp"]. "'><label ".(strlen($word) != strlen($suggestion["tipp"]) ? "class='text-danger'": "")." for='$ids'>".$suggestion["tipp"]. "</label><br>";
+											}
 										}
-
-
 										echo "<tr><td>$i</td><td>$word</td><td>$suggestions</td></tr>";
 									}
 									?>
