@@ -192,6 +192,7 @@ $allGrades = [
 										<option name="grade" <?php if ($grade == "5c") echo " selected "; ?>value="5c">5c</option>
 										<option name="grade" <?php if ($grade == "5d") echo " selected "; ?>value="5d">5d</option>
 										<option name="grade" <?php if ($grade == "5e") echo " selected "; ?>value="5e">5e</option>
+										<option name="grade" <?php if ($grade == "5f") echo " selected "; ?>value="5f">5f</option>
 									</optgroup>
 									<optgroup label="Jahrgangsstufe 6">
 										<option name="grade" <?php if ($grade == "6a") echo " selected "; ?>value="6a">6a</option>
