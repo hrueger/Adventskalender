@@ -44,13 +44,13 @@ require_once("./include/db.inc.php");
 					<h3>Alle Schüler</h3>
 					<h6><b><?php echo "Stand: " . strftime("%A") . ", " . date('d.m.o \u\m H:i:s') . " Uhr"; ?></b></h6>
 					<?php
-					createBestenliste("SELECT * FROM users WHERE grade NOT IN ('Lehrer/in', 'Studienseminar 17/19', 'Studienseminar 18/20') AND `checked`!=-1 AND `hideInScores`!=1  ORDER BY `points` DESC", false);
+					createBestenliste("SELECT * FROM users WHERE grade NOT IN ('Lehrer/in', 'Studienseminar 18/20', 'Studienseminar 19/21') AND `checked`!=-1 AND `hideInScores`!=1  ORDER BY `points` DESC", false);
 					?>
 				</div>
 				<div id="tab2" role="tabpanel" class="tab-pane fade table-responsive">
 					<h3>Alle Lehrer</h3>
 					<?php
-					createBestenliste("SELECT * FROM users WHERE grade IN ('Lehrer/in', 'Studienseminar 17/19', 'Studienseminar 18/20') AND `checked`!=-1 AND `hideInScores`!=1 ORDER BY `points` DESC", false);
+					createBestenliste("SELECT * FROM users WHERE grade IN ('Lehrer/in', 'Studienseminar 18/20', 'Studienseminar 19/21') AND `checked`!=-1 AND `hideInScores`!=1 ORDER BY `points` DESC", false);
 					?>
 				</div>
 				<div id="tab3" role="tabpanel" class="tab-pane fade table-responsive">
