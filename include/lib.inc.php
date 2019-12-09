@@ -179,11 +179,11 @@ function updatePoints()
 				}
 			} else if (in_array($tipp, $alternatives) and !empty($tipp) and $tipp != "" && trim($tipp) != "") {
 				if (intval($day) <= 8) {
-					$userpoints[$userid] += 5;
-				} else if (intval($day) <= 15) {
 					$userpoints[$userid] += 10;
+				} else if (intval($day) <= 15) {
+					$userpoints[$userid] += 20;
 				} else if (intval($day) <= 23) {
-					$userpoints[$userid] += 15;
+					$userpoints[$userid] += 30;
 				}
 			}
 		}

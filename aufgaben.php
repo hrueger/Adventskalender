@@ -147,12 +147,12 @@ require_once("./include/login.inc.php");
 			<?php alert("info", "<h3>Farbcodes</h3><table class='colorcodes'>
 						<tr><td class='green'>Grün</td><td>Richtig, volle Punkzahl</td></tr>
 						<tr><td class='red'>Rot</td><td>Falsch, keine Punkte</td></tr>
-						<tr><td class='blue'>Blau</td><td>Richtige Alternative, halbe Punkzahl</td></tr>
+						<tr><td class='blue'>Blau</td><td>Richtige Alternative, volle Punkzahl</td></tr>
 						<tr><td class='yellow'>Gelb</td><td>Momentan zur Bearbeitung</td></tr>
 						<tr><td class='white'>Weiß</td><td>Noch nicht freigeschaltet</td></tr>
 						</table>
 						");
-			alert("warning", "<h3>Achtung</h3>Stimmt deine Lösung nicht mit der offiziellen Lösung überein, kann sie nachträglich dennoch mit 50 % der erreichbaren Punkte belohnt werden.<br>Bitte Geduld! Es baucht Zeit, alle alternativen Lösungen zu bewerten.");
+			alert("warning", "<h3>Achtung</h3>Stimmt deine Lösung nicht mit der offiziellen Lösung überein, kann sie nachträglich dennoch mit der vollen Punktzahl belohnt werden.<br>Bitte Geduld! Es baucht Zeit, alle alternativen Lösungen zu bewerten.");
 			?>
 			<table class='overview'>
 				<tr>
