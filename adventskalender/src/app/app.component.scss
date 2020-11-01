@@ -6,3 +6,8 @@
     background-attachment: fixed;
     background-position: center center;
 }
+
+div.fullheight {
+    min-height: calc(100vh - 3rem - 1rem); // image is 3rem and padding is .5 rem each
+    width: 100vw;
+}
