@@ -1,5 +1,0 @@
-# Uncomment for placeholder page
-RewriteEngine On
-RewriteBase /
-RewriteCond %{REQUEST_URI} !/waitForDecember.html$
-RewriteRule .* /waitForDecember.html [L]
