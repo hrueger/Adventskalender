@@ -15,6 +15,7 @@ import { RulesComponent } from "./_pages/rules/rules.component";
 import { HomeComponent } from "./_pages/home/home.component";
 import { ErrorInterceptor } from "./_interceptors/error.interceptor";
 import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
+import { WelcomeComponent } from "./_pages/welcome/welcome.component";
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
         ScoresComponent,
         RulesComponent,
         HomeComponent,
+        WelcomeComponent,
     ],
     imports: [
         BrowserModule,
