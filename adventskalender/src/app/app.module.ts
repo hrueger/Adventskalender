@@ -17,6 +17,7 @@ import { ErrorInterceptor } from "./_interceptors/error.interceptor";
 import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
 import { WelcomeComponent } from "./_pages/welcome/welcome.component";
 import { TasksComponent } from "./_pages/tasks/tasks.component";
+import { TaskComponent } from "./_pages/task/task.component";
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { TasksComponent } from "./_pages/tasks/tasks.component";
         HomeComponent,
         WelcomeComponent,
         TasksComponent,
+        TaskComponent,
     ],
     imports: [
         BrowserModule,
