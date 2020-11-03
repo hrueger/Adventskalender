@@ -7,7 +7,5 @@ import { AuthenticationService } from "../../_services/authentication.service";
     styleUrls: ["./welcome.component.scss"],
 })
 export class WelcomeComponent {
-  constructor(public authenticationService: AuthenticationService) {
-    console.log(authenticationService.currentUser);
-    }
+    constructor(public authenticationService: AuthenticationService) {}
 }
