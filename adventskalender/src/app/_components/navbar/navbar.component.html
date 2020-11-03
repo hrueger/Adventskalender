@@ -13,10 +13,10 @@
                     <li class="nav-item" routerLinkActive="active">
                         <a class="nav-link" routerLink="/home">Start</a>
                     </li>
-                    <li class="nav-item" routerLinkActive="active">
+                    <li class="nav-item" routerLinkActive="active" *ngIf="!authenticationService.currentUser">
                         <a class="nav-link" routerLink="/login">Login</a>
                     </li>
-                    <li class="nav-item" routerLinkActive="active">
+                    <li class="nav-item" routerLinkActive="active" *ngIf="!authenticationService.currentUser">
                         <a class="nav-link" routerLink="/register">Registrieren</a>
                     </li>
                     <li class="nav-item" routerLinkActive="active">
@@ -24,6 +24,9 @@
                     </li>
                     <li class="nav-item" routerLinkActive="active">
                         <a class="nav-link" routerLink="/rules">Regeln</a>
+                    </li>
+                    <li class="nav-item cursor-pointer" routerLinkActive="active" *ngIf="authenticationService.currentUser">
+                        <a class="nav-link" (click)="authenticationService.logout()">Logout</a>
                     </li>
                 </ul>
             </div>
