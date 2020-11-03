@@ -19,8 +19,8 @@ export class AuthenticationService {
         private router: Router,
     ) { }
 
-    public login(name: string, password: string): Observable<any> {
-        return this.remoteService.post("auth/login", { password, name }).pipe(
+    public login(nickname: string, password: string): Observable<any> {
+        return this.remoteService.post("auth/login", { password, nickname }).pipe(
             map((user: any) => {
                 // login successful if there's a jwt token in the response
                 this.loggedIn(user);
