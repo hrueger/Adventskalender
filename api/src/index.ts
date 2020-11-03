@@ -16,7 +16,7 @@ import { createAdminUser1574018391679 } from "./migration/1574018391679-createAd
 import routes from "./routes";
 import ConfigController from "./controllers/ConfigController";
 
-const config = getConfig(JSON.parse(fs.readFileSync(path.join(__dirname, "../../container-env.json")).toString()));
+const config = getConfig(JSON.parse(fs.readFileSync(path.join(__dirname, "../../container-env.json")).toString()), "/app/config/adventskalender.json");
 
 // Connects to the Database -> then starts the express
 createConnection({
