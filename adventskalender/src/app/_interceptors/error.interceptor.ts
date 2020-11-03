@@ -1,43 +1,34 @@
 import {
+    HttpErrorResponse,
     HttpEvent,
     HttpHandler,
     HttpInterceptor,
     HttpRequest,
 } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
 import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { AuthenticationService } from "../_services/authentication.service";
+import { catchError, retry } from "rxjs/operators";
+import { NoErrorHttpParams } from "../_helpers/noErrorHttpParams";
 import { AlertService } from "../_services/alert.service";
 
   @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(
-        private authenticationService: AuthenticationService,
-        private router: Router,
-        private alertService: AlertService,
-    ) { }
-
-    public intercept(
-        request: HttpRequest<any>,
-        next: HttpHandler,
-    ): Observable<HttpEvent<any>> {
-        return next.handle(request).pipe(
-            catchError((err) => {
-                // eslint-disable-next-line no-console
-                console.error("Error in error.interceptor.ts: ", err, err.stack);
-
-                if (err && err.error && err.error.logout) {
-                    this.authenticationService.logout();
-                    this.router.navigate(["login"]);
-                }
-                const error = err.error && err.error.error
-                    ? err.error.error : err.error && err.error.message
-                        ? err.error.message : err.statusText ? err.statusText : err || "Unknown error!";
-                this.alertService.error(error);
-                return throwError(error);
-            }),
-        );
+    constructor(private toastService: AlertService) {}
+    public intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        return next.handle(request)
+            .pipe(
+                retry(1),
+                catchError((error: HttpErrorResponse) => {
+                    // eslint-disable-next-line no-console
+                    console.log(error);
+                    const errorMessage = error.error?.message || error.message || "unknown error!";
+                    // when using { params: new NoErrorToastHttpParams(true) }, don't show toast
+                    if (!(request.params instanceof NoErrorHttpParams
+                        && request.params.dontShowAlert)) {
+                        this.toastService.error(errorMessage);
+                    }
+                    return throwError(error.error);
+                }),
+            );
     }
 }
