@@ -1,29 +1,35 @@
-
-<h1>AGventskalender 2020</h1>
-<div class="alert alert-info" *ngIf="passwordLost">
-    <b>Ein neues Passwort muss persönlich bei Herr Herz abgegeben werden.</b><br>Dieser ist i.d.R. in der Pause im
-    Lehrerzimmer oder im Seminarraum 419 zu erreichen.
+<div class="d-flex justify-content-center autoLoginSpinner" *ngIf="tryingToAutoLogin">
+    <div class="spinner-border text-primary"></div>
 </div>
-<h3>Jetzt einloggen!</h3>
-
-<form class="form-horizontal">
-    <div class="form-group row">
-        <label for="nickname" class="col-sm-2 control-label">Nickname</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="nickname" required="" autofocus="" value="" name="nickname"
-            placeholder="Nickname">
-        </div>
+<div *ngIf="!tryingToAutoLogin">
+    <h1>AGventskalender 2020</h1>
+    <div class="alert alert-info" *ngIf="passwordLost">
+        <b>Ein neues Passwort muss persönlich bei Herr Herz abgegeben werden.</b><br>Dieser ist i.d.R. in der Pause im
+        Lehrerzimmer oder im Seminarraum 419 zu erreichen.
     </div>
-    <div class="form-group row">
-        <label for="password" class="col-sm-2 control-label">Passwort</label>
-        <div class="col-sm-10">
-            <input type="password" class="form-control" id="password" required="" name="password" placeholder="Passwort">
+    <h3>Jetzt einloggen!</h3>
+    
+    <form class="form-horizontal"  [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group row">
+            <label for="nickname" class="col-sm-2 control-label" >Nickname</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="nickname" required="" formControlName="nickname" autofocus="" value="" name="nickname" placeholder="Nickname" [class.is-invalid]="submitted && loginForm.controls.nickname.invalid" [class.is-valid]="loginForm.controls.nickname.valid">
+                <div class="invalid-feedback">Dieses Feld muss ausgefüllt werden!</div>
+            </div>
         </div>
-    </div>
-    <div class="form-group row">
-        <div class="mx-auto">
-            <input class="btn btn-primary" type="submit" value="Einloggen">
-            <button class="btn btn-secondary ml-4" (click)="passwordLost = true; $event.preventDefault(); $event.stopPropagation()">Passwort vergessen</button>
+        <div class="form-group row">
+            <label for="password" class="col-sm-2 control-label">Passwort</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="password" formControlName="password" required="" name="password" placeholder="Passwort" [class.is-invalid]="submitted && loginForm.controls.password.invalid" [class.is-valid]="loginForm.controls.password.valid">
+                <div class="invalid-feedback">Dieses Feld muss ausgefüllt werden!</div>
+            </div>
         </div>
-    </div>
-</form>
+        <div class="form-group row">
+            <div class="mx-auto">
+                <button class="btn btn-primary" [disabled]="loading" type="submit">Einloggen <span *ngIf="loading"
+                    class="spinner-border spinner-border-sm mb-1"></span></button>
+                <button class="btn btn-secondary ml-4" (click)="passwordLost = true; $event.preventDefault(); $event.stopPropagation()">Passwort vergessen</button>
+            </div>
+        </div>
+    </form>
+</div>
