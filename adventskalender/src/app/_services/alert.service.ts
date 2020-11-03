@@ -39,4 +39,8 @@ export class AlertService {
             this.configSet = true;
         }
     }
+
+    public removeAll(): void {
+        this.toastr.clear();
+    }
 }
