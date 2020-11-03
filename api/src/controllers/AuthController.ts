@@ -8,7 +8,8 @@ class AuthController {
     public static async login(req: Request, res: Response): Promise<void> {
         const { nickname, password } = req.body;
         if (!(nickname && password)) {
-            res.status(400).end(JSON.stringify({ error: "Nicht alle Felder ausgefüllt!" }));
+            res.status(400).end(JSON.stringify({ message: "Nicht alle Felder ausgefüllt!" }));
+            return;
         }
 
         // Get user from database
@@ -21,6 +22,7 @@ class AuthController {
                 .getOne();
         } catch (error) {
             res.status(401).end(JSON.stringify({ message: "Falscher Nickname!" }));
+            return;
         }
 
         if (!user) {
