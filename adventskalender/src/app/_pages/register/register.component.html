@@ -1,1 +1,129 @@
-<p>register works!</p>
+<h1>AG-Ventskalender 2020</h1>
+<h3 class="my-4">Jetzt anmelden!</h3>
+<div class="alert alert-success mb-4">Beim AG-Ventskalender können alle Schülerinnen und Schüler sowie alle Lehrerinnen und Lehrer des Allgäu-Gymnasiums teilnehmen.</div>
+
+<form class="form-horizontal" method="post">
+    <div class="forn-group row">
+        <label for="firstname" class="col-sm-2 control-label">Vorname</label>
+        <div class="col-sm-10">
+
+            <input type="text" name="firstname" required="" autofocus="" class="form-control" id="firstname" value="" placeholder="Vorname">
+            <div class="alert alert-info text-left">Bitte gib hier deinen echten Vornamen an, da dein Benutzer sonst blockiert wird und du nicht mehr mitspielen kannst.</div>
+        </div>
+    </div>
+    <div class="forn-group row">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10">
+
+            <input type="text" name="name" required="" autofocus="" class="form-control" id="name" value="" placeholder="Nachname">
+            <div class="alert alert-info text-left">Bitte gib hier deinen echten Nachnamen an, da dein Benutzer sonst blockiert wird und du nicht mehr mitspielen kannst.</div>
+        </div>
+    </div>
+    <div class="forn-group row">
+        <label for="grade" class="col-sm-2 control-label">Klasse</label>
+        <div class="col-sm-10">
+            <select name="grade" required="" class="form-control" id="grade">
+                <optgroup label="Lehrer/in">
+                    <option name="grade" value="Lehrer/in">Lehrer/in</option>
+                    <option name="grade" value="Studienseminar 18/20">Studienseminar 18/20</option>
+                    <option name="grade" value="Studienseminar 19/21">Studienseminar 19/21</option>
+                    <option name="grade" value="Studienseminar 20/22">Studienseminar 20/22</option>
+
+                </optgroup>
+                <optgroup label="Jahrgangsstufe 5">
+                    <option name="grade" value="5a">5a</option>
+                    <option name="grade" value="5b">5b</option>
+                    <option name="grade" value="5c">5c</option>
+                    <option name="grade" value="5d">5d</option>
+                    <option name="grade" value="5e">5e</option>
+                    <option name="grade" value="5f">5f</option>
+                </optgroup>
+                <optgroup label="Jahrgangsstufe 6">
+                    <option name="grade" value="6a">6a</option>
+                    <option name="grade" value="6b">6b</option>
+                    <option name="grade" value="6c">6c</option>
+                    <option name="grade" value="6d">6d</option>
+                    <option name="grade" value="6e">6e</option>
+                    <option name="grade" value="6f">6f</option>
+                </optgroup>
+                <optgroup label="Jahrgangsstufe 7">
+                    <option name="grade" value="7a">7a</option>
+                    <option name="grade" value="7b">7b</option>
+                    <option name="grade" value="7c">7c</option>
+                    <option name="grade" value="7d">7d</option>
+                    <option name="grade" value="7e">7e</option>
+                    <option name="grade" value="7f">7f</option>
+                </optgroup>
+
+                <optgroup label="Jahrgangsstufe 8">
+                    <option name="grade" value="8a">8a</option>
+                    <option name="grade" value="8b">8b</option>
+                    <option name="grade" value="8c">8c</option>
+                    <option name="grade" value="8d">8d</option>
+                    <option name="grade" value="8e">8e</option>
+                    <option name="grade" value="8f">8f</option>
+                </optgroup>
+                <optgroup label="Jahrgangsstufe 9">
+                    <option name="grade" value="9a">9a</option>
+                    <option name="grade" value="9b">9b</option>
+                    <option name="grade" value="9c">9c</option>
+                    <option name="grade" value="9d">9d</option>
+                    <option name="grade" value="9e">9e</option>
+                    <option name="grade" value="9f">9f</option>
+                </optgroup><optgroup label="Jahrgangsstufe 10">
+                    <option name="grade" value="10a">10a</option>
+                    <option name="grade" value="10b">10b</option>
+                    <option name="grade" value="10c">10c</option>
+                    <option name="grade" value="10d">10d</option>
+                    <option name="grade" value="10e">10e</option>
+                    <option name="grade" value="10f">10f</option>
+                </optgroup>
+                <optgroup label="Jahrgangsstufe 11">
+                    <option name="grade" value="Q11">Q11</option>
+                </optgroup>
+                <optgroup label="Jahrgangsstufe 12">
+                    <option name="grade" value="Q12">Q12</option>
+                </optgroup>
+            </select>
+            <div class="alert alert-info text-left">Bitte gib hier deine richtige Klasse bzw. deinen Oberstufenjahrgang an, da dein Benutzer sonst blockiert wird und du nicht mehr mitspielen kannst.
+                Wenn Sie eine Lehrkraft sind, wählen Sie bitte <i>Lehrer/in</i> oder das entsprechende Studienseminar aus.</div>
+
+        </div>
+    </div>
+
+    <div class="forn-group row">
+        <label for="nickname" class="col-sm-2 control-label">Nickname</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" required="" id="nickname" value="" name="nickname" placeholder="Nickname">
+            <div class="alert alert-info text-left">Dein Nickname soll ein erfundener Name sein, mit dem du in der Bestenliste auf der Schulhomepage angezeigt wirst, z.B. <i>Weihnachtsmann24</i>. Es sind nur Buchstaben, Umlaute, Zahlen, Lehrzeichen, Punkte und Unterstriche erlaubt!<br>Der Nickname darf maximal 30 Zeichen lang sein.<br>Benutzer, deren Nicknamen eine Beleidigung enthalten oder gegen die Regeln der guten Sitten verstoßen, werden gelöscht.</div>
+        </div>
+    </div>
+    <div class="forn-group row">
+        <label for="password" class="col-sm-2 control-label">Passwort</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" required="" id="password" name="password" placeholder="Passwort">
+            <div class="alert alert-info text-left">Dein Passwort muss folgende Kriterien erfüllen:
+                <ol>
+                    <li>mindestens 5 Zeichen</li>
+                    <li>mindestens 1 Kleinbuchstabe</li>
+                    <li>mindestens 1 Großbuchstabe</li>
+                    <li>mindestens 1 Zahl</li>
+                </ol>
+                Merke es dir gut und gib es nicht weiter!
+            </div>
+        </div>
+    </div>
+    <div class="forn-group row">
+        <label for="password2" class="col-sm-2 control-label">Passwort wiederholen</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" required="" id="password2" name="password2" placeholder="Passwort wiederholen">
+        </div>
+    </div>
+
+    <div class="forn-group row">
+        <div class="mx-auto">
+            <input type="submit" name="submit" value="Registrieren" class="btn btn-primary btn-lg">
+        </div>
+    </div>
+
+</form>
