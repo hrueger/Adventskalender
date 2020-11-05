@@ -18,6 +18,8 @@ import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
 import { WelcomeComponent } from "./_pages/welcome/welcome.component";
 import { TasksComponent } from "./_pages/tasks/tasks.component";
 import { TaskComponent } from "./_pages/task/task.component";
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
     declarations: [
@@ -41,6 +43,7 @@ import { TaskComponent } from "./_pages/task/task.component";
         ReactiveFormsModule,
         ToastrModule.forRoot(),
         BrowserAnimationsModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     ],
     providers: [
         {
