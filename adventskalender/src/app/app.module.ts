@@ -4,6 +4,7 @@ import { NgModule } from "@angular/core";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ToastrModule } from "ngx-toastr";
+import { ServiceWorkerModule } from "@angular/service-worker";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./_components/navbar/navbar.component";
@@ -18,8 +19,7 @@ import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
 import { WelcomeComponent } from "./_pages/welcome/welcome.component";
 import { TasksComponent } from "./_pages/tasks/tasks.component";
 import { TaskComponent } from "./_pages/task/task.component";
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
+import { environment } from "../environments/environment";
 
 @NgModule({
     declarations: [
@@ -43,7 +43,7 @@ import { environment } from '../environments/environment';
         ReactiveFormsModule,
         ToastrModule.forRoot(),
         BrowserAnimationsModule,
-        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+        ServiceWorkerModule.register("ngsw-worker.js", { enabled: environment.production }),
     ],
     providers: [
         {
