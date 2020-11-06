@@ -9,12 +9,6 @@ class UserController {
         res.send(users);
     }
 
-    public static nicknameAvailable = async (req: Request, res: Response): Promise<void> => {
-        const userRepository = getRepository(User);
-        const result = await userRepository.findOne({ nickname: req.params.nickname });
-        res.send({ nicknameAvailable: !result });
-    }
-
     public static newUser = async (req: Request, res: Response): Promise<void> => {
         const {
             nickname, password, password2, realname, grade,
@@ -49,7 +43,7 @@ class UserController {
             res.status(409).send({ message: "Der Nickname ist schon vorhanden!", errorField: "username" });
             return;
         }
-        res.status(200).send({ status: true });
+        res.status(200).send({ success: true });
     }
 
     public static deleteUser = async (req: Request, res: Response): Promise<void> => {
@@ -62,7 +56,7 @@ class UserController {
             res.status(500).send({ message: "Konnte den Benutzer nicht löschen!" });
             return;
         }
-        res.status(200).send({ status: true });
+        res.status(200).send({ success: true });
     }
 
     public static changeAdminStatus = async (req: Request, res: Response): Promise<void> => {
@@ -78,7 +72,7 @@ class UserController {
             res.status(500).send({ message: "Konnte den Adminstatus nicht ändern!" });
             return;
         }
-        res.status(200).send({ status: true });
+        res.status(200).send({ success: true });
     }
 }
 
