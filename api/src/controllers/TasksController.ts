@@ -1,3 +1,24 @@
+import { Request, Response } from "express";
+import { Task, TaskStatus } from "../entity/Task";
+import { tasks } from "../resources/tasks";
+
+const CHRISTMAS = 24;
+
+class TasksController {
+    public static listAll = async (req: Request, res: Response): Promise<void> => {
+        res.send(tasks.map((t) => {
+            // eslint-disable-next-line no-use-before-define
+            t.status = getTaskStatus(t);
+            if (t.status !== TaskStatus.SOLVED) {
+                delete t.easy.solution;
+                delete t.hard.solution;
+            }
+            return t;
+        }));
+    }
+}
+
+export default TasksController;
 
 function getTaskStatus(task: Task, fakeTodayForTesting?: number): TaskStatus {
     const year = new Date().getFullYear();
