@@ -6,6 +6,8 @@ export class createAdminUser1574018391679 implements MigrationInterface {
         const user = new User();
         user.nickname = "admin";
         user.password = "admin";
+        user.realname = "AdminRealName";
+        user.grade = "AdminGrade";
         user.isAdmin = true;
         user.hashPassword();
         const userRepository = getRepository(User);
