@@ -1,6 +1,6 @@
 cd ../adventskalender
 npm install
-npm run web:build -- --outputPath=../docker/frontend
+npm run build -- --outputPath=../docker/frontend
 cd ../api
 npm install
 npx @zeit/ncc build src/index.ts -o ../docker/backend
