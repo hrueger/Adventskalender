@@ -102,7 +102,7 @@ export class LoginComponent {
         if (this.route.snapshot.queryParams.returnUrl) {
             this.router.navigate([this.route.snapshot.queryParams.returnUrl]);
         } else {
-            this.router.navigate(["home"]);
+            this.router.navigate(["welcome"]);
         }
     }
 }
