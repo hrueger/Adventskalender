@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { Observable, Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { NoErrorHttpParams } from "../_helpers/noErrorHttpParams";
+import { User } from '../_models/User';
 import { RemoteService } from "./remote.service";
 import { StorageService } from "./storage.service";
 
@@ -10,13 +11,12 @@ import { StorageService } from "./storage.service";
     providedIn: "root",
 })
 export class AuthenticationService {
-    public currentUser: any;
+    public currentUser: User;
     public onLogin = new Subject<boolean>();
 
     constructor(
         private remoteService: RemoteService,
         private storageService: StorageService,
-        private router: Router,
     ) { }
 
     public login(nickname: string, password: string): Observable<any> {
