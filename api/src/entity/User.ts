@@ -39,6 +39,10 @@ export class User {
 
     public jwtToken?: string;
 
+    public points?: number;
+    
+    public place?: number;
+
     public hashPassword(): void {
         this.password = bcrypt.hashSync(this.password, 8);
     }
