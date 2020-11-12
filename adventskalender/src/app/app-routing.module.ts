@@ -19,7 +19,7 @@ const routes: Routes = [
     { path: "register", component: RegisterComponent },
     { path: "scores", component: ScoresComponent },
     { path: "rules", component: RulesComponent },
-    { path: "**", redirectTo: "welcome", pathMatch: "full" },
+    { path: "**", redirectTo: "home", pathMatch: "full" },
 ];
 
 @NgModule({
