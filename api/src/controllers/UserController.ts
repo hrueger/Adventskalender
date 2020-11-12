@@ -3,7 +3,7 @@ import { getRepository } from "typeorm";
 import { User } from "../entity/User";
 
 class UserController {
-    public static listAll = async (req: Request, res: Response): Promise<void> => {
+    public static listUsers = async (req: Request, res: Response): Promise<void> => {
         const userRepository = getRepository(User);
         const users = await userRepository.find();
         res.send(users);
