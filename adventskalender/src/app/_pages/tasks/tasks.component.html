@@ -1,98 +1,99 @@
-<h1>Aufgaben</h1>
-<div class="alert alert-info">
-  <h3>Farbcodes</h3>
-  <table class="colorcodes">
+
+  <h1>Aufgaben</h1>
+  <div class="alert alert-info">
+    <h3>Farbcodes</h3>
+    <table class="colorcodes">
+      <tbody>
+        <tr>
+          <td class="green">Grün</td>
+          <td>Richtig, volle Punkzahl</td>
+        </tr>
+        <tr>
+          <td class="red">Rot</td>
+          <td>Falsch, keine Punkte</td>
+        </tr>
+        <tr>
+          <td class="blue">Blau</td>
+          <td>Richtige Alternative, volle Punkzahl</td>
+        </tr>
+        <tr>
+          <td class="yellow">Gelb</td>
+          <td>Momentan zur Bearbeitung</td>
+        </tr>
+        <tr>
+          <td class="white">Weiß</td>
+          <td>Noch nicht freigeschaltet</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="alert alert-warning">
+    <h3>Achtung</h3>Stimmt deine Lösung nicht mit der offiziellen Lösung überein, kann sie nachträglich dennoch mit der
+    vollen Punktzahl belohnt werden.<br>Bitte Geduld! Es baucht Zeit, alle alternativen Lösungen zu bewerten.
+  </div>
+  <table class="overview">
     <tbody>
       <tr>
-        <td class="green">Grün</td>
-        <td>Richtig, volle Punkzahl</td>
+        <td class="green">01</td>
+        <td class="yellow">02</td>
+        <td class="yellow">03</td>
+        <td>04</td>
+        <td>05</td>
+        <td>06</td>
+        <td>07</td>
+        <td>08</td>
+        <td>09</td>
+        <td>10</td>
+        <td>11</td>
+        <td>12</td>
+        <td>13</td>
+        <td>14</td>
+        <td>15</td>
+        <td>16</td>
+        <td>17</td>
+        <td>18</td>
+        <td>19</td>
+        <td>20</td>
+        <td>21</td>
+        <td>22</td>
+        <td>23</td>
+        <td>24</td>
       </tr>
       <tr>
-        <td class="red">Rot</td>
-        <td>Falsch, keine Punkte</td>
-      </tr>
-      <tr>
-        <td class="blue">Blau</td>
-        <td>Richtige Alternative, volle Punkzahl</td>
-      </tr>
-      <tr>
-        <td class="yellow">Gelb</td>
-        <td>Momentan zur Bearbeitung</td>
-      </tr>
-      <tr>
-        <td class="white">Weiß</td>
-        <td>Noch nicht freigeschaltet</td>
+        <td class="green">R</td>
+        <td class="yellow"></td>
+        <td class="yellow"></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
-
-</div>
-<div class="alert alert-warning">
-  <h3>Achtung</h3>Stimmt deine Lösung nicht mit der offiziellen Lösung überein, kann sie nachträglich dennoch mit der
-  vollen Punktzahl belohnt werden.<br>Bitte Geduld! Es baucht Zeit, alle alternativen Lösungen zu bewerten.
-</div>
-<table class="overview">
-  <tbody>
-    <tr>
-      <td class="green">01</td>
-      <td class="yellow">02</td>
-      <td class="yellow">03</td>
-      <td>04</td>
-      <td>05</td>
-      <td>06</td>
-      <td>07</td>
-      <td>08</td>
-      <td>09</td>
-      <td>10</td>
-      <td>11</td>
-      <td>12</td>
-      <td>13</td>
-      <td>14</td>
-      <td>15</td>
-      <td>16</td>
-      <td>17</td>
-      <td>18</td>
-      <td>19</td>
-      <td>20</td>
-      <td>21</td>
-      <td>22</td>
-      <td>23</td>
-      <td>24</td>
-    </tr>
-    <tr>
-      <td class="green">R</td>
-      <td class="yellow"></td>
-      <td class="yellow"></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
-<div>
-  <div class="day" *ngFor="let task of tasks">
-    <a [routerLink]="['/tasks', task.day]">
-      <img class="present" src="/assets/presents/present.png">
-      <p class="number">{{task.day}}</p>
-    </a>
+  <div>
+    <div class="day" *ngFor="let task of tasks">
+        <a [routerLink]="['/tasks', task.day]">
+            <img class="present" src="/assets/presents/present.png">
+            <p class="number">{{task.day}}</p>
+        </a>
+    </div>
   </div>
-</div>
-<div class="clearfix">&nbsp;</div>
+  <div class="clearfix">&nbsp;</div>
