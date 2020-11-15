@@ -1,7 +1,12 @@
 import { Component } from "@angular/core";
-import { User } from 'src/app/_models/User';
-import { AuthenticationService } from 'src/app/_services/authentication.service';
-import { RemoteService } from 'src/app/_services/remote.service';
+import { User } from "../../_models/User";
+import { AuthenticationService } from "../../_services/authentication.service";
+import { RemoteService } from "../../_services/remote.service";
+
+type View = {
+    id: string;
+    name: string;
+}
 
 @Component({
     selector: "app-scores",
@@ -11,35 +16,38 @@ import { RemoteService } from 'src/app/_services/remote.service';
 export class ScoresComponent {
     public users: User[] = [];
     public allUsers: User[] = [];
-    public maxPoints: number = 1000000000;
+    public maxPoints = 1000000000;
     public myPlace: number;
     public placesCount: number;
-    public views = [
+    public views: View[] = [
         {
             id: "all",
-            name: "Alle"
+            name: "Alle",
         },
         {
             id: "students",
-            name: "Schüler"
+            name: "Schüler",
         },
         {
             id: "teachers",
-            name: "Lehrer"
+            name: "Lehrer",
         },
         {
             id: "grades-absolute",
-            name: "Klassen (absolut)"
+            name: "Klassen (absolut)",
         },
         {
             id: "grades-relative",
-            name: "Klassen (relativ)"
+            name: "Klassen (relativ)",
         },
     ];
     public currentView = this.views[0];
-    constructor(private remoteService: RemoteService, public authenticationService: AuthenticationService) { }
+    constructor(
+        private remoteService: RemoteService,
+        public authenticationService: AuthenticationService,
+    ) { }
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         this.remoteService.get("users").subscribe((data) => {
             if (data) {
                 this.allUsers = data;
@@ -88,9 +96,13 @@ export class ScoresComponent {
         }
         if (this.authenticationService.currentUser) {
             if (this.currentView.id == "grades-absolute" || this.currentView.id == "grades-relative") {
-                this.myPlace = this.users.filter((u) => u.grade == this.authenticationService.currentUser.grade)[0].place;
+                this.myPlace = this.users.filter(
+                    (u) => u.grade == this.authenticationService.currentUser.grade,
+                )[0].place;
             } else {
-                const user = this.users.filter((u) => u.nickname == this.authenticationService.currentUser.nickname);
+                const user = this.users.filter(
+                    (u) => u.nickname == this.authenticationService.currentUser.nickname,
+                );
                 if (user && user[0]) {
                     this.myPlace = user[0].place;
                 } else {
@@ -101,12 +113,12 @@ export class ScoresComponent {
         }
         setTimeout(() => {
             if (this.users.length) {
-                this.maxPoints = this.users.reduce((p, c) => p.points > c.points ? p : c).points;
+                this.maxPoints = this.users.reduce((p, c) => (p.points > c.points ? p : c)).points;
             }
         }, 20);
     }
 
-    public view(v) {
+    public view(v: View): void {
         this.currentView = v;
         this.filterAndDisplayData();
     }

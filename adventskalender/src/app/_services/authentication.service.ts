@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
 import { Observable, Subject } from "rxjs";
 import { map } from "rxjs/operators";
 import { NoErrorHttpParams } from "../_helpers/noErrorHttpParams";
-import { User } from '../_models/User';
+import { User } from "../_models/User";
 import { RemoteService } from "./remote.service";
 import { StorageService } from "./storage.service";
 
