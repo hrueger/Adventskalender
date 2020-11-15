@@ -32,6 +32,9 @@ export class User {
     @Column({ select: false })
     public password: string;
 
+    @Column({ select: false, nullable: true })
+    public passwordResetToken: string;
+
     @Column()
     @CreateDateColumn()
     public createdAt: Date;
