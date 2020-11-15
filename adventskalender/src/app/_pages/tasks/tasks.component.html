@@ -1,99 +1,35 @@
-
-  <h1>Aufgaben</h1>
-  <div class="alert alert-info">
-    <h3>Farbcodes</h3>
-    <table class="colorcodes">
-      <tbody>
-        <tr>
-          <td class="green">Grün</td>
-          <td>Richtig, volle Punkzahl</td>
-        </tr>
-        <tr>
-          <td class="red">Rot</td>
-          <td>Falsch, keine Punkte</td>
-        </tr>
-        <tr>
-          <td class="blue">Blau</td>
-          <td>Richtige Alternative, volle Punkzahl</td>
-        </tr>
-        <tr>
-          <td class="yellow">Gelb</td>
-          <td>Momentan zur Bearbeitung</td>
-        </tr>
-        <tr>
-          <td class="white">Weiß</td>
-          <td>Noch nicht freigeschaltet</td>
-        </tr>
-      </tbody>
+<h1>Aufgaben</h1>
+<div class="alert alert-info">
+    <h4>Farbcodes</h4>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td class="bg-success text-white">Richtig, volle Punkzahl</td>
+                <td class="bg-danger  text-white">Falsch, keine Punkte</td>
+            </tr>
+            <tr>
+                <td class="bg-warning">Momentan zur Bearbeitung</td>
+                <td class="bg-light">Noch nicht freigeschaltet</td>
+            </tr>
+        </tbody>
     </table>
 
-  </div>
-  <div class="alert alert-warning">
-    <h3>Achtung</h3>Stimmt deine Lösung nicht mit der offiziellen Lösung überein, kann sie nachträglich dennoch mit der
-    vollen Punktzahl belohnt werden.<br>Bitte Geduld! Es baucht Zeit, alle alternativen Lösungen zu bewerten.
-  </div>
-  <table class="overview">
+</div>
+<table class="table table-responsive">
     <tbody>
-      <tr>
-        <td class="green">01</td>
-        <td class="yellow">02</td>
-        <td class="yellow">03</td>
-        <td>04</td>
-        <td>05</td>
-        <td>06</td>
-        <td>07</td>
-        <td>08</td>
-        <td>09</td>
-        <td>10</td>
-        <td>11</td>
-        <td>12</td>
-        <td>13</td>
-        <td>14</td>
-        <td>15</td>
-        <td>16</td>
-        <td>17</td>
-        <td>18</td>
-        <td>19</td>
-        <td>20</td>
-        <td>21</td>
-        <td>22</td>
-        <td>23</td>
-        <td>24</td>
-      </tr>
-      <tr>
-        <td class="green">R</td>
-        <td class="yellow"></td>
-        <td class="yellow"></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
+        <tr>
+            <td *ngFor="let task of tasks" [class.text-white]="task.status == 'SOLVED'" [class.bg-success]="task.status == 'SOLVED'" [class.bg-warning]="task.status == 'OPEN'" [class.bg-light]="task.status == 'LOCKED'">{{task.day}}</td>
+        </tr>
+        <tr>
+        </tr>
     </tbody>
-  </table>
-  <div>
-    <div class="day" *ngFor="let task of tasks">
+</table>
+<div>
+    <div class="day float-left" *ngFor="let task of tasksInRandomOrder">
         <a [routerLink]="['/tasks', task.day]">
             <img class="present" src="/assets/presents/present.png">
             <p class="number">{{task.day}}</p>
         </a>
     </div>
-  </div>
-  <div class="clearfix">&nbsp;</div>
+</div>
+<div class="clearfix"></div>
