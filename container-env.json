@@ -39,6 +39,42 @@
             "description": "The JWT secret, just choose a random string",
             "default": "rwiuerslixalsdkxaxsdjxald",
             "type": "string"
+        },
+        {
+            "name": "URL",
+            "description": "The url where the Advent Calendar is available (no / at the end needed)",
+            "default": "http://localhost:4200",
+            "type": "string"
+        },
+        {
+            "name": "MAIL_SERVER_HOST",
+            "description": "The url of the SMTP to use",
+            "default": "",
+            "type": "string"
+        },
+        {
+            "name": "MAIL_SERVER_PORT",
+            "description": "The port of the SMTP to use",
+            "default": "",
+            "type": "number"
+        },
+        {
+            "name": "MAIL_SERVER_USER",
+            "description": "The username to use for the SMTP server",
+            "default": "",
+            "type": "string"
+        },
+        {
+            "name": "MAIL_SERVER_PASSWORD",
+            "description": "The password to use for the SMTP server",
+            "default": "",
+            "type": "string"
+        },
+        {
+            "name": "MAIL_SENDER",
+            "description": "The sender of the emails",
+            "default": "no-reply@adventskalender",
+            "type": "string"
         }
     ]
 }
