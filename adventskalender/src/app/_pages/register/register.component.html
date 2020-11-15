@@ -84,6 +84,16 @@
         </div>
     </div>
 
+    
+    <div class="forn-group row">
+        <label for="email" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+            <input type="text" name="email" required="" autofocus="" formControlName="email" class="form-control" id="email" placeholder="Email-Adresse" [class.is-invalid]="submitted && form.controls.email.invalid" [class.is-valid]="form.controls.email.valid">
+            <div class="alert alert-danger my-0 invalid-feedback">{{form.controls.email.errors?.required ? 'Dieses Feld muss ausgefüllt werden!' : 'Bitte gib eine gültige Email-Adresse an!'}}</div>
+            <div class="alert alert-info text-left">Bitte gib hier eine gültige Email-Adresse an, da Du sonst dein Passwort nicht zurücksetzen kannst, solltest Du es vergessen haben.</div>
+        </div>
+    </div>
+
     <div class="forn-group row">
         <label for="nickname" class="col-sm-2 control-label">Nickname</label>
         <div class="col-sm-10">

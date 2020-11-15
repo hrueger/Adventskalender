@@ -11,9 +11,9 @@ class UserController {
 
     public static newUser = async (req: Request, res: Response): Promise<void> => {
         const {
-            nickname, password, password2, realname, grade,
+            nickname, password, password2, realname, grade, email,
         } = req.body;
-        if (!(nickname && realname && password && password2 && grade)) {
+        if (!(nickname && realname && password && password2 && grade && email)) {
             res.status(400).send({ message: "Nicht alle Felder ausgefüllt!" });
             return;
         }
@@ -31,6 +31,7 @@ class UserController {
         user.nickname = nickname;
         user.realname = realname;
         user.password = password;
+        user.email = email;
         user.grade = grade;
         user.isAdmin = false;
 
@@ -40,7 +41,7 @@ class UserController {
         try {
             user = await userRepository.save(user);
         } catch (e) {
-            res.status(409).send({ message: "Der Nickname ist schon vorhanden!", errorField: "username" });
+            res.status(409).send({ message: "Der Nickname ist schon vorhanden!", errorField: "nickname" });
             return;
         }
         res.status(200).send({ success: true });

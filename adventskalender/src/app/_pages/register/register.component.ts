@@ -22,6 +22,7 @@ export class RegisterComponent {
         this.form = new FormGroup({
             realname: new FormControl("", [Validators.required, Validators.pattern(/(.+ .+)/)]),
             grade: new FormControl("", [Validators.required]),
+            email: new FormControl("", [Validators.required, Validators.email]),
             nickname: new FormControl("", [Validators.required]),
             password: new FormControl("", [Validators.required, Validators.minLength(5), Validators.pattern(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/)]),
             password2: new FormControl("", [Validators.required]),
@@ -39,6 +40,7 @@ export class RegisterComponent {
             nickname: this.form.controls.nickname.value,
             realname: this.form.controls.realname.value,
             grade: this.form.controls.grade.value,
+            email: this.form.controls.email.value,
             password: this.form.controls.password.value,
             password2: this.form.controls.password2.value,
         }).subscribe((data: any) => {

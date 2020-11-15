@@ -23,6 +23,9 @@ export class User {
     @Column()
     public grade: string;
 
+    @Column()
+    public email: string;
+
     @Column({ default: false })
     public isAdmin: boolean;
 
@@ -40,7 +43,7 @@ export class User {
     public jwtToken?: string;
 
     public points?: number;
-    
+
     public place?: number;
 
     public hashPassword(): void {
