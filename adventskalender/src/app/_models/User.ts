@@ -34,6 +34,9 @@
 /* do not edit */     public password: string;
 /* do not edit */ 
 /* do not edit */     
+/* do not edit */     public passwordResetToken: string;
+/* do not edit */ 
+/* do not edit */     
 /* do not edit */     
 /* do not edit */     public createdAt: Date;
 /* do not edit */ 
@@ -44,8 +47,10 @@
 /* do not edit */     public jwtToken?: string;
 /* do not edit */ 
 /* do not edit */     public points?: number;
-/* do not edit */     
+/* do not edit */ 
 /* do not edit */     public place?: number;
+/* do not edit */ 
+/* do not edit */     public isYoung?: boolean;
 /* do not edit */ 
 /* do not edit */     
 /* do not edit */ 

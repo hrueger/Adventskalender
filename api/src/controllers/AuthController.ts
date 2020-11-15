@@ -152,7 +152,6 @@ class AuthController {
                 throw Error();
             }
         } catch (e) {
-            console.log(e);
             res.status(404).send({ message: "Der Benutzer wurde nicht gefunden!" });
         }
         if (password1 != password2) {
