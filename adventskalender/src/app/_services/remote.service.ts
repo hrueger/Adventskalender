@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
 import { StorageService } from "./storage.service";
 import { AuthenticationService } from "./authentication.service";
+import { getApiUrl } from "../_helpers/apiUrl";
 
 @Injectable({
     providedIn: "root",
@@ -10,15 +11,7 @@ import { AuthenticationService } from "./authentication.service";
 export class RemoteService {
     private pApiUrl = "";
     constructor(private httpClient: HttpClient, private storageService: StorageService) {
-        this.pApiUrl = this.storageService.get("apiUrl");
-    }
-
-    public setApiUrl(url: string): void {
-        this.pApiUrl = url;
-    }
-
-    public get apiUrl(): string {
-        return this.pApiUrl;
+        this.pApiUrl = getApiUrl();
     }
 
     public getImageUrl(url: string, authService: AuthenticationService): string {
