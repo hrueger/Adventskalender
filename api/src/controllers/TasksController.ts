@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import { Request, Response } from "express";
 import { Task, TaskStatus } from "../entity/Task";
 import { tasks } from "../resources/tasks";
@@ -7,14 +8,26 @@ const CHRISTMAS = 24;
 class TasksController {
     public static listAll = async (req: Request, res: Response): Promise<void> => {
         res.send(tasks.map((t) => {
-            // eslint-disable-next-line no-use-before-define
-            t.status = getTaskStatus(t);
+            t.status = getTaskStatus(t, 15);
             if (t.status !== TaskStatus.SOLVED) {
-                delete t.easy.solution;
-                delete t.hard.solution;
+                delete t.young.solution;
+                delete t.old.solution;
             }
             return t;
         }));
+    }
+    public static getTask = async (req: Request, res: Response): Promise<void> => {
+        const t = tasks.find((ts) => ts.day == parseInt(req.params.day, 10));
+        t.status = getTaskStatus(t, 15);
+        if (t.status == TaskStatus.LOCKED) {
+            res.status(401).send({ message: "Diese Aufgabe ist noch nicht freigeschalten!" });
+            return;
+        }
+        if (t.status !== TaskStatus.SOLVED) {
+            delete t.young.solution;
+            delete t.old.solution;
+        }
+        res.send(t);
     }
 }
 

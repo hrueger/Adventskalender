@@ -1,37 +1,20 @@
 import { Task } from "../entity/Task";
 
-export const tasks: Task[] = [
-    {
-        day: 1,
-        easy: {
-            description: "Test am Tag 1 leicht",
-            solution: "leicht1",
-        },
-        hard: {
-            description: "Test am Tag 1 schwer",
-            solution: "schwer1",
+export const tasks: Task[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+    13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24].map((n) => ({
+    day: n,
+    young: {
+        description: `Test am Tag ${n} leicht`,
+        solution: {
+            row: 5,
+            column: "E",
         },
     },
-    {
-        day: 2,
-        easy: {
-            description: "Test am Tag 2 leicht",
-            solution: "leicht2",
-        },
-        hard: {
-            description: "Test am Tag 2 schwer",
-            solution: "schwer2",
+    old: {
+        description: `Test am Tag ${n} schwer`,
+        solution: {
+            row: 5,
+            column: "E",
         },
     },
-    {
-        day: 3,
-        easy: {
-            description: "Test am Tag 3 leicht",
-            solution: "leicht3",
-        },
-        hard: {
-            description: "Test am Tag 3 schwer",
-            solution: "schwer3",
-        },
-    },
-];
+}));

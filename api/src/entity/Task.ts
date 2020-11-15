@@ -1,14 +1,19 @@
+type TaskSolution = {
+    row: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+    column: "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H";
+}
+
 export type Task = {
     day: number;
     status?: TaskStatus;
     solutionStatus?: SolutionStatus;
-    easy: {
+    young: {
         description: string;
-        solution: string;
+        solution: TaskSolution;
     };
-    hard: {
+    old: {
         description: string;
-        solution: string;
+        solution: TaskSolution;
     };
 };
 

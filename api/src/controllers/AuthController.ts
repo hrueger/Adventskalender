@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable max-len */
 import { Request, Response } from "express";
 import * as jwt from "jsonwebtoken";
@@ -43,6 +44,7 @@ class AuthController {
 
         const response = {
             ...user,
+            isYoung: checkUserYoung(user),
             jwtToken: token,
         };
         response.password = undefined;
@@ -66,8 +68,12 @@ class AuthController {
             res.status(401).send({ message: "Unbekannter Fehler!" });
             return;
         }
-        const { userId, nickname, isAdmin } = jwtPayload;
-        const newToken = jwt.sign({ userId, nickname, isAdmin }, req.app.locals.config.JWT_SECRET, {
+        const {
+            userId, nickname, isAdmin, isYoung,
+        } = jwtPayload;
+        const newToken = jwt.sign({
+            userId, nickname, isAdmin, isYoung,
+        }, req.app.locals.config.JWT_SECRET, {
             expiresIn: "1h",
         });
 
@@ -78,6 +84,7 @@ class AuthController {
                 nickname,
                 isAdmin,
                 jwtToken: newToken,
+                isYoung,
             },
         });
     }
@@ -161,3 +168,6 @@ class AuthController {
     }
 }
 export default AuthController;
+function checkUserYoung(user: User) {
+    return user.grade.startsWith("5") || user.grade.startsWith("6");
+}
