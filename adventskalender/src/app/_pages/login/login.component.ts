@@ -1,9 +1,6 @@
-import { HttpClient } from "@angular/common/http";
 import { Component } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
-import { NoErrorHttpParams } from "../../_helpers/noErrorHttpParams";
-import { AlertService } from "../../_services/alert.service";
 import { AuthenticationService } from "../../_services/authentication.service";
 import { RemoteService } from "../../_services/remote.service";
 import { StorageService } from "../../_services/storage.service";
@@ -14,42 +11,46 @@ import { StorageService } from "../../_services/storage.service";
     styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent {
-    public passwordLost = false;
     public loginForm: FormGroup;
+    public resetPasswordForm: FormGroup;
+    public newPasswordForm: FormGroup;
     public submitted = false;
+    public resetPasswordSubmitted = false;
+    public newPasswordSubmitted = false;
     public loading = false;
     public tryingToAutoLogin = false;
-    public changePassword = false;
 
-    private domain = "";
+    public action: "login" | "resetPassword" | "newPassword" = "login";
+
+    passwordResetSuccessfull: boolean;
+    resetToken: any;
+    passwordChangeSuccessfull: boolean;
 
     constructor(
-        private httpClient: HttpClient,
-        private alertService: AlertService,
         private remoteService: RemoteService,
         private authenticationService: AuthenticationService,
         private router: Router,
         private storageService: StorageService,
         private route: ActivatedRoute,
     ) {
+        if (this.route.snapshot.params.token) {
+            this.action = "newPassword";
+            this.resetToken = this.route.snapshot.params.token;
+        }
         this.loginForm = new FormGroup({
             nickname: new FormControl("", [Validators.required]),
             password: new FormControl("", [Validators.required]),
         });
-        const url = typeof window !== "undefined" ? window.location.toString() : "";
-        if (url.indexOf(":4200") !== -1) { // is dev
-            const apiPortDev = 3000;
-            const match = (url as string).match(/(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/g);
-            this.domain = `http://${match ? match[0] : "localhost"}:${apiPortDev}`;
-        } else {
-            this.domain = url.substring(0, url.indexOf("/login"));
-        }
-        this.remoteService.setApiUrl(this.domain);
+        this.resetPasswordForm = new FormGroup({
+            email: new FormControl("", [Validators.required, Validators.email]),
+        });
+        this.newPasswordForm = new FormGroup({
+            password: new FormControl("", [Validators.required, Validators.minLength(5), Validators.pattern(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/)]),
+            password2: new FormControl("", [Validators.required]),
+        });
         const jwtToken = this.storageService.get("jwtToken");
-        const apiUrl = this.storageService.get("apiUrl");
-        if (jwtToken && apiUrl) {
+        if (jwtToken) {
             this.tryingToAutoLogin = true;
-            this.remoteService.setApiUrl(apiUrl);
             this.authenticationService.autoLogin(jwtToken).subscribe((success) => {
                 if (success) {
                     if (this.route.snapshot.queryParams.returnUrl) {
@@ -64,36 +65,57 @@ export class LoginComponent {
     }
 
     public onSubmit(): void {
-        this.alertService.removeAll();
         this.submitted = true;
         if (this.loginForm.invalid) {
             return;
         }
         this.loading = true;
-        this.httpClient.get(`${this.domain}/config.json`, { params: new NoErrorHttpParams(true) }).subscribe((data: any) => {
+        this.authenticationService.login(
+            this.loginForm.controls.nickname.value,
+            this.loginForm.controls.password.value,
+        ).subscribe(() => {
+            this.loading = true;
+            this.submitted = false;
+            this.loggedInSuccessfully();
+        }, () => {
             this.loading = false;
-            if (data && data.apiUrl) {
-                const apiUrl = `${this.domain}${data.apiUrl}`;
-                this.storageService.set("apiUrl", apiUrl);
-                this.remoteService.setApiUrl(apiUrl);
-                this.authenticationService.login(
-                    this.loginForm.controls.nickname.value,
-                    this.loginForm.controls.password.value,
-                ).subscribe((d: any) => {
-                    this.submitted = false;
-                    if (d.changePassword) {
-                        this.changePassword = true;
-                    } else {
-                        this.loggedInSuccessfully();
-                    }
-                });
-            } else {
-                this.loading = false;
-                this.alertService.error("Fehlerhafte config!");
+        });
+    }
+
+    public onResetPasswordSubmit(): void {
+        this.resetPasswordSubmitted = true;
+        if (this.resetPasswordForm.invalid) {
+            return;
+        }
+        this.loading = true;
+        this.remoteService.post("auth/resetPassword", { email: this.resetPasswordForm.controls.email.value }).subscribe((data) => {
+            this.loading = false;
+            if (data && data.success) {
+                this.passwordResetSuccessfull = true;
+                this.action = "login";
             }
         }, () => {
             this.loading = false;
-            this.alertService.error("Falsche Domain!");
+        });
+    }
+
+    public onNewPasswordSubmit(): void {
+        this.newPasswordSubmitted = true;
+        if (this.newPasswordForm.invalid) {
+            return;
+        }
+        this.loading = true;
+        this.remoteService.post(`auth/newPassword/${this.resetToken}`, {
+            password1: this.newPasswordForm.controls.password.value,
+            password2: this.newPasswordForm.controls.password2.value,
+        }).subscribe((data) => {
+            this.loading = false;
+            if (data && data.success) {
+                this.passwordChangeSuccessfull = true;
+                this.action = "login";
+            }
+        }, () => {
+            this.loading = false;
         });
     }
 

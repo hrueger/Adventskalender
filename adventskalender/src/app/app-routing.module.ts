@@ -16,6 +16,7 @@ const routes: Routes = [
     { path: "tasks/:day", component: TaskComponent, canActivate: [AuthenticationGuard] },
     { path: "tasks", component: TasksComponent, canActivate: [AuthenticationGuard] },
     { path: "login", component: LoginComponent },
+    { path: "resetPassword/:token", component: LoginComponent },
     { path: "register", component: RegisterComponent },
     { path: "scores", component: ScoresComponent },
     { path: "rules", component: RulesComponent },
