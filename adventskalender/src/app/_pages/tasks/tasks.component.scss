@@ -17,4 +17,11 @@ div.day {
         line-height: 200px;
         text-shadow: 0 0 5px black;
     }
+    .overlay {
+        text-shadow: -3px 0 white, 0 3px white, 3px 0 white, 0 -3px white;
+        position: absolute;
+        right: .5rem;
+        bottom: -.5rem;
+        z-index: 4;
+    }
 }

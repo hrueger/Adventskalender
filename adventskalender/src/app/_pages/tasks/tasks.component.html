@@ -27,6 +27,8 @@
 <div>
     <div class="day float-left" *ngFor="let task of tasksInRandomOrder" [class.cursor-normal]="task.status == 'LOCKED'">
         <a [routerLink]="task.status == 'LOCKED' ? null : ['/tasks', task.day]" [class.cursor-normal]="task.status == 'LOCKED'">
+            <i class="overlay text-success fa-4x fas fa-check" *ngIf="task.status == 'SOLVED' && task.solutionStatus == 'CORRECT'"></i>
+            <i class="overlay text-warning fa-4x fas fa-times" *ngIf="task.status == 'SOLVED' && task.solutionStatus == 'INCORRECT'"></i>
             <img class="present" [src]="task.status == 'OPEN' ? '/assets/presents/presentToday.png' : '/assets/presents/present.png'">
             <p class="number">{{task.day}}</p>
         </a>
