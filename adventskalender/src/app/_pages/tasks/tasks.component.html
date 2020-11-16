@@ -19,9 +19,7 @@
     <table class="table">
         <tbody>
             <tr>
-                <td *ngFor="let task of tasks" [class.text-white]="task.status == 'SOLVED'" [class.bg-success]="task.status == 'SOLVED'" [class.bg-warning]="task.status == 'OPEN'" [class.bg-light]="task.status == 'LOCKED'">{{task.day}}</td>
-            </tr>
-            <tr>
+                <td *ngFor="let task of tasks" [class.text-white]="task.status == 'SOLVED'" [class.bg-success]="task.status == 'SOLVED' && task.solutionStatus == 'CORRECT'" [class.bg-danger]="task.status == 'SOLVED' && task.solutionStatus == 'INCORRECT'" [class.bg-warning]="task.status == 'OPEN'" [class.bg-light]="task.status == 'LOCKED'">{{task.day}}</td>
             </tr>
         </tbody>
     </table>
