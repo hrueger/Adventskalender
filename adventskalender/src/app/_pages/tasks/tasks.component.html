@@ -1,5 +1,5 @@
 <h1>Aufgaben</h1>
-<div class="alert alert-info">
+<div class="alert alert-info table-responsive">
     <h4>Farbcodes</h4>
     <table class="table">
         <tbody>
@@ -15,15 +15,17 @@
     </table>
 
 </div>
-<table class="table table-responsive">
-    <tbody>
-        <tr>
-            <td *ngFor="let task of tasks" [class.text-white]="task.status == 'SOLVED'" [class.bg-success]="task.status == 'SOLVED'" [class.bg-warning]="task.status == 'OPEN'" [class.bg-light]="task.status == 'LOCKED'">{{task.day}}</td>
-        </tr>
-        <tr>
-        </tr>
-    </tbody>
-</table>
+<div class="table-responsive">
+    <table class="table">
+        <tbody>
+            <tr>
+                <td *ngFor="let task of tasks" [class.text-white]="task.status == 'SOLVED'" [class.bg-success]="task.status == 'SOLVED'" [class.bg-warning]="task.status == 'OPEN'" [class.bg-light]="task.status == 'LOCKED'">{{task.day}}</td>
+            </tr>
+            <tr>
+            </tr>
+        </tbody>
+    </table>
+</div>
 <div>
     <div class="day float-left" *ngFor="let task of tasksInRandomOrder" [class.cursor-normal]="task.status == 'LOCKED'">
         <a [routerLink]="task.status == 'LOCKED' ? null : ['/tasks', task.day]" [class.cursor-normal]="task.status == 'LOCKED'">
