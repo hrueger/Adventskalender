@@ -1,4 +1,4 @@
-type TaskSolution = {
+export type Field = {
     row: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
     column: "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H";
 }
@@ -7,13 +7,14 @@ export type Task = {
     day: number;
     status?: TaskStatus;
     solutionStatus?: SolutionStatus;
+    guess?: Field;
     young: {
         description: string;
-        solution: TaskSolution;
+        solutions: Field[];
     };
     old: {
         description: string;
-        solution: TaskSolution;
+        solutions: Field[];
     };
 };
 

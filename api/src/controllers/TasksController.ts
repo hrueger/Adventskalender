@@ -10,8 +10,8 @@ class TasksController {
         res.send(tasks.map((t) => {
             t.status = getTaskStatus(t, 15);
             if (t.status !== TaskStatus.SOLVED) {
-                delete t.young.solution;
-                delete t.old.solution;
+                delete t.young.solutions;
+                delete t.old.solutions;
             }
             return t;
         }));
@@ -24,8 +24,8 @@ class TasksController {
             return;
         }
         if (t.status !== TaskStatus.SOLVED) {
-            delete t.young.solution;
-            delete t.old.solution;
+            delete t.young.solutions;
+            delete t.old.solutions;
         }
         res.send(t);
     }

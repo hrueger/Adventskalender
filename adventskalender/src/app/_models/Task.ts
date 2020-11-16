@@ -6,7 +6,7 @@
 /*    |    Then, run "npx redundancyjs" in the terminal.                      |    */
 /*    +-----------------------------------------------------------------------+    */
 
-/* do not edit */ type TaskSolution = {
+/* do not edit */ export type Field = {
 /* do not edit */     row: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 /* do not edit */     column: "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H";
 /* do not edit */ }
@@ -15,13 +15,14 @@
 /* do not edit */     day: number;
 /* do not edit */     status?: TaskStatus;
 /* do not edit */     solutionStatus?: SolutionStatus;
+/* do not edit */     guess?: Field;
 /* do not edit */     young: {
 /* do not edit */         description: string;
-/* do not edit */         solution: TaskSolution;
+/* do not edit */         solutions: Field[];
 /* do not edit */     };
 /* do not edit */     old: {
 /* do not edit */         description: string;
-/* do not edit */         solution: TaskSolution;
+/* do not edit */         solution: Field[];
 /* do not edit */     };
 /* do not edit */ };
 /* do not edit */ 
