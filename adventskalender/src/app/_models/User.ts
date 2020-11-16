@@ -8,6 +8,7 @@
 
 /* do not edit */ 
 /* do not edit */ 
+/* do not edit */ import { TaskSolution } from "./TaskSolution";
 /* do not edit */ 
 /* do not edit */ 
 /* do not edit */ 
@@ -43,6 +44,9 @@
 /* do not edit */     
 /* do not edit */     
 /* do not edit */     public updatedAt: Date;
+/* do not edit */ 
+/* do not edit */     
+/* do not edit */     public solutions: TaskSolution[];
 /* do not edit */ 
 /* do not edit */     public jwtToken?: string;
 /* do not edit */ 

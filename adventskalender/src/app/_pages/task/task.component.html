@@ -3,7 +3,7 @@
     <h1>Aufgabe {{task.day}}</h1>
 
     <div class="row mt-5">
-        <div class="col col-12 col-lg-6">
+        <div class="col col-12 col-lg-6 pb-5">
             <img class="img-fluid" [src]="remoteService.getImageUrl('tasks/images/'+task.day, authenticationService)">
             <div class="card p-3">
                 {{task[authenticationService.isYoung ? 'young' : 'old'].description}}
@@ -38,6 +38,10 @@
                 Du hast das Feld <b>{{selectedField.col}} {{selectedField.row}}</b> ausgewählt. Ist das korrekt? Dann klicke auf <i>Abgeben</i>, um deine Lösung zu speichern.
             </div>
         </div>
+    </div>
+    <div class="mt-5">
+        <a class="btn btn-secondary mr-2" routerLink="/tasks">Zurück</a>
+        <button class="btn btn-success" [disabled]="!selectedField" (click)="save()">Abgeben</button>
     </div>
 
 </div>

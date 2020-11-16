@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { RemoteService } from "../../_services/remote.service";
 import { Task } from "../../_models/Task";
 import { AuthenticationService } from "../../_services/authentication.service";
+import { AlertService } from "../../_services/alert.service";
 
 @Component({
     selector: "app-task",
@@ -19,6 +20,8 @@ export class TaskComponent {
         public remoteService: RemoteService,
         public authenticationService: AuthenticationService,
         private route: ActivatedRoute,
+        private alertService: AlertService,
+        private router: Router,
     ) {
         this.route.params.subscribe((params) => {
             if (params.day && parseInt(params.day, 10)) {
@@ -31,10 +34,19 @@ export class TaskComponent {
         });
     }
 
-    public selectField(col: string, row: number) {
+    public selectField(col: string, row: number): void {
         this.selectedField = {
             col,
             row,
         };
+    }
+
+    public save(): void {
+        this.remoteService.post(`tasks/${this.task.day}`, { ...this.selectedField }).subscribe((d) => {
+            if (d?.success) {
+                this.alertService.success("Deine Lösung wurde erfolgreich gespeichert!");
+                this.router.navigate(["/tasks"]);
+            }
+        });
     }
 }
