@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
-import { Task, TaskStatus } from "../entity/Task";
+import { SolutionStatus, Task, TaskStatus } from "../entity/Task";
 import { TaskSolution } from "../entity/TaskSolution";
 import { User } from "../entity/User";
 import { tasks } from "../resources/tasks";
@@ -10,9 +10,27 @@ const CHRISTMAS = 24;
 
 class TasksController {
     public static listAll = async (req: Request, res: Response): Promise<void> => {
+        const me = await getRepository(User).findOne(res.locals.jwtPayload.userId);
+        const guesses = (await getRepository(TaskSolution).find({
+            where: {
+                user: me,
+            },
+        })) || [];
+
         res.send(tasks.map((t) => {
-            t.status = getTaskStatus(t, 15);
-            if (t.status !== TaskStatus.SOLVED) {
+            t.status = getTaskStatus(t, 20);
+            const guess = guesses.find((g) => g.day == t.day);
+            if (guess) {
+                t.guess = {
+                    row: guess.row,
+                    col: guess.col,
+                };
+            }
+            if (t.status == TaskStatus.SOLVED) {
+                t.solutionStatus = taskSolvedCorrectly(t)
+                    ? SolutionStatus.CORRECT
+                    : SolutionStatus.INCORRECT;
+            } else {
                 delete t.young.solutions;
                 delete t.old.solutions;
             }
@@ -22,7 +40,7 @@ class TasksController {
     public static getTask = async (req: Request, res: Response): Promise<void> => {
         const day = parseInt(req.params.day, 10);
         const t = tasks.find((ts) => ts.day == day);
-        t.status = getTaskStatus(t, 15);
+        t.status = getTaskStatus(t, 20);
         if (t.status == TaskStatus.LOCKED) {
             res.status(401).send({ message: "Diese Aufgabe ist noch nicht freigeschalten!" });
             return;
@@ -44,7 +62,6 @@ class TasksController {
                     row: guess.row,
                     col: guess.col,
                 };
-                console.log(t);
             }
         } catch {
             //
@@ -91,6 +108,13 @@ class TasksController {
 }
 
 export default TasksController;
+
+function taskSolvedCorrectly(t: Task) {
+    if (!(t.guess?.row && t.guess?.col)) {
+        return false;
+    }
+    return !!t.young.solutions.find((s) => s.row == t.guess.row && s.col == t.guess.col);
+}
 
 function getTaskStatus(task: Task, fakeTodayForTesting?: number): TaskStatus {
     const year = new Date().getFullYear();
