@@ -27,7 +27,7 @@
 <div>
     <div class="day float-left" *ngFor="let task of tasksInRandomOrder" [class.cursor-normal]="task.status == 'LOCKED'">
         <a [routerLink]="task.status == 'LOCKED' ? null : ['/tasks', task.day]" [class.cursor-normal]="task.status == 'LOCKED'">
-            <img class="present" src="/assets/presents/present.png">
+            <img class="present" [src]="task.status == 'OPEN' ? '/assets/presents/presentToday.png' : '/assets/presents/present.png'">
             <p class="number">{{task.day}}</p>
         </a>
     </div>
