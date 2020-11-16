@@ -1,11 +1,8 @@
-import * as bcrypt from "bcryptjs";
 import {
     Column,
-    CreateDateColumn,
     Entity,
     ManyToOne,
     PrimaryGeneratedColumn,
-    UpdateDateColumn,
 } from "typeorm";
 import { User } from "./User";
 

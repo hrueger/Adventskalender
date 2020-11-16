@@ -20,7 +20,8 @@ class TasksController {
         }));
     }
     public static getTask = async (req: Request, res: Response): Promise<void> => {
-        const t = tasks.find((ts) => ts.day == parseInt(req.params.day, 10));
+        const day = parseInt(req.params.day, 10);
+        const t = tasks.find((ts) => ts.day == day);
         t.status = getTaskStatus(t, 15);
         if (t.status == TaskStatus.LOCKED) {
             res.status(401).send({ message: "Diese Aufgabe ist noch nicht freigeschalten!" });
@@ -29,6 +30,24 @@ class TasksController {
         if (t.status !== TaskStatus.SOLVED) {
             delete t.young.solutions;
             delete t.old.solutions;
+        }
+        try {
+            const me = await getRepository(User).findOne(res.locals.jwtPayload.userId);
+            const guess = await getRepository(TaskSolution).findOne({
+                where: {
+                    user: me,
+                    day,
+                },
+            });
+            if (guess) {
+                t.guess = {
+                    row: guess.row,
+                    col: guess.col,
+                };
+                console.log(t);
+            }
+        } catch {
+            //
         }
         res.send(t);
     }

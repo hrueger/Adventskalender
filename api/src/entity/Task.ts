@@ -1,6 +1,6 @@
 export type Field = {
-    row: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-    col: "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H";
+    row: number;
+    col: string;
 }
 
 export type Task = {
