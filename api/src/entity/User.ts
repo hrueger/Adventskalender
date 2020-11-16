@@ -3,10 +3,12 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    OneToMany,
     PrimaryGeneratedColumn,
     Unique,
     UpdateDateColumn,
 } from "typeorm";
+import { TaskSolution } from "./TaskSolution";
 
 @Entity()
 @Unique(["nickname"])
@@ -42,6 +44,9 @@ export class User {
     @Column()
     @UpdateDateColumn()
     public updatedAt: Date;
+
+    @OneToMany(() => TaskSolution, (solution) => solution.user)
+    public solutions: TaskSolution[];
 
     public jwtToken?: string;
 

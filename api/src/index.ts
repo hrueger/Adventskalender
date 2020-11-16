@@ -15,6 +15,7 @@ import { User } from "./entity/User";
 import { createAdminUser1574018391679 } from "./migration/1574018391679-createAdminUser";
 import routes from "./routes";
 import ConfigController from "./controllers/ConfigController";
+import { TaskSolution } from "./entity/TaskSolution";
 
 const config = getConfig(JSON.parse(fs.readFileSync(path.join(__dirname, "../../container-env.json")).toString()), "/app/config/adventskalender.json");
 
@@ -30,6 +31,7 @@ createConnection({
     // List all entities here
     entities: [
         User,
+        TaskSolution,
     ],
     host: config.DB_HOST,
     logging: false,

@@ -1,6 +1,9 @@
 /* eslint-disable no-use-before-define */
 import { Request, Response } from "express";
+import { getRepository } from "typeorm";
 import { Task, TaskStatus } from "../entity/Task";
+import { TaskSolution } from "../entity/TaskSolution";
+import { User } from "../entity/User";
 import { tasks } from "../resources/tasks";
 
 const CHRISTMAS = 24;
@@ -28,6 +31,43 @@ class TasksController {
             delete t.old.solutions;
         }
         res.send(t);
+    }
+
+    public static saveSolution = async (req: Request, res: Response): Promise<void> => {
+        const day = parseInt(req.params.day, 10);
+        const t = tasks.find((ts) => ts.day == day);
+        t.status = getTaskStatus(t, 15);
+        if (t.status == TaskStatus.LOCKED) {
+            res.status(401).send({ message: "Diese Aufgabe ist noch nicht freigeschalten!" });
+            return;
+        }
+        if (!(req.body.row && req.body.col)) {
+            res.status(400).send({ message: "Nicht alle Felder wurden ausgefüllt!" });
+            return;
+        }
+
+        const solutionRepository = getRepository(TaskSolution);
+        const me = await getRepository(User).findOne(res.locals.jwtPayload.userId);
+        let solution = await solutionRepository.findOne({
+            where: {
+                user: me,
+                day,
+            },
+        });
+        if (!solution) {
+            solution = new TaskSolution();
+            solution.user = me;
+            solution.day = day;
+        }
+        solution.col = req.body.col;
+        solution.row = req.body.row;
+        try {
+            await solutionRepository.save(solution);
+        } catch {
+            res.status(500).send({ message: "Error" });
+            return;
+        }
+        res.send({ success: true });
     }
 }
 
