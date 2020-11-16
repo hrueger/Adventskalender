@@ -1,7 +1,7 @@
 <div class="spinner-border text-primary" *ngIf="loading"></div>
 <div *ngIf="task && !loading">
     <h1>Aufgabe {{task.day}}</h1>
-    
+
     <div class="row mt-5">
         <div class="col col-12 col-lg-6">
             <img class="img-fluid" [src]="remoteService.getImageUrl('tasks/images/'+task.day, authenticationService)">
@@ -13,13 +13,30 @@
             <div class="alert alert-primary">
                 Wo befindet sich der Gegenstand? Klicke auf das entsprechende Quadrat.
             </div>
-            <img src="assets/coordinates/map.jpg" class="img-fluid" usemap="#image-map">
-            
-            <map name="image-map">
+
+            <div class="map-holder">
+                <img src="assets/coordinates/map.jpg" class="img-fluid">
+                <table class="fields">
+                    <tr *ngFor="let row of rows; index as colIdx">
+                        <td class="space-field"></td>
+                        <td class="field cursor-pointer" (click)="selectField(col, row)" [title]="col + ' ' + row" *ngFor="let col of cols; index as rowIdx"></td>
+                    </tr>
+                    <tr>
+                        <td class="space-field"></td>
+                        <td *ngFor="let row of rows; index as colIdx" class="space-field"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!--<map name="image-map">usemap="#image-map"
                 <ng-container *ngFor="let col of cols; index as colIdx">
-                    <area class="cursor-pointer" [title]="col + ' ' + row" [coords]="(colIdx+1)*100 + ',' + rowIdx * 100 + ',' +  (colIdx+2)*100 + ',' + (rowIdx + 1) * 100" shape="rect" *ngFor="let row of rows; index as rowIdx">
+                    <area class="cursor-pointer" (click)="selectField(col, row)" [title]="col + ' ' + row" [coords]="(colIdx+1)*100 + ',' + rowIdx * 100 + ',' +  (colIdx+2)*100 + ',' + (rowIdx + 1) * 100" shape="rect" *ngFor="let row of rows; index as rowIdx">
                 </ng-container>
-            </map>
+            </map>-->
+
+            <div class="alert alert-primary" *ngIf="selectedField">
+                Du hast das Feld <b>{{selectedField.col}} {{selectedField.row}}</b> ausgewählt. Ist das korrekt? Dann klicke auf <i>Abgeben</i>, um deine Lösung zu speichern.
+            </div>
         </div>
     </div>
 

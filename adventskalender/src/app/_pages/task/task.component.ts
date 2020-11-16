@@ -12,6 +12,7 @@ import { AuthenticationService } from "../../_services/authentication.service";
 export class TaskComponent {
     public task: Task;
     public loading = true;
+    public selectedField: { col: string, row: number };
     public cols = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
     public rows = [9, 8, 7, 6, 5, 4, 3, 2, 1];
     constructor(
@@ -28,5 +29,12 @@ export class TaskComponent {
                 });
             }
         });
+    }
+
+    public selectField(col: string, row: number) {
+        this.selectedField = {
+            col,
+            row,
+        };
     }
 }
