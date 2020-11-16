@@ -5,16 +5,20 @@ export const tasks: Task[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
     day: n,
     young: {
         description: `Test am Tag ${n} leicht`,
-        solution: {
-            row: 5,
-            column: "E",
-        },
+        solutions: [
+            {
+                row: 5,
+                col: "E",
+            },
+        ],
     },
     old: {
         description: `Test am Tag ${n} schwer`,
-        solution: {
-            row: 5,
-            column: "E",
-        },
+        solutions: [
+            {
+                row: 5,
+                col: "E",
+            },
+        ],
     },
 }));
