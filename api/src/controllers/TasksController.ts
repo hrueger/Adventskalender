@@ -69,6 +69,10 @@ class TasksController {
         res.send(t);
     }
 
+    public static getImage = async (req: Request, res: Response): Promise<void> => {
+        res.sendFile("E:/Downloads/ding_21.jpg");
+    }
+
     public static saveSolution = async (req: Request, res: Response): Promise<void> => {
         const day = parseInt(req.params.day, 10);
         const t = tasks.find((ts) => ts.day == day);
