@@ -28,6 +28,13 @@ export class TaskComponent {
                 const day = parseInt(params.day, 10);
                 this.remoteService.get(`tasks/${day}`).subscribe((t: Task) => {
                     this.task = t;
+                    if (this.task.guess) {
+                        this.selectedField = {
+                            row: this.task.guess.row,
+                            col: this.task.guess.col,
+                        };
+                        console.log(this.selectedField);
+                    }
                     this.loading = false;
                 });
             }
