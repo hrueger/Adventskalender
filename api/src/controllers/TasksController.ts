@@ -45,10 +45,6 @@ class TasksController {
             res.status(401).send({ message: "Diese Aufgabe ist noch nicht freigeschalten!" });
             return;
         }
-        if (t.status !== TaskStatus.SOLVED) {
-            delete t.young.solutions;
-            delete t.old.solutions;
-        }
         try {
             const me = await getRepository(User).findOne(res.locals.jwtPayload.userId);
             const guess = await getRepository(TaskSolution).findOne({
@@ -65,6 +61,14 @@ class TasksController {
             }
         } catch {
             //
+        }
+        if (t.status == TaskStatus.SOLVED) {
+            t.solutionStatus = taskSolvedCorrectly(t)
+                ? SolutionStatus.CORRECT
+                : SolutionStatus.INCORRECT;
+        } else {
+            delete t.young.solutions;
+            delete t.old.solutions;
         }
         res.send(t);
     }
