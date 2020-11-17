@@ -19,6 +19,7 @@ export class ScoresComponent {
     public maxPoints = 1000000000;
     public myPlace: number;
     public placesCount: number;
+    public loading = true;
     public views: View[] = [
         {
             id: "all",
@@ -50,6 +51,7 @@ export class ScoresComponent {
     public ngOnInit(): void {
         this.remoteService.get("users").subscribe((data) => {
             if (data) {
+                this.loading = false;
                 this.allUsers = data;
                 this.filterAndDisplayData();
             }
