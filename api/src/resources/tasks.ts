@@ -10,6 +10,18 @@ export const tasks: Task[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
                 row: 5,
                 col: "E",
             },
+            {
+                row: 6,
+                col: "E",
+            },
+            {
+                row: 7,
+                col: "E",
+            },
+            {
+                row: 8,
+                col: "E",
+            },
         ],
     },
     old: {
@@ -17,6 +29,18 @@ export const tasks: Task[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
         solutions: [
             {
                 row: 5,
+                col: "E",
+            },
+            {
+                row: 6,
+                col: "E",
+            },
+            {
+                row: 7,
+                col: "E",
+            },
+            {
+                row: 8,
                 col: "E",
             },
         ],
