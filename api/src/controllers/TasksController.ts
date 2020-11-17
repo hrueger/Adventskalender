@@ -121,7 +121,7 @@ class TasksController {
 
 export default TasksController;
 
-function taskSolvedCorrectly(t: Task) {
+export function taskSolvedCorrectly(t: Task): boolean {
     if (!(t.guess?.row && t.guess?.col)) {
         return false;
     }

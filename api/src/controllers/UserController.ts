@@ -1,12 +1,38 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { User } from "../entity/User";
+import { tasks } from "../resources/tasks";
+import { taskSolvedCorrectly } from "./TasksController";
+
+const weeksAndPoints: Record<number, number> = { // lastDay with those points
+    8: 10,
+    15: 20,
+    23: 30,
+    24: 40,
+};
 
 class UserController {
     public static listUsers = async (req: Request, res: Response): Promise<void> => {
         const userRepository = getRepository(User);
-        const users = await userRepository.find();
-        res.send(users);
+        const users = await userRepository.find({
+            relations: ["solutions"],
+        });
+        res.send(users.map((u) => {
+            u.points = 0;
+            for (const guess of u.solutions) {
+                const task = tasks.find((t) => t.day == guess.day);
+                task.guess = guess;
+                if (taskSolvedCorrectly(task)) {
+                    for (const [lastDay, points] of Object.entries(weeksAndPoints)) {
+                        if (task.day <= parseInt(lastDay)) {
+                            u.points += points;
+                            break;
+                        }
+                    }
+                }
+            }
+            return u;
+        }));
     }
 
     public static newUser = async (req: Request, res: Response): Promise<void> => {
