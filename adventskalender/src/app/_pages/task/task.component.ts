@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { RemoteService } from "../../_services/remote.service";
-import { Task } from "../../_models/Task";
+import { Task, Field, TaskStatus } from "../../_models/Task";
 import { AuthenticationService } from "../../_services/authentication.service";
 import { AlertService } from "../../_services/alert.service";
 
@@ -33,7 +33,6 @@ export class TaskComponent {
                             row: this.task.guess.row,
                             col: this.task.guess.col,
                         };
-                        console.log(this.selectedField);
                     }
                     this.loading = false;
                 });
@@ -42,10 +41,26 @@ export class TaskComponent {
     }
 
     public selectField(col: string, row: number): void {
+        if (this.task.status !== TaskStatus.OPEN) {
+            return;
+        }
         this.selectedField = {
             col,
             row,
         };
+    }
+
+    public getCorrectSolutionsString(): string {
+        const { solutions } = this.task[this.authenticationService.isYoung ? "young" : "old"];
+        return solutions.length == 1
+            ? this.printField(solutions[0])
+            : solutions.length == 2
+                ? `${this.printField(solutions[0])} oder ${this.printField(solutions[1])}`
+                : `${solutions.slice(0, solutions.length - 2).map((f) => this.printField(f)).join(", ")}, ${this.printField(solutions[solutions.length - 2])} oder ${this.printField(solutions[solutions.length - 1])}`;
+    }
+
+    private printField(field: Field) {
+        return `${field.col}${field.row}`;
     }
 
     public save(): void {
