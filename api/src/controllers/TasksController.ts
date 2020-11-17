@@ -85,6 +85,10 @@ class TasksController {
             res.status(401).send({ message: "Diese Aufgabe ist noch nicht freigeschalten!" });
             return;
         }
+        if (t.status == TaskStatus.SOLVED) {
+            res.status(401).send({ message: "Diese Aufgabe ist leider schon abgelaufen!" });
+            return;
+        }
         if (!(req.body.row && req.body.col)) {
             res.status(400).send({ message: "Nicht alle Felder wurden ausgefüllt!" });
             return;
