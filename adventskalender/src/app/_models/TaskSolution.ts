@@ -7,7 +7,6 @@
 /*    +-----------------------------------------------------------------------+    */
 
 /* do not edit */ 
-/* do not edit */ 
 /* do not edit */ import { User } from "./User";
 /* do not edit */ 
 /* do not edit */ 

@@ -7,8 +7,8 @@
 /*    +-----------------------------------------------------------------------+    */
 
 /* do not edit */ export type Field = {
-/* do not edit */     row: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-/* do not edit */     col: "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H";
+/* do not edit */     row: number;
+/* do not edit */     col: string;
 /* do not edit */ }
 /* do not edit */ 
 /* do not edit */ export type Task = {
