@@ -1,13 +1,12 @@
 <div>
-    <h2><i>Der etwas andere</i></h2>
-    <h1 class="font-weight-bold"><i>AG-venskalender</i></h1>
-    <h2><i>des AGs</i></h2>
-    <h4> Willkommen, {{authenticationService.currentUser?.nickname}}!</h4>
-    <button class="mr-3 mt-3 mb-3 btn btn-primary" routerLink="/tasks">Aufgaben</button>
-    <button class="ml-3 mt-3 mb-3 btn btn-success" routerLink="/scores">Bestenliste</button>
-    <p>Auf welchen Plätzen sind Deine Freunde? Hie siehst Du es: <a routerLink="/scores">Bestenliste</a>
-    </p>
-    <p>Schau mal nach ob Du noch <a routerLink="/tasks">Aufgaben</a> hast, die Du noch erledigen
-        musst! Du willst ja
-        keine verpassen, oder?</p>
+    <span class="display-4 d-block">Der etwas andere</span>
+    <span class="font-weight-bold display-3 d-block">AG-Ventskalender</span>
+    <span class="display-4 d-block">des Allgäu-Gymnasiums</span>
+    <h3 class="mt-5"> Willkommen, <i>{{authenticationService.currentUser?.nickname}}</i>!</h3>
+    <p>Auf welchen Plätzen sind Deine Freunde? Hier siehst Du es: <a routerLink="/scores">Bestenliste</a></p>
+    <p>Schau mal nach, ob Du noch <a routerLink="/tasks">Aufgaben</a> hast, die Du noch erledigen musst! Du willst ja keine verpassen, oder?</p>
+    <div>
+        <button class="mx-2 btn btn-primary btn-lg" routerLink="/tasks">Aufgaben</button>
+        <button class="mx-2 btn btn-success btn-lg" routerLink="/scores">Bestenliste</button>
+    </div>
 </div>
