@@ -4,6 +4,7 @@ import { RemoteService } from "../../_services/remote.service";
 import { Task, Field, TaskStatus } from "../../_models/Task";
 import { AuthenticationService } from "../../_services/authentication.service";
 import { AlertService } from "../../_services/alert.service";
+import { getBack } from "../../_helpers/task-status";
 
 @Component({
     selector: "app-task",
@@ -13,6 +14,7 @@ import { AlertService } from "../../_services/alert.service";
 export class TaskComponent {
     public task: Task;
     public loading = true;
+    public due: Date = new Date();
     public selectedField: { col: string, row: number };
     public cols = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
     public rows = [9, 8, 7, 6, 5, 4, 3, 2, 1];
@@ -34,6 +36,9 @@ export class TaskComponent {
                             col: this.task.guess.col,
                         };
                     }
+                    const d = new Date();
+                    d.setDate(this.task.day);
+                    this.due.setDate(this.task.day + getBack(this.task.day, d.getDay()));
                     this.loading = false;
                 });
             }

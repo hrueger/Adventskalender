@@ -1,6 +1,9 @@
 <div class="spinner-border text-primary" *ngIf="loading"></div>
 <div *ngIf="task && !loading">
     <h1>Aufgabe {{task.day}}</h1>
+    <div class="alert alert-success mt-4">
+        Diese Aufgabe ist zu erledigen bis <b>{{due | date:'EEEE, dd.MM.yyyy'}}, 23:59 Uhr</b>.
+    </div>
 
     <div class="row mt-5">
         <div class="col col-12 col-lg-6 pb-5">
@@ -11,7 +14,7 @@
         </div>
         <div class="col col-12 col-lg-6">
             <div class="alert alert-primary" *ngIf="task.status == 'OPEN'">
-                Wo befindet sich der Gegenstand? Klicke auf das entsprechende Quadrat.
+                Wo befindet sich der Gegenstand?<br>Klicke auf das entsprechende Quadrat.
             </div>
             <div class="alert" [class.alert-success]="task.solutionStatus == 'CORRECT'" [class.alert-danger]="task.solutionStatus == 'INCORRECT'" *ngIf="task.status == 'SOLVED'">
                 Die korrekte Lösung ist {{getCorrectSolutionsString()}}. {{task.guess ? 'Deine Antwort (' + task.guess.col + task.guess.row + ') ist ' + (task.solutionStatus == 'CORRECT' ? 'korrekt' : 'falsch') + '.' : 'Du hast keine Antwort abgegeben.'}}
@@ -38,7 +41,7 @@
             </map>-->
 
             <div class="alert alert-primary" *ngIf="selectedField && task.status == 'OPEN'">
-                Du hast das Feld <b>{{selectedField.col}} {{selectedField.row}}</b> ausgewählt. Ist das korrekt? Dann klicke auf <i>Abgeben</i>, um deine Lösung zu speichern.
+                Du hast das Feld <b>{{selectedField.col}} {{selectedField.row}}</b> ausgewählt. Ist das korrekt?<br>Dann klicke auf <i>Speichern</i>.<br>Du kannst diese Lösung noch bis zum <b>{{due | date:'EEEE, dd.MM.yyyy'}}, 23:59 Uhr</b> ändern.
             </div>
         </div>
     </div>
