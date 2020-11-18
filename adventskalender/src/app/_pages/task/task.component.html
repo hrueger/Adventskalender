@@ -1,12 +1,11 @@
 <div class="spinner-border text-primary" *ngIf="loading"></div>
 <div *ngIf="task && !loading">
-    <h1>Aufgabe {{task.day}}</h1>
-    <div class="alert alert-success mt-4">
-        Diese Aufgabe ist zu erledigen bis <b>{{due | date:'EEEE, dd.MM.yyyy'}}, 23:59 Uhr</b>.
-    </div>
-
+    <h1>Aufgabe zum <b>{{task.day}}. Dezember</b></h1>
     <div class="row mt-5">
         <div class="col col-12 col-lg-6 pb-5">
+            <div class="alert alert-success">
+                Diese Aufgabe ist zu erledigen bis <b>{{due | date:'EEEE, dd.MM.yyyy'}}, 23:59 Uhr</b>.
+            </div>
             <img class="img-fluid" [src]="remoteService.getImageUrl('tasks/images/'+task.day, authenticationService)">
             <div class="card p-3">
                 {{task[authenticationService.isYoung ? 'young' : 'old'].description}}
