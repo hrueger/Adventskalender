@@ -1,10 +1,16 @@
 {
     "version": 1,
-    "files": [{
-        "src": "api/src/entity/*",
-        "dest": "adventskalender/src/app/_models",
-        "removeDecorators": true,
-        "removeMethods": ["hashPassword", "checkIfUnencryptedPasswordIsValid"],
-        "removeImports": ["bcryptjs", "typeorm"]
-    }]
+    "files": [
+        {
+            "src": "api/src/entity/*",
+            "dest": "adventskalender/src/app/_models",
+            "removeDecorators": true,
+            "removeMethods": ["hashPassword", "checkIfUnencryptedPasswordIsValid"],
+            "removeImports": ["bcryptjs", "typeorm"]
+        },
+        {
+            "src": "api/src/helpers/*",
+            "dest": "adventskalender/src/app/_helpers"
+        }
+    ]
 }
