@@ -84,13 +84,13 @@ export class ScoresComponent {
                     points: this.currentView.id == "grades-absolute" ? d.points : Math.round(d.points / d.users),
                 } as any);
             }
-            this.users.sort((a, b) => b.points - a.points);
         }
+        this.users.sort((a, b) => b.points - a.points);
         this.maxPoints = 1000000000;
         let place = 1;
         let lastUser;
         for (const user of this.users) {
-            if (lastUser && lastUser.points && user.points < lastUser.points) {
+            if (lastUser?.points && user.points < lastUser.points) {
                 place++;
             }
             user.place = place;
