@@ -255,7 +255,7 @@ export const tasks: Task[] = [
         },
     },
     {
-        day: 22,
+        day: 24,
         young: {
             description: "Kugeliges Wohnzimmer",
             solutions: [{ col: "D", row: 2 }],
