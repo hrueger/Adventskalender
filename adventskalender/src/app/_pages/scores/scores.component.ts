@@ -111,7 +111,7 @@ export class ScoresComponent {
                     this.myPlace = undefined;
                 }
             }
-            this.placesCount = this.users[this.users.length - 1].place;
+            this.placesCount = this.users[this.users.length - 1]?.place;
         }
         setTimeout(() => {
             if (this.users.length) {
