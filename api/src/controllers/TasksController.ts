@@ -1,6 +1,7 @@
 /* eslint-disable no-use-before-define */
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
+import * as path from "path";
 import { SolutionStatus, Task, TaskStatus } from "../entity/Task";
 import { TaskSolution } from "../entity/TaskSolution";
 import { User } from "../entity/User";
@@ -74,7 +75,14 @@ class TasksController {
     }
 
     public static getImage = async (req: Request, res: Response): Promise<void> => {
-        res.sendFile("E:/Downloads/ding_21.jpg");
+        const day = parseInt(req.params.day, 10);
+        const t = tasks.find((ts) => ts.day == day);
+        t.status = getTaskStatus(t, 20);
+        if (t.status == TaskStatus.LOCKED) {
+            res.status(401).send("Diese Aufgabe ist noch nicht freigeschalten!");
+            return;
+        }
+        res.sendFile(path.join(__dirname, "../../assets/images/", `${day}_${res.locals.jwtPayload.isYoung ? "jung" : "alt"}_${t.status == TaskStatus.SOLVED ? "loesung" : "raetsel"}.jpg`));
     }
 
     public static saveSolution = async (req: Request, res: Response): Promise<void> => {

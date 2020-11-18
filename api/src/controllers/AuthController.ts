@@ -37,7 +37,12 @@ class AuthController {
             return;
         }
         const token = jwt.sign(
-            { userId: user.id, nickname: user.nickname, isAdmin: user.isAdmin },
+            {
+                userId: user.id,
+                nickname: user.nickname,
+                isAdmin: user.isAdmin,
+                isYoung: checkUserYoung(user),
+            },
             req.app.locals.config.JWT_SECRET,
             { expiresIn: "1h" },
         );
