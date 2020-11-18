@@ -75,6 +75,12 @@
             "description": "The sender of the emails",
             "default": "no-reply@adventskalender",
             "type": "string"
+        },
+        {
+            "name": "TEST_MODE",
+            "description": "Whether to allow setting the current day with a cookie or not",
+            "default": false,
+            "type": "boolean"
         }
     ]
 }

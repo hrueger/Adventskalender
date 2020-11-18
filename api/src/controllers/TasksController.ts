@@ -17,8 +17,9 @@ class TasksController {
             },
         })) || [];
 
+        const forceDay = getForceDay(req, res);
         res.send(tasks.map((t) => {
-            t.status = getTaskStatus(t, 20);
+            t.status = getTaskStatus(t, forceDay);
             const guess = guesses.find((g) => g.day == t.day);
             if (guess) {
                 t.guess = {
@@ -27,7 +28,7 @@ class TasksController {
                 };
             }
             if (t.status == TaskStatus.SOLVED) {
-                t.solutionStatus = taskSolvedCorrectly(t)
+                t.solutionStatus = taskSolvedCorrectly(res.locals.jwtPayload.user, t)
                     ? SolutionStatus.CORRECT
                     : SolutionStatus.INCORRECT;
             } else {
@@ -40,7 +41,8 @@ class TasksController {
     public static getTask = async (req: Request, res: Response): Promise<void> => {
         const day = parseInt(req.params.day, 10);
         const t = tasks.find((ts) => ts.day == day);
-        t.status = getTaskStatus(t, 20);
+        const forceDay = getForceDay(req, res);
+        t.status = getTaskStatus(t, forceDay);
         if (t.status == TaskStatus.LOCKED) {
             res.status(401).send({ message: "Diese Aufgabe ist noch nicht freigeschalten!" });
             return;
@@ -63,7 +65,7 @@ class TasksController {
             //
         }
         if (t.status == TaskStatus.SOLVED) {
-            t.solutionStatus = taskSolvedCorrectly(t)
+            t.solutionStatus = taskSolvedCorrectly(res.locals.jwtPayload.user, t)
                 ? SolutionStatus.CORRECT
                 : SolutionStatus.INCORRECT;
         } else {
@@ -76,7 +78,8 @@ class TasksController {
     public static getImage = async (req: Request, res: Response): Promise<void> => {
         const day = parseInt(req.params.day, 10);
         const t = tasks.find((ts) => ts.day == day);
-        t.status = getTaskStatus(t, 20);
+        const forceDay = getForceDay(req, res);
+        t.status = getTaskStatus(t, forceDay);
         if (t.status == TaskStatus.LOCKED) {
             res.status(401).send("Diese Aufgabe ist noch nicht freigeschalten!");
             return;
@@ -128,9 +131,26 @@ class TasksController {
 
 export default TasksController;
 
-export function taskSolvedCorrectly(t: Task): boolean {
+export function taskSolvedCorrectly(user: User, t: Task): boolean {
     if (!(t.guess?.row && t.guess?.col)) {
         return false;
     }
-    return !!t.young.solutions.find((s) => s.row == t.guess.row && s.col == t.guess.col);
+    return !!t[user.isYoung ? "young" : "old"].solutions.find((s) => s.row == t.guess.row && s.col == t.guess.col);
 }
+
+export function getForceDay(req: Request, res: Response): number {
+    if (res.app.locals.config.TEST_MODE) {
+        try {
+            const d = parseInt(req.headers.cookie.split(";").map((t) => t.trim())?.find((t) => t.startsWith("forceDay=")).replace("forceDay=", "")?.trim());
+            return d;
+        } catch {
+            //
+        }
+    }
+    return undefined;
+}
+
+/*
+    document.cookie = "forceDay= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie = "forceDay="+parseInt(prompt("Aktueller Tag"));
+*/

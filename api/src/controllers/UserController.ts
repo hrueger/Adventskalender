@@ -22,7 +22,7 @@ class UserController {
             for (const guess of u.solutions) {
                 const task = tasks.find((t) => t.day == guess.day);
                 task.guess = guess;
-                if (taskSolvedCorrectly(task)) {
+                if (taskSolvedCorrectly(u, task)) {
                     for (const [lastDay, points] of Object.entries(weeksAndPoints)) {
                         if (task.day <= parseInt(lastDay)) {
                             u.points += points;
