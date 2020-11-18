@@ -1,10 +1,12 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgModule } from "@angular/core";
+import { LOCALE_ID, NgModule } from "@angular/core";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ToastrModule } from "ngx-toastr";
 import { ServiceWorkerModule } from "@angular/service-worker";
+import { registerLocaleData } from "@angular/common";
+import localeDe from "@angular/common/locales/de";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NavbarComponent } from "./_components/navbar/navbar.component";
@@ -20,6 +22,8 @@ import { WelcomeComponent } from "./_pages/welcome/welcome.component";
 import { TasksComponent } from "./_pages/tasks/tasks.component";
 import { TaskComponent } from "./_pages/task/task.component";
 import { environment } from "../environments/environment";
+
+registerLocaleData(localeDe);
 
 @NgModule({
     declarations: [
@@ -55,6 +59,10 @@ import { environment } from "../environments/environment";
             provide: HTTP_INTERCEPTORS,
             useClass: JwtInterceptor,
             multi: true,
+        },
+        {
+            provide: LOCALE_ID,
+            useValue: "de",
         },
     ],
     bootstrap: [AppComponent],
