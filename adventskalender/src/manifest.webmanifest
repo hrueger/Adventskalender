@@ -1,7 +1,7 @@
 {
-  "name": "adventskalender",
-  "short_name": "adventskalender",
-  "theme_color": "#1976d2",
+  "name": "AG-Ventskalender",
+  "short_name": "AG-Ventskalender",
+  "theme_color": "#dc3545",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",
