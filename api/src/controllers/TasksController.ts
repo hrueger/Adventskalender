@@ -135,7 +135,7 @@ export function taskSolvedCorrectly(user: User, t: Task): boolean {
     if (!(t.guess?.row && t.guess?.col)) {
         return false;
     }
-    return !!t[user.isYoung ? "young" : "old"].solutions.find((s) => s.row == t.guess.row && s.col == t.guess.col);
+    return !!t[user.isYoung ? "young" : "old"]?.solutions?.find((s) => s.row == t.guess.row && s.col == t.guess.col);
 }
 
 export function getForceDay(req: Request, res: Response): number {

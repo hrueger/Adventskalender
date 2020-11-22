@@ -44,19 +44,19 @@ export function getTaskStatus(task: Task, fakeTodayForTesting?: number): TaskSta
     // let todayDay: number;
     let date: Date;
     // let month: number;
+    // January is month 0, that's why December is 11
     if (fakeTodayForTesting) {
-        now = new Date(year, 12, fakeTodayForTesting);
+        now = new Date(year, 11, fakeTodayForTesting);
         // todayDay = fakeTodayForTesting;
-        date = new Date(year, 12, task.day);
+        date = new Date(year, 11, task.day);
         // month = 12;
     } else {
         now = new Date();
         now.setHours(0, 0, 0, 0);
         // todayDay = now.getDate();
-        date = new Date(year, 12, task.day);
+        date = new Date(year, 11, task.day);
         // month = new Date().getMonth();
     }
-
     const dayOfWeek = now.getDay();
     const dateDiff = date.getTime() - now.getTime();
     const diff = Math.floor(dateDiff / (60 * 60 * 24 * 1000));
