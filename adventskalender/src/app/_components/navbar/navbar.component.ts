@@ -7,5 +7,6 @@ import { AuthenticationService } from "../../_services/authentication.service";
     styleUrls: ["./navbar.component.scss"],
 })
 export class NavbarComponent {
+    public showMobileMenu = false;
     constructor(public authenticationService: AuthenticationService) {}
 }

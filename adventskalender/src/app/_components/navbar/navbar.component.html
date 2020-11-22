@@ -4,32 +4,32 @@
             <a class="navbar-brand" routerLink="/">
                 <img src="assets/logos/header.png" class="header-logo">
             </a>
-            <button class="navbar-toggler" type="button">
+            <button class="navbar-toggler" type="button" (click)="showMobileMenu = !showMobileMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
             
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" [class.show]="showMobileMenu">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item" routerLinkActive="active">
+                    <li class="nav-item" routerLinkActive="active" (click)="showMobileMenu = false">
                         <a class="nav-link" routerLink="/home" *ngIf="!authenticationService.currentUser">Start</a>
                         <a class="nav-link" routerLink="/welcome" *ngIf="authenticationService.currentUser">Start</a>
                     </li>
-                    <li class="nav-item" routerLinkActive="active" *ngIf="authenticationService.currentUser">
+                    <li class="nav-item" routerLinkActive="active" *ngIf="authenticationService.currentUser" (click)="showMobileMenu = false">
                         <a class="nav-link" routerLink="/tasks">Aufgaben</a>
                     </li>
-                    <li class="nav-item" routerLinkActive="active" *ngIf="!authenticationService.currentUser">
+                    <li class="nav-item" routerLinkActive="active" *ngIf="!authenticationService.currentUser" (click)="showMobileMenu = false">
                         <a class="nav-link" routerLink="/login">Login</a>
                     </li>
-                    <li class="nav-item" routerLinkActive="active" *ngIf="!authenticationService.currentUser">
+                    <li class="nav-item" routerLinkActive="active" *ngIf="!authenticationService.currentUser" (click)="showMobileMenu = false">
                         <a class="nav-link" routerLink="/register">Registrieren</a>
                     </li>
-                    <li class="nav-item" routerLinkActive="active">
+                    <li class="nav-item" routerLinkActive="active" (click)="showMobileMenu = false">
                         <a class="nav-link" routerLink="/scores">Bestenliste</a>
                     </li>
-                    <li class="nav-item" routerLinkActive="active">
+                    <li class="nav-item" routerLinkActive="active" (click)="showMobileMenu = false">
                         <a class="nav-link" routerLink="/rules">Regeln</a>
                     </li>
-                    <li class="nav-item cursor-pointer" routerLinkActive="active" *ngIf="authenticationService.currentUser">
+                    <li class="nav-item cursor-pointer" routerLinkActive="active" *ngIf="authenticationService.currentUser" (click)="showMobileMenu = false">
                         <a class="nav-link" (click)="authenticationService.logout()">Logout</a>
                     </li>
                 </ul>
