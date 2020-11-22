@@ -15,7 +15,7 @@ export const tasks: Task[] = [
     {
         day: 2,
         young: {
-            description: "Geht dir ein Licht auf?",
+            description: "Geht Dir ein Licht auf?",
             solutions: [{ col: "E", row: 5 }, { col: "E", row: 6 }],
         },
         old: {
@@ -129,18 +129,18 @@ export const tasks: Task[] = [
             solutions: [{ col: "E", row: 5 }],
         },
         old: {
-            description: "Schau! Shawn das Schaf grast grünes Gras.",
+            description: "Schau! Shaun das Schaf grast grünes Gras.",
             solutions: [{ col: "C", row: 8 }, { col: "D", row: 8 }],
         },
     },
     {
         day: 13,
         young: {
-            description: "Am AG hängen so mache rum.",
+            description: "Am AG hängen so manche rum.",
             solutions: [{ col: "E", row: 6 }],
         },
         old: {
-            description: "Sehr nahe, aber übersieht man leicht in Gebüsch",
+            description: "Sehr nahe, aber übersieht man leicht im Gebüsch",
             solutions: [{ col: "I", row: 1 }],
         },
     },
@@ -173,7 +173,7 @@ export const tasks: Task[] = [
             solutions: [{ col: "C", row: 6 }],
         },
         old: {
-            description: "Schau es dir doch von der Nähe an - aber schwindle nicht!",
+            description: "Schau es Dir doch von der Nähe an - aber schwindle nicht!",
             solutions: [{ col: "H", row: 6 }],
         },
     },
@@ -184,18 +184,18 @@ export const tasks: Task[] = [
             solutions: [{ col: "F", row: 5 }],
         },
         old: {
-            description: "Glänzende Zeugnisse großer Triumphe auf dem quadratischen Spielfeld. Hat aber nichts mit Christiano Ronaldo zu tun!",
+            description: "Glänzende Zeugnisse großer Triumphe auf dem quadratischen Spielfeld. Hat aber nichts mit Cristiano Ronaldo zu tun!",
             solutions: [{ col: "C", row: 7 }],
         },
     },
     {
         day: 18,
         young: {
-            description: "Lass dich doch nicht hängen!",
+            description: "Lass Dich doch nicht hängen!",
             solutions: [{ col: "E", row: 6 }],
         },
         old: {
-            description: "Ein Eck zum Ostereier verstecken",
+            description: "Ein Eck zum Ostereier Verstecken",
             solutions: [{ col: "D", row: 5 }],
         },
     },
@@ -224,7 +224,7 @@ export const tasks: Task[] = [
     {
         day: 21,
         young: {
-            description: "Wer wird denn gleich so schreien in der staden Weihnachtszeit!",
+            description: "Wer wird denn gleich so schreien in der staden Weihnachtszeit?",
             solutions: [{ col: "E", row: 6 }],
         },
         old: {
@@ -250,7 +250,7 @@ export const tasks: Task[] = [
             solutions: [{ col: "G", row: 5 }, { col: "H", row: 5 }],
         },
         old: {
-            description: "Die Krone eines der heiligen drei Könige? Oder kommt dir da was spanisch vor?",
+            description: "Die Krone eines der heiligen drei Könige? Oder kommt Dir da was spanisch vor?",
             solutions: [{ col: "F", row: 5 }, { col: "F", row: 6 }],
         },
     },

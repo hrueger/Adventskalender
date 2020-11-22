@@ -29,7 +29,7 @@ class AuthController {
         }
 
         if (!user) {
-            res.status(401).end(JSON.stringify({ message: "Falscher Nickname" }));
+            res.status(401).end(JSON.stringify({ message: "Falscher Nickname!" }));
             return;
         }
         if (!user.checkIfUnencryptedPasswordIsValid(password)) {
