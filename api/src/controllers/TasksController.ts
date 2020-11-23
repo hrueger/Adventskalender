@@ -90,7 +90,8 @@ class TasksController {
     public static saveSolution = async (req: Request, res: Response): Promise<void> => {
         const day = parseInt(req.params.day, 10);
         const t = tasks.find((ts) => ts.day == day);
-        t.status = getTaskStatus(t, 20);
+        const forceDay = getForceDay(req, res);
+        t.status = getTaskStatus(t, forceDay);
         if (t.status == TaskStatus.LOCKED) {
             res.status(401).send({ message: "Diese Aufgabe ist noch nicht freigeschaltet!" });
             return;
