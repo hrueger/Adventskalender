@@ -32,8 +32,8 @@ class TasksController {
                     ? SolutionStatus.CORRECT
                     : SolutionStatus.INCORRECT;
             } else {
-                delete t.young.solutions;
-                delete t.old.solutions;
+                t.young.solutions = undefined;
+                t.old.solutions = undefined;
             }
             return t;
         }));
@@ -69,8 +69,8 @@ class TasksController {
                 ? SolutionStatus.CORRECT
                 : SolutionStatus.INCORRECT;
         } else {
-            delete t.young.solutions;
-            delete t.old.solutions;
+            t.young.solutions = undefined;
+            t.old.solutions = undefined;
         }
         res.send(t);
     }
