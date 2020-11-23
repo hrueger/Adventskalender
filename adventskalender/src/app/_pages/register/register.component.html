@@ -1,26 +1,35 @@
 <h1>AG-Ventskalender 2020</h1>
 <h3 class="my-4">Jetzt anmelden!</h3>
-<div class="alert alert-success mb-4">Beim AG-Ventskalender können alle Schülerinnen und Schüler sowie alle Lehrerinnen und Lehrer des Allgäu-Gymnasiums teilnehmen.</div>
+<div class="alert alert-success mb-4">Beim AG-Ventskalender können alle Schülerinnen und Schüler sowie alle Lehrerinnen
+    und Lehrer des Allgäu-Gymnasiums teilnehmen.</div>
 
 <form class="form-horizontal" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="forn-group row">
         <label for="realname" class="col-sm-2 control-label">Name</label>
         <div class="col-sm-10">
-            <input type="text" name="realname" required="" autofocus="" formControlName="realname" class="form-control" id="realname" placeholder="Vorname Nachname" [class.is-invalid]="submitted && form.controls.realname.invalid" [class.is-valid]="form.controls.realname.valid">
-            <div class="alert alert-danger my-0 invalid-feedback">{{form.controls.realname.errors?.required ? 'Dieses Feld muss ausgefüllt werden!' : 'Bitte gib Deinen Vor- und Nachnamen an!'}}</div>
-            <div class="alert alert-info text-left">Bitte gib hier Deinen echten Vor- und Nachnamen an, da Dein Benutzer sonst blockiert wird und Du nicht mehr mitspielen kannst.</div>
+            <input type="text" name="realname" required="" autofocus="" formControlName="realname" class="form-control"
+                id="realname" placeholder="Vorname Nachname"
+                [class.is-invalid]="submitted && form.controls.realname.invalid"
+                [class.is-valid]="form.controls.realname.valid">
+            <div class="alert alert-danger my-0 invalid-feedback">
+                {{form.controls.realname.errors?.required ? 'Dieses Feld muss ausgefüllt werden!' : 'Bitte gib Deinen Vor- und Nachnamen an!'}}
+            </div>
+            <div class="alert alert-info text-left">Bitte gib hier Deinen echten Vor- und Nachnamen an, da Dein Benutzer
+                sonst blockiert wird und Du nicht mehr mitspielen kannst.</div>
         </div>
     </div>
     <div class="forn-group row">
         <label for="grade" class="col-sm-2 control-label">Klasse</label>
         <div class="col-sm-10">
-            <select name="grade" required="" class="custom-select" id="grade" formControlName="grade" [class.is-invalid]="submitted && form.controls.grade.invalid" [class.is-valid]="form.controls.grade.valid">
+            <select name="grade" required="" class="custom-select" id="grade" formControlName="grade"
+                [class.is-invalid]="submitted && form.controls.grade.invalid"
+                [class.is-valid]="form.controls.grade.valid">
                 <optgroup label="Lehrkraft">
                     <option name="grade" value="Lehrerin / Lehrer">Lehrer/in</option>
                     <option name="grade" value="Studienseminar 18/20">Studienseminar 18/20</option>
                     <option name="grade" value="Studienseminar 19/21">Studienseminar 19/21</option>
                     <option name="grade" value="Studienseminar 20/22">Studienseminar 20/22</option>
-                    
+
                 </optgroup>
                 <optgroup label="Jahrgangsstufe 5">
                     <option name="grade" value="5a">5a</option>
@@ -46,7 +55,7 @@
                     <option name="grade" value="7e">7e</option>
                     <option name="grade" value="7f">7f</option>
                 </optgroup>
-                
+
                 <optgroup label="Jahrgangsstufe 8">
                     <option name="grade" value="8a">8a</option>
                     <option name="grade" value="8b">8b</option>
@@ -62,7 +71,8 @@
                     <option name="grade" value="9d">9d</option>
                     <option name="grade" value="9e">9e</option>
                     <option name="grade" value="9f">9f</option>
-                </optgroup><optgroup label="Jahrgangsstufe 10">
+                </optgroup>
+                <optgroup label="Jahrgangsstufe 10">
                     <option name="grade" value="10a">10a</option>
                     <option name="grade" value="10b">10b</option>
                     <option name="grade" value="10c">10c</option>
@@ -78,35 +88,54 @@
                 </optgroup>
             </select>
             <div class="alert alert-danger my-0 invalid-feedback">Dieses Feld muss ausgefüllt werden!</div>
-            <div class="alert alert-info text-left">Bitte gib hier Deine richtige Klasse bzw. Deinen Oberstufenjahrgang an, da Dein Benutzer sonst blockiert wird und Du nicht mehr mitspielen kannst.
-                Wenn Sie eine Lehrkraft sind, wählen Sie bitte <i>Lehrer/in</i> oder das entsprechende Studienseminar aus.</div>
+            <div class="alert alert-info text-left">Bitte gib hier Deine richtige Klasse bzw. Deinen Oberstufenjahrgang
+                an, da Dein Benutzer sonst blockiert wird und Du nicht mehr mitspielen kannst.
+                Wenn Sie eine Lehrkraft sind, wählen Sie bitte <i>Lehrer/in</i> oder das entsprechende Studienseminar
+                aus.</div>
 
         </div>
     </div>
 
-    
+
     <div class="forn-group row">
         <label for="email" class="col-sm-2 control-label">Email</label>
         <div class="col-sm-10">
-            <input type="email" name="email" required="" autofocus="" formControlName="email" class="form-control" id="email" placeholder="Email-Adresse" [class.is-invalid]="submitted && form.controls.email.invalid" [class.is-valid]="form.controls.email.valid">
-            <div class="alert alert-danger my-0 invalid-feedback">{{form.controls.email.errors?.required ? 'Dieses Feld muss ausgefüllt werden!' : 'Bitte gib eine gültige Email-Adresse an!'}}</div>
-            <div class="alert alert-info text-left">Bitte gib hier eine gültige Email-Adresse an, da Du sonst Dein Passwort nicht zurücksetzen kannst, solltest Du es vergessen haben.</div>
+            <input type="email" name="email" required="" autofocus="" formControlName="email" class="form-control"
+                id="email" placeholder="Email-Adresse" [class.is-invalid]="submitted && form.controls.email.invalid"
+                [class.is-valid]="form.controls.email.valid">
+            <div class="alert alert-danger my-0 invalid-feedback">
+                {{form.controls.email.errors?.required ? 'Dieses Feld muss ausgefüllt werden!' : 'Bitte gib eine gültige Email-Adresse an!'}}
+            </div>
+            <div class="alert alert-info text-left">Bitte gib hier eine gültige Email-Adresse an, da Du sonst Dein
+                Passwort nicht zurücksetzen kannst, solltest Du es vergessen haben.</div>
         </div>
     </div>
 
     <div class="forn-group row">
         <label for="nickname" class="col-sm-2 control-label">Nickname</label>
         <div class="col-sm-10">
-            <input type="text" class="form-control" required="" id="nickname" formControlName="nickname" name="nickname" placeholder="Nickname" [class.is-invalid]="submitted && form.controls.nickname.invalid" [class.is-valid]="form.controls.nickname.valid">
-            <div class="alert alert-danger my-0 invalid-feedback">Dieses Feld muss ausgefüllt werden!</div>
-            <div class="alert alert-info text-left">Dein Nickname soll ein erfundener Name sein, mit dem Du in der Bestenliste auf der Schulhomepage angezeigt wirst, z.B. <i>Weihnachtsmann24</i>. Der Nickname darf maximal 30 Zeichen lang sein.<br>Benutzer, deren Nicknamen eine Beleidigung enthalten oder gegen die Regeln der guten Sitten verstoßen, werden gelöscht.</div>
+            <input type="text" class="form-control" required="" id="nickname" formControlName="nickname" name="nickname"
+                placeholder="Nickname" [class.is-invalid]="submitted && form.controls.nickname.invalid"
+                [class.is-valid]="form.controls.nickname.valid">
+            <div class="alert alert-danger my-0 invalid-feedback">
+                {{ form.errors ? form.controls.nickname.errors?.maxlength ? 'Dein Nickname ist zu lang!' : 'Dieses Feld mus ausgefüllt werden!' : ""}}
+            </div>
+            <div class="alert alert-info text-left">Dein Nickname soll ein erfundener Name sein, mit dem Du in der
+                Bestenliste auf der Schulhomepage angezeigt wirst, z.B. <i>Weihnachtsmann24</i>. Der Nickname darf
+                maximal 20 Zeichen lang sein.<br>Benutzer, deren Nicknamen eine
+                Beleidigung enthalten oder gegen die Regeln der guten Sitten verstoßen, werden gelöscht!</div>
         </div>
     </div>
     <div class="forn-group row">
         <label for="password" class="col-sm-2 control-label">Passwort</label>
         <div class="col-sm-10">
-            <input type="password" class="form-control" required="" id="password" name="password" formControlName="password"  placeholder="Passwort" [class.is-invalid]="submitted && form.controls.password.invalid" [class.is-valid]="form.controls.password.valid">
-            <div class="alert alert-danger my-0 invalid-feedback">{{form.controls.password.errors?.required ? 'Dieses Feld muss ausgefüllt werden!' : form.controls.password.errors?.minlength ? 'Dein Passwort muss mindestens 5 Zeichen lang sein!' : 'Dein Passwort muss mindestens einen Groß-, einen Kleinbuchstaben und eine Zahl enthalten!'}}</div>
+            <input type="password" class="form-control" required="" id="password" name="password"
+                formControlName="password" placeholder="Passwort"
+                [class.is-invalid]="submitted && form.controls.password.invalid"
+                [class.is-valid]="form.controls.password.valid">
+            <div class="alert alert-danger my-0 invalid-feedback">
+                {{form.controls.password.errors?.required ? 'Dieses Feld muss ausgefüllt werden!' : form.controls.password.errors?.minlength ? 'Dein Passwort muss mindestens 5 Zeichen lang sein!' : 'Dein Passwort muss mindestens einen Groß-, einen Kleinbuchstaben und eine Zahl enthalten!'}}
+            </div>
             <div class="alert alert-info text-left">Dein Passwort muss folgende Kriterien erfüllen:
                 <ol>
                     <li>mindestens 5 Zeichen</li>
@@ -121,14 +150,18 @@
     <div class="forn-group row">
         <label for="password2" class="col-sm-2 control-label">Passwort wiederholen</label>
         <div class="col-sm-10">
-            <input type="password" class="form-control" required="" id="password2" name="password2" formControlName="password2"  placeholder="Passwort wiederholen" [class.is-invalid]="submitted && form.controls.password2.invalid" [class.is-valid]="form.controls.password2.valid">
+            <input type="password" class="form-control" required="" id="password2" name="password2"
+                formControlName="password2" placeholder="Passwort wiederholen"
+                [class.is-invalid]="submitted && form.controls.password2.invalid"
+                [class.is-valid]="form.controls.password2.valid">
             <div class="alert alert-danger my-0 invalid-feedback">Dieses Feld muss ausgefüllt werden!</div>
         </div>
     </div>
 
     <div class="forn-group row">
         <div class="mx-auto">
-            <button type="submit" name="submit" [disabled]="loading" class="btn btn-primary btn-lg">Registrieren <div *ngIf="loading" class="spinner-border ml-2"></div></button>
+            <button type="submit" name="submit" [disabled]="loading" class="btn btn-primary btn-lg">Registrieren <div
+                    *ngIf="loading" class="spinner-border ml-2"></div></button>
         </div>
     </div>
 

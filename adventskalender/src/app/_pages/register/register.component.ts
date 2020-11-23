@@ -23,7 +23,7 @@ export class RegisterComponent {
             realname: new FormControl("", [Validators.required, Validators.pattern(/(.+ .+)/)]),
             grade: new FormControl("", [Validators.required]),
             email: new FormControl("", [Validators.required, Validators.email]),
-            nickname: new FormControl("", [Validators.required]),
+            nickname: new FormControl("", [Validators.required, Validators.maxLength(20)]),
             password: new FormControl("", [Validators.required, Validators.minLength(5), Validators.pattern(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/)]),
             password2: new FormControl("", [Validators.required]),
         });
