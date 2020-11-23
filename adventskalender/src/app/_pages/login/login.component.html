@@ -4,89 +4,67 @@
 <div *ngIf="!tryingToAutoLogin">
     <h1>AGventskalender 2020</h1>
     <h3>Jetzt einloggen!</h3>
-
+    
     <div class="alert alert-success" *ngIf="passwordResetSuccessfull">
         Die Passwort-Zurücksetzen Email wurde erfolgreich versendet. Bitte überprüfe Dein Postfach.
     </div>
     <div class="alert alert-success" *ngIf="passwordChangeSuccessfull">
         Dein Passwort wurde erfolgreich geändert! Du kannst Dich nun wieder anmelden.
     </div>
-
-    <form class="form-horizontal" [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="action == 'login'">
+    
+    <form class="form-horizontal"  [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="action == 'login'">
         <div class="form-group row">
-            <label for="nickname" class="col-sm-2 control-label">Nickname</label>
+            <label for="nickname" class="col-sm-2 control-label" >Nickname</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="nickname" required="" formControlName="nickname"
-                    autofocus="" value="" name="nickname" placeholder="Nickname"
-                    [class.is-invalid]="submitted && loginForm.controls.nickname.invalid"
-                    [class.is-valid]="loginForm.controls.nickname.valid">
+                <input type="text" class="form-control" id="nickname" required="" formControlName="nickname" autofocus="" value="" name="nickname" placeholder="Nickname" [class.is-invalid]="submitted && loginForm.controls.nickname.invalid" [class.is-valid]="loginForm.controls.nickname.valid">
                 <div class="invalid-feedback">Dieses Feld muss ausgefüllt werden!</div>
             </div>
         </div>
         <div class="form-group row">
             <label for="password" class="col-sm-2 control-label">Passwort</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" id="password" formControlName="password" required=""
-                    name="password" placeholder="Passwort"
-                    [class.is-invalid]="submitted && loginForm.controls.password.invalid"
-                    [class.is-valid]="loginForm.controls.password.valid">
+                <input type="password" class="form-control" id="password" formControlName="password" required="" name="password" placeholder="Passwort" [class.is-invalid]="submitted && loginForm.controls.password.invalid" [class.is-valid]="loginForm.controls.password.valid">
                 <div class="invalid-feedback">Dieses Feld muss ausgefüllt werden!</div>
             </div>
         </div>
         <div class="form-group row">
             <div class="mx-auto">
                 <button class="btn btn-primary" [disabled]="loading" type="submit">Einloggen <span *ngIf="loading"
-                        class="spinner-border spinner-border-sm mb-1"></span></button>
-                <button class="btn btn-secondary ml-4" type="button"
-                    (click)="action = 'resetPassword'; $event.preventDefault(); $event.stopPropagation()">Passwort
-                    vergessen</button>
+                    class="spinner-border spinner-border-sm mb-1"></span></button>
+                <button class="btn btn-secondary ml-4" type="button" (click)="action = 'resetPassword'; $event.preventDefault(); $event.stopPropagation()">Passwort vergessen</button>
             </div>
         </div>
     </form>
 
-    <form class="form-horizontal" [formGroup]="resetPasswordForm" (ngSubmit)="onResetPasswordSubmit()"
-        *ngIf="action == 'resetPassword'">
+    <form class="form-horizontal"  [formGroup]="resetPasswordForm" (ngSubmit)="onResetPasswordSubmit()" *ngIf="action == 'resetPassword'">
         <div class="alert alert-primary">
-            Bitte gib Deine Email Adresse ein. Du erhältst dann eine Mail mit einem Link, über den Du Dein Passwort
-            zurücksetzen kannst.
+            Bitte gib Deine Email Adresse ein. Du erhältst dann eine Mail mit einem Link, über den Du Dein Passwort zurücksetzen kannst.
         </div>
         <div class="form-group row">
-            <label for="email" class="col-sm-2 control-label">Email</label>
+            <label for="email" class="col-sm-2 control-label" >Email</label>
             <div class="col-sm-10">
-                <input type="email" class="form-control" id="email" required="" formControlName="email" autofocus=""
-                    name="email" placeholder="Email-Adresse"
-                    [class.is-invalid]="resetPasswordSubmitted && resetPasswordForm.controls.email.invalid"
-                    [class.is-valid]="resetPasswordForm.controls.email.valid">
-                <div class="invalid-feedback">
-                    {{resetPasswordForm.controls.email.errors?.required ? 'Dieses Feld muss ausgefüllt werden!' : 'Bitte gib eine gültige Email-Adresse an!'}}
-                </div>
+                <input type="email" class="form-control" id="email" required="" formControlName="email" autofocus="" name="email" placeholder="Email-Adresse" [class.is-invalid]="resetPasswordSubmitted && resetPasswordForm.controls.email.invalid" [class.is-valid]="resetPasswordForm.controls.email.valid">
+                <div class="invalid-feedback">{{resetPasswordForm.controls.email.errors?.required ? 'Dieses Feld muss ausgefüllt werden!' : 'Bitte gib eine gültige Email-Adresse an!'}}</div>
             </div>
         </div>
         <div class="form-group row">
             <div class="mx-auto">
-                <button class="btn btn-secondary" type="button"
-                    (click)="action = 'login'; $event.preventDefault(); $event.stopPropagation()">Zurück</button>
-                <button class="btn btn-primary ml-4" [disabled]="loading" type="submit">Password zurücksetzen <span
-                        *ngIf="loading" class="spinner-border spinner-border-sm mb-1"></span></button>
+                <button class="btn btn-secondary"  type="button" (click)="action = 'login'; $event.preventDefault(); $event.stopPropagation()">Zurück</button>
+                <button class="btn btn-primary ml-4" [disabled]="loading" type="submit">Password zurücksetzen <span *ngIf="loading"
+                    class="spinner-border spinner-border-sm mb-1"></span></button>
             </div>
         </div>
     </form>
 
-    <form class="form-horizontal" [formGroup]="newPasswordForm" (ngSubmit)="onNewPasswordSubmit()"
-        *ngIf="action == 'newPassword'">
+    <form class="form-horizontal"  [formGroup]="newPasswordForm" (ngSubmit)="onNewPasswordSubmit()" *ngIf="action == 'newPassword'">
         <div class="alert alert-primary">
             Bitte gib nun ein neues Password ein. Merke es Dir dieses Mal gut!
         </div>
         <div class="forn-group row">
             <label for="password" class="col-sm-2 control-label">Passwort</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" required="" id="password" name="password"
-                    formControlName="password" placeholder="Passwort"
-                    [class.is-invalid]="newPasswordSubmitted && newPasswordForm.controls.password.invalid"
-                    [class.is-valid]="newPasswordForm.controls.password.valid">
-                <div class="alert alert-danger my-0 invalid-feedback">
-                    {{newPasswordForm.controls.password.errors?.required ? 'Dieses Feld muss ausgefüllt werden!' : newPasswordForm.controls.password.errors?.minlength ? 'Dein Passwort muss mindestens 5 Zeichen lang sein!' : 'Dein Passwort muss mindestens einen Groß-, einen Kleinbuchstaben und eine Zahl enthalten!'}}
-                </div>
+                <input type="password" class="form-control" required="" id="password" name="password" formControlName="password"  placeholder="Passwort" [class.is-invalid]="newPasswordSubmitted && newPasswordForm.controls.password.invalid" [class.is-valid]="newPasswordForm.controls.password.valid">
+                <div class="alert alert-danger my-0 invalid-feedback">{{newPasswordForm.controls.password.errors?.required ? 'Dieses Feld muss ausgefüllt werden!' : newPasswordForm.controls.password.errors?.minlength ? 'Dein Passwort muss mindestens 5 Zeichen lang sein!' : 'Dein Passwort muss mindestens einen Groß-, einen Kleinbuchstaben und eine Zahl enthalten!'}}</div>
                 <div class="alert alert-info text-left">Dein Passwort muss folgende Kriterien erfüllen:
                     <ol>
                         <li>mindestens 5 Zeichen</li>
@@ -101,19 +79,15 @@
         <div class="forn-group row">
             <label for="password2" class="col-sm-2 control-label">Passwort wiederholen</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" required="" id="password2" name="password2"
-                    formControlName="password2" placeholder="Passwort wiederholen"
-                    [class.is-invalid]="newPasswordSubmitted && newPasswordForm.controls.password2.invalid"
-                    [class.is-valid]="newPasswordForm.controls.password2.valid">
+                <input type="password" class="form-control" required="" id="password2" name="password2" formControlName="password2"  placeholder="Passwort wiederholen" [class.is-invalid]="newPasswordSubmitted && newPasswordForm.controls.password2.invalid" [class.is-valid]="newPasswordForm.controls.password2.valid">
                 <div class="alert alert-danger my-0 invalid-feedback">Dieses Feld muss ausgefüllt werden!</div>
             </div>
         </div>
         <div class="form-group row">
             <div class="mx-auto">
-                <button class="btn btn-secondary" type="button"
-                    (click)="action = 'login'; $event.preventDefault(); $event.stopPropagation()">Zurück</button>
-                <button class="btn btn-primary ml-4" [disabled]="loading" type="submit">Password ändern <span
-                        *ngIf="loading" class="spinner-border spinner-border-sm mb-1"></span></button>
+                <button class="btn btn-secondary"  type="button" (click)="action = 'login'; $event.preventDefault(); $event.stopPropagation()">Zurück</button>
+                <button class="btn btn-primary ml-4" [disabled]="loading" type="submit">Password ändern <span *ngIf="loading"
+                    class="spinner-border spinner-border-sm mb-1"></span></button>
             </div>
         </div>
     </form>
