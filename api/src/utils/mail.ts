@@ -8,7 +8,7 @@ export function sendMail(req: Request, to: string, data: {summary: string;
     cardTitle: string; cardSubtitle: string; btnText: string; btnUrl: string;}): Promise<void> {
     const locals: any = data;
     locals.sentTo = `Diese Mail wurde an ${to} gesendet.`;
-    locals.info = "Wenn Sie diese Mail versehentlich erhalten haben, bitten wir Sie sie zu löschen und nicht weiterzuleiten, da diese Mail vertrauliche Informationen enthalten kann.";
+    locals.info = "Wenn Sie diese Mail versehentlich erhalten haben, bitten wir Sie, sie zu löschen und nicht weiterzuleiten, da diese Mail vertrauliche Informationen enthalten kann.";
     return new Promise<any>((resolve, reject) => {
         const transporter = nodeMailer.createTransport({
             auth: {

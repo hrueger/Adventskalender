@@ -92,7 +92,7 @@ class TasksController {
         const t = tasks.find((ts) => ts.day == day);
         t.status = getTaskStatus(t, 20);
         if (t.status == TaskStatus.LOCKED) {
-            res.status(401).send({ message: "Diese Aufgabe ist noch nicht freigeschalten!" });
+            res.status(401).send({ message: "Diese Aufgabe ist noch nicht freigeschaltet!" });
             return;
         }
         if (t.status == TaskStatus.SOLVED) {
