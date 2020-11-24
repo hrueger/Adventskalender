@@ -8,7 +8,7 @@
         <div class="col-sm-10">
             <input type="text" name="realname" required="" autofocus="" formControlName="realname" class="form-control" id="realname" placeholder="Vorname Nachname" [class.is-invalid]="submitted && form.controls.realname.invalid" [class.is-valid]="form.controls.realname.valid">
             <div class="alert alert-danger my-0 invalid-feedback">{{form.controls.realname.errors?.required ? 'Dieses Feld muss ausgefüllt werden!' : 'Bitte gib Deinen Vor- und Nachnamen an!'}}</div>
-            <div class="alert alert-info text-left">Bitte gib hier Deinen echten Vor- und Nachnamen an, da Dein Benutzer sonst blockiert wird und Du nicht mehr mitspielen kannst.</div>
+            <div class="alert alert-info text-left">Bitte gib hier Deinen echten Vor- und Nachnamen an. Es wird dann geprüft, ob Du tatsächlich Schüler unseres Gymnasium bist bzw. ob Sie tatsächlich Lehrer unseres Gymnasiums sind.</div>
         </div>
     </div>
     <div class="forn-group row">
