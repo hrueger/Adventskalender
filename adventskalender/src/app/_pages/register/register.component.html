@@ -98,8 +98,13 @@
         <label for="nickname" class="col-sm-2 control-label">Nickname</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" required="" id="nickname" formControlName="nickname" name="nickname" placeholder="Nickname" [class.is-invalid]="submitted && form.controls.nickname.invalid" [class.is-valid]="form.controls.nickname.valid">
-            <div class="alert alert-danger my-0 invalid-feedback">Dieses Feld muss ausgefüllt werden!</div>
-            <div class="alert alert-info text-left">Dein Nickname soll ein erfundener Name sein, mit dem Du in der Bestenliste auf der Schulhomepage angezeigt wirst, z.B. <i>Weihnachtsmann24</i>. Der Nickname darf maximal 30 Zeichen lang sein.<br>Benutzer, deren Nicknamen eine Beleidigung enthalten oder gegen die Regeln der guten Sitten verstoßen, werden gelöscht.</div>
+            <div class="alert alert-danger my-0 invalid-feedback">
+                {{ form.controls.nickname.errors ? form.controls.nickname.errors?.maxlength ? 'Dein Nickname ist zu lang!' : 'Dieses Feld mus ausgefüllt werden!' : ""}}
+            </div>
+            <div class="alert alert-info text-left">Dein Nickname soll ein erfundener Name sein, mit dem Du in der
+                Bestenliste auf der Schulhomepage angezeigt wirst, z.B. <i>Weihnachtsmann24</i>. Der Nickname darf
+                maximal 20 Zeichen lang sein.<br>Benutzer, deren Nicknamen eine
+                Beleidigung enthalten oder gegen die Regeln der guten Sitten verstoßen, werden gelöscht!</div>
         </div>
     </div>
     <div class="forn-group row">
