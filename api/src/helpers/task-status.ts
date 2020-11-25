@@ -23,15 +23,15 @@ export function getBack(taskDay: number, dayOfWeek: number): number {
     case DayOfWeek.MONDAY:
         return 4;
     case DayOfWeek.TUESDAY:
-        return 4;
+        return 5;
     case DayOfWeek.WEDNESDAY:
-        return 2;
+        return 3;
     case DayOfWeek.THURSDAY:
-        return 2;
+        return 3;
     case DayOfWeek.FRIDAY:
-        return 2;
+        return 3;
     case DayOfWeek.SATURDAY:
-        return 2;
+        return 3;
     default:
         break;
     }
