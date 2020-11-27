@@ -11,8 +11,7 @@
                 <th>Klasse</th>
                 <th>Benutzer</th>
                 <th>Nickname</th>
-                <th>Email</th>
-                <th colspan="2">Punkte</th>
+                <th>Punkte</th>
                 <th>Admin</th>
                 <th>Aktionen</th>
             </tr>
@@ -20,15 +19,12 @@
         <tbody>
             <tr *ngFor="let user of users">
                 <td>{{user.grade}}</td>
-                <td>{{user.realname}}</td>
-                <td>{{user.nickname}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.points}}</td>
-                <td>
-                    <div class="progress pointsIndicator">
-                        <div class="progress-bar" role="progressbar" [style.width]="user.points / maxPoints * 100 + '%'"></div>
-                    </div>
+                <td>{{user.realname}}
+                    <br>
+                    <i>{{user.email}}</i>
                 </td>
+                <td>{{user.nickname}}</td>
+                <td>{{user.points}}</td>
                 <td><i class="fas fa-user-shield" *ngIf="user.isAdmin"></i></td>
                 <td>
                     <button class="btn btn-outline-warning mr-2" (click)="changeAdminStatus(user, !user.isAdmin)"><i [class]="'fas fa-user' + (user.isAdmin ? '' : '-shield')"></i></button>
