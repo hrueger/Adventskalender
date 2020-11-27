@@ -1,1 +1,40 @@
-<p>users works!</p>
+<div class="text-center mb-3">
+    <h3>Benutzer</h3>
+</div>
+<div class="table-responsive mt-1">
+    <div class="alert alert-primary">
+        Es gibt momentan {{userCount}} Benutzer.
+    </div>
+    <table class="table table-striped border-top-0">
+        <thead>
+            <tr>
+                <th>Klasse</th>
+                <th>Benutzer</th>
+                <th>Nickname</th>
+                <th>Email</th>
+                <th colspan="2">Punkte</th>
+                <th>Admin</th>
+                <th>Aktionen</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{user.grade}}</td>
+                <td>{{user.realname}}</td>
+                <td>{{user.nickname}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.points}}</td>
+                <td>
+                    <div class="progress pointsIndicator">
+                        <div class="progress-bar" role="progressbar" [style.width]="user.points / maxPoints * 100 + '%'"></div>
+                    </div>
+                </td>
+                <td><i class="fas fa-user-shield" *ngIf="user.isAdmin"></i></td>
+                <td>
+                    <button class="btn btn-outline-warning mr-2" (click)="changeAdminStatus(user, !user.isAdmin)"><i [class]="'fas fa-user' + (user.isAdmin ? '' : '-shield')"></i></button>
+                    <button class="btn btn-outline-danger" (click)="deleteUser(user)"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
