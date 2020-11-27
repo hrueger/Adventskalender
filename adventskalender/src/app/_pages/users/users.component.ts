@@ -33,9 +33,14 @@ export class UsersComponent implements OnInit {
     }
 
     private sortUsers(data: User[]): User[] {
-        return data.sort((a, b) => (this.order == "date"
-            ? a.createdAt.toString().localeCompare(b.createdAt.toString())
-            : a.grade.localeCompare(b.grade)));
+        if (this.order == "date") {
+            return data.sort((a, b) => a.createdAt.toString()
+                .localeCompare(b.createdAt.toString())).reverse();
+        }
+        if (this.order == "grade") {
+            return data.sort((a, b) => a.grade.localeCompare(b.grade));
+        }
+        return data;
     }
 
     public sort(type: "grade" | "date"): void {
