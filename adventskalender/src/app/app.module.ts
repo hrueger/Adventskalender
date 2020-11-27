@@ -21,6 +21,7 @@ import { JwtInterceptor } from "./_interceptors/jwt.interceptor";
 import { WelcomeComponent } from "./_pages/welcome/welcome.component";
 import { TasksComponent } from "./_pages/tasks/tasks.component";
 import { TaskComponent } from "./_pages/task/task.component";
+import { UsersComponent } from "./_pages/users/users.component";
 import { environment } from "../environments/environment";
 
 registerLocaleData(localeDe);
@@ -38,6 +39,7 @@ registerLocaleData(localeDe);
         WelcomeComponent,
         TasksComponent,
         TaskComponent,
+        UsersComponent,
     ],
     imports: [
         BrowserModule,

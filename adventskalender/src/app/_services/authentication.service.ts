@@ -26,7 +26,7 @@ export class AuthenticationService {
         return this.remoteService.post("auth/login", { password, nickname }).pipe(
             map((user: any) => {
                 // login successful if there's a jwt token in the response
-                this.loggedIn(user);
+                this.onLoggedIn(user);
                 return user;
             }),
         );
@@ -36,7 +36,11 @@ export class AuthenticationService {
         return !!this.currentUser?.isAdmin;
     }
 
-    private loggedIn(user: any) {
+    public get loggedIn(): boolean {
+        return !!this.currentUser;
+    }
+
+    private onLoggedIn(user: any): void {
         if (user) {
             this.currentUser = user;
             this.storageService.set("jwtToken", user.jwtToken);
@@ -48,7 +52,7 @@ export class AuthenticationService {
         const o = new Subject();
         this.remoteService.post("auth/renewToken", { jwtToken }, { params: new NoErrorHttpParams(true) }).subscribe((data) => {
             if (data && data.user) {
-                this.loggedIn(data.user);
+                this.onLoggedIn(data.user);
                 o.next(true);
             } else {
                 o.next(false);

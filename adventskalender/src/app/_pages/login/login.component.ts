@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
+import { AlertService } from "../../_services/alert.service";
 import { AuthenticationService } from "../../_services/authentication.service";
 import { RemoteService } from "../../_services/remote.service";
 import { StorageService } from "../../_services/storage.service";
@@ -32,6 +33,7 @@ export class LoginComponent {
         private router: Router,
         private storageService: StorageService,
         private route: ActivatedRoute,
+        private alertService: AlertService,
     ) {
         if (this.route.snapshot.params.token) {
             this.action = "newPassword";
