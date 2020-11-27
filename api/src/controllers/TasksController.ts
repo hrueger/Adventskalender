@@ -7,6 +7,7 @@ import { TaskSolution } from "../entity/TaskSolution";
 import { User } from "../entity/User";
 import { tasks } from "../resources/tasks";
 import { getTaskStatus } from "../helpers/task-status";
+import { checkUserYoung } from "./AuthController";
 
 class TasksController {
     public static listAll = async (req: Request, res: Response): Promise<void> => {
@@ -84,7 +85,7 @@ class TasksController {
             res.status(401).send("Diese Aufgabe ist noch nicht freigeschalten!");
             return;
         }
-        res.sendFile(path.join(__dirname, "../../assets/images/", `${day}_${res.locals.jwtPayload.isYoung ? "jung" : "alt"}_${t.status == TaskStatus.SOLVED ? "loesung" : "raetsel"}.jpg`));
+        res.sendFile(path.join(__dirname, "../../assets/images/", `${day}_${checkUserYoung(res.locals.jwtPayload.user) ? "jung" : "alt"}_${t.status == TaskStatus.SOLVED ? "loesung" : "raetsel"}.jpg`));
     }
 
     public static saveSolution = async (req: Request, res: Response): Promise<void> => {
@@ -136,7 +137,7 @@ export function taskSolvedCorrectly(user: User, t: Task): boolean {
     if (!(t.guess?.row && t.guess?.col)) {
         return false;
     }
-    return !!t[user.isYoung ? "young" : "old"]?.solutions?.find((s) => s.row == t.guess.row && s.col == t.guess.col);
+    return !!t[checkUserYoung(user) ? "young" : "old"]?.solutions?.find((s) => s.row == t.guess.row && s.col == t.guess.col);
 }
 
 export function getForceDay(req: Request, res: Response): number {

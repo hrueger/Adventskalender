@@ -172,6 +172,9 @@ class AuthController {
     }
 }
 export default AuthController;
-function checkUserYoung(user: User) {
+export function checkUserYoung(user: User): boolean {
+    if (!user.grade) {
+        throw Error(`got ${user}`);
+    }
     return user.grade.startsWith("5") || user.grade.startsWith("6");
 }
