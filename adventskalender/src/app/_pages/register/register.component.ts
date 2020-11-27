@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import {
+    FormControl, FormGroup, Validators,
+} from "@angular/forms";
 import { Router } from "@angular/router";
 import { RemoteService } from "../../_services/remote.service";
 import { AlertService } from "../../_services/alert.service";
@@ -26,7 +28,22 @@ export class RegisterComponent {
             nickname: new FormControl("", [Validators.required, Validators.maxLength(20)]),
             password: new FormControl("", [Validators.required, Validators.minLength(5), Validators.pattern(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/)]),
             password2: new FormControl("", [Validators.required]),
-        });
+        }, this.confirmPasswordValidator("password", "password2"));
+    }
+
+    public confirmPasswordValidator(controlName: string, matchingControlName: string): any {
+        return (formGroup: FormGroup) => {
+            const control = formGroup.controls[controlName];
+            const matchingControl = formGroup.controls[matchingControlName];
+            if (matchingControl.errors && !matchingControl.errors.confirmedValidator) {
+                return;
+            }
+            if (control.value !== matchingControl.value) {
+                matchingControl.setErrors({ confirmedValidator: true });
+            } else {
+                matchingControl.setErrors(null);
+            }
+        };
     }
 
     public onSubmit(): void {
