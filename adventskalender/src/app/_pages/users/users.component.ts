@@ -10,7 +10,6 @@ import { User } from "../../_models/User";
 })
 export class UsersComponent implements OnInit {
     public users: User[] = [];
-    public maxPoints = 1000000000;
     public userCount = 0;
     public currentUser: User;
     constructor(
@@ -19,19 +18,15 @@ export class UsersComponent implements OnInit {
     ) { }
 
     public ngOnInit(updateCurrentUser?: boolean): void {
-        this.remoteService.get("users/admin").subscribe((data) => {
+        this.remoteService.get("users/admin").subscribe((data: User[]) => {
             if (data) {
-                this.users = data;
+                this.users = data.sort((a, b) => a.grade.localeCompare(b.grade));
                 this.userCount = data.length;
                 for (const user of this.users) {
                     if (updateCurrentUser && user.id == this.currentUser.id) {
                         this.currentUser = user;
                     }
                 }
-                setTimeout(() => {
-                    this.maxPoints = this.users
-                        .reduce((p, c) => (p.points > c.points ? p : c)).points;
-                }, 20);
             }
         });
     }
