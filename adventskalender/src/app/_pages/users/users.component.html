@@ -5,6 +5,12 @@
     <div class="alert alert-primary">
         Es gibt momentan {{userCount}} Benutzer.
     </div>
+    <div class="text-left mb-4">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn" (click)="sort('date')" [class.btn-primary]="order == 'date'" [class.btn-outline-primary]="order !== 'date'">Nach Anmeldedatum sortieren</button>
+            <button type="button" class="btn" (click)="sort('grade')" [class.btn-primary]="order == 'grade'" [class.btn-outline-primary]="order !== 'grade'">Nach Klasse sortieren</button>
+          </div>
+    </div>
     <table class="table table-striped border-top-0">
         <thead>
             <tr>
