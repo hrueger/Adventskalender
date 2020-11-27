@@ -13,26 +13,10 @@ const weeksAndPoints: Record<number, number> = { // lastDay with those points
 
 class UserController {
     public static listUsers = async (req: Request, res: Response): Promise<void> => {
-        const userRepository = getRepository(User);
-        const users = await userRepository.find({
-            relations: ["solutions"],
-        });
-        res.send(users.map((u) => {
-            u.points = 0;
-            for (const guess of u.solutions) {
-                const task = tasks.find((t) => t.day == guess.day);
-                task.guess = guess;
-                if (taskSolvedCorrectly(u, task)) {
-                    for (const [lastDay, points] of Object.entries(weeksAndPoints)) {
-                        if (task.day <= parseInt(lastDay)) {
-                            u.points += points;
-                            break;
-                        }
-                    }
-                }
-            }
-            return u;
-        }));
+        await UserController.getAllUsers(res);
+    }
+    public static listUsersAdmin = async (req: Request, res: Response): Promise<void> => {
+        await UserController.getAllUsers(res, true);
     }
 
     public static newUser = async (req: Request, res: Response): Promise<void> => {
@@ -94,6 +78,11 @@ class UserController {
         const { id } = req.params;
         const { admin } = req.body;
 
+        if (id == res.locals.jwtPayload.userId) {
+            res.status(500).send({ message: "Du kannst Dir nicht selbst den Admin-Status entfernen!" });
+            return;
+        }
+
         const userRepository = getRepository(User);
         try {
             const user = await userRepository.findOne(id);
@@ -104,6 +93,35 @@ class UserController {
             return;
         }
         res.status(200).send({ success: true });
+    }
+
+    private static async getAllUsers(res: Response, forAdmin = false) {
+        const userRepository = getRepository(User);
+        const users = await userRepository.find({
+            relations: ["solutions"],
+        });
+        res.send(users.map((u) => {
+            if (!forAdmin) {
+                u.realname = undefined;
+                u.email = undefined;
+                u.isAdmin = undefined;
+            }
+            u.points = 0;
+            for (const guess of u.solutions) {
+                const task = tasks.find((t) => t.day == guess.day);
+                task.guess = guess;
+                if (taskSolvedCorrectly(u, task)) {
+                    for (const [lastDay, points] of Object.entries(weeksAndPoints)) {
+                        if (task.day <= parseInt(lastDay)) {
+                            u.points += points;
+                            break;
+                        }
+                    }
+                }
+            }
+            u.solutions = undefined;
+            return u;
+        }));
     }
 }
 
