@@ -16,7 +16,7 @@ export const tasks: Task[] = [
         day: 2,
         young: {
             description: "Geht Dir ein Licht auf?",
-            solutions: [{ col: "E", row: 5 }, { col: "E", row: 6 }],
+            solutions: [{ col: "E", row: 6 }, { col: "F", row: 6 }],
         },
         old: {
             description: "Ein rumhängendes bemaltes Osterei? Denk mal ans Abitur vor einigen Jahren!",
@@ -108,7 +108,7 @@ export const tasks: Task[] = [
         },
         old: {
             description: "Eine Spaßbadrutsche am AG?",
-            solutions: [{ col: "F", row: 6 }],
+            solutions: [{ col: "C", row: 6 }, { col: "D", row: 6 }],
         },
     },
     {
@@ -125,7 +125,7 @@ export const tasks: Task[] = [
     {
         day: 12,
         young: {
-            description: "Plan einer Weggabelung?",
+            description: "Plan des Tunnelsystems unter'm AG?",
             solutions: [{ col: "E", row: 5 }],
         },
         old: {
@@ -163,7 +163,7 @@ export const tasks: Task[] = [
         },
         old: {
             description: "Es ranken sich Gerüchte, dass man hier meterlange Steaks grillen kann.",
-            solutions: [{ col: "G", row: 4 }],
+            solutions: [{ col: "G", row: 4 }, { col: "G", row: 5 }],
         },
     },
     {
@@ -262,7 +262,7 @@ export const tasks: Task[] = [
         },
         old: {
             description: "Der Stern von Bethlehem? Oder ein NATO-Geheimzeichen?",
-            solutions: [{ col: "D", row: 6 }],
+            solutions: [{ col: "C", row: 6 }, { col: "D", row: 6 }],
         },
     },
 ];
