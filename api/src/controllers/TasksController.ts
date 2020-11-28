@@ -19,7 +19,10 @@ class TasksController {
         })) || [];
 
         const forceDay = getForceDay(req, res);
-        res.send(tasks.map((t) => {
+
+        const ts = [];
+        for (const task of tasks) {
+            const t = { ...task };
             t.status = getTaskStatus(t, forceDay);
             const guess = guesses.find((g) => g.day == t.day);
             if (guess) {
@@ -36,12 +39,14 @@ class TasksController {
                 t.young.solutions = undefined;
                 t.old.solutions = undefined;
             }
-            return t;
-        }));
+            ts.push(t);
+        }
+
+        res.send(ts);
     }
     public static getTask = async (req: Request, res: Response): Promise<void> => {
         const day = parseInt(req.params.day, 10);
-        const t = tasks.find((ts) => ts.day == day);
+        const t = { ...tasks.find((ts) => ts.day == day) };
         const forceDay = getForceDay(req, res);
         t.status = getTaskStatus(t, forceDay);
         if (t.status == TaskStatus.LOCKED) {
@@ -78,7 +83,7 @@ class TasksController {
 
     public static getImage = async (req: Request, res: Response): Promise<void> => {
         const day = parseInt(req.params.day, 10);
-        const t = tasks.find((ts) => ts.day == day);
+        const t = { ...tasks.find((ts) => ts.day == day) };
         const forceDay = getForceDay(req, res);
         t.status = getTaskStatus(t, forceDay);
         if (t.status == TaskStatus.LOCKED) {
@@ -90,7 +95,7 @@ class TasksController {
 
     public static saveSolution = async (req: Request, res: Response): Promise<void> => {
         const day = parseInt(req.params.day, 10);
-        const t = tasks.find((ts) => ts.day == day);
+        const t = { ...tasks.find((ts) => ts.day == day) };
         const forceDay = getForceDay(req, res);
         t.status = getTaskStatus(t, forceDay);
         if (t.status == TaskStatus.LOCKED) {
