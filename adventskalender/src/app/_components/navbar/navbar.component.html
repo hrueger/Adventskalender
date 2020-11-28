@@ -15,7 +15,7 @@
                         <a class="nav-link" routerLink="/welcome" *ngIf="authenticationService.currentUser">Start</a>
                     </li>
                     <li class="nav-item" routerLinkActive="active" *ngIf="authenticationService.currentUser" (click)="showMobileMenu = false">
-                        <a class="nav-link" routerLink="/tasks">Aufgaben</a>
+                        <a class="nav-link" routerLink="/tasks">Bilderrätsel</a>
                     </li>
                     <li class="nav-item" routerLinkActive="active" *ngIf="!authenticationService.currentUser" (click)="showMobileMenu = false">
                         <a class="nav-link" routerLink="/login">Login</a>
