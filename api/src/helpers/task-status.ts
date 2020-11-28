@@ -61,12 +61,6 @@ export function getTaskStatus(task: Task, fakeTodayForTesting?: number): TaskSta
     const dateDiff = date.getTime() - now.getTime();
     const diff = Math.floor(dateDiff / (60 * 60 * 24 * 1000));
 
-    /* if ((todayDay == 25 || todayDay == 26 || todayDay == 27)
-        && task.day == CHRISTMAS
-        && month == 12) {
-        return TaskStatus.OPEN;
-    } */
-
     const zurueckliegend = getBack(task.day, dayOfWeek);
     if (-zurueckliegend < diff && diff <= 0) {
         return TaskStatus.OPEN;

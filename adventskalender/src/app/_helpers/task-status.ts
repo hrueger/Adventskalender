@@ -52,23 +52,23 @@
 /* do not edit */     // let todayDay: number;
 /* do not edit */     let date: Date;
 /* do not edit */     // let month: number;
+/* do not edit */     // January is month 0, that's why December is 11
 /* do not edit */     if (fakeTodayForTesting) {
-/* do not edit */         now = new Date(year, 12, fakeTodayForTesting);
+/* do not edit */         now = new Date(year, 11, fakeTodayForTesting);
 /* do not edit */         // todayDay = fakeTodayForTesting;
-/* do not edit */         date = new Date(year, 12, task.day);
+/* do not edit */         date = new Date(year, 11, task.day);
 /* do not edit */         // month = 12;
 /* do not edit */     } else {
 /* do not edit */         now = new Date();
 /* do not edit */         now.setHours(0, 0, 0, 0);
 /* do not edit */         // todayDay = now.getDate();
-/* do not edit */         date = new Date(year, 12, task.day);
+/* do not edit */         date = new Date(year, 11, task.day);
 /* do not edit */         // month = new Date().getMonth();
 /* do not edit */     }
-/* do not edit */ 
 /* do not edit */     const dayOfWeek = now.getDay();
 /* do not edit */     const dateDiff = date.getTime() - now.getTime();
 /* do not edit */     const diff = Math.floor(dateDiff / (60 * 60 * 24 * 1000));
-/* do not edit */
+/* do not edit */ 
 /* do not edit */     const zurueckliegend = getBack(task.day, dayOfWeek);
 /* do not edit */     if (-zurueckliegend < diff && diff <= 0) {
 /* do not edit */         return TaskStatus.OPEN;

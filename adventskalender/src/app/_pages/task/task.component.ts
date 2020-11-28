@@ -4,7 +4,7 @@ import { RemoteService } from "../../_services/remote.service";
 import { Task, Field, TaskStatus } from "../../_models/Task";
 import { AuthenticationService } from "../../_services/authentication.service";
 import { AlertService } from "../../_services/alert.service";
-import { getBack } from "../../_helpers/task-status";
+import { getTaskStatus } from "../../_helpers/task-status";
 
 @Component({
     selector: "app-task",
@@ -37,8 +37,14 @@ export class TaskComponent {
                         };
                     }
                     const d = new Date();
+                    d.setMonth(11);
                     d.setDate(this.task.day);
-                    this.due.setDate(this.task.day + getBack(this.task.day, d.getDay()));
+
+                    let add = 0;
+                    while (getTaskStatus(this.task, this.task.day + add) == TaskStatus.OPEN) {
+                        this.due = new Date(2020, 11, this.task.day + add);
+                        add++;
+                    }
                     this.loading = false;
                 });
             }
