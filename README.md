@@ -1,4 +1,4 @@
-# Adventskalender
+# AGventskalender
 > A simple Advent calendar in German.
 
 ## Development

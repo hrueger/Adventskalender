@@ -1,7 +1,7 @@
 {
-    "name": "adventskalender-api",
+    "name": "agventskalender-api",
     "version": "0.0.0",
-    "description": "The api for the Adventskalender",
+    "description": "The api for the AGventskalender",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/multimediaAG/Adventskalender.git"
