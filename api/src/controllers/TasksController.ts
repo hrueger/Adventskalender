@@ -8,6 +8,7 @@ import { User } from "../entity/User";
 import { tasks } from "../resources/tasks";
 import { getTaskStatus } from "../helpers/task-status";
 import { checkUserYoung } from "./AuthController";
+import { mergeDeep } from "../helpers/merge-deep";
 
 class TasksController {
     public static listAll = async (req: Request, res: Response): Promise<void> => {
@@ -22,7 +23,7 @@ class TasksController {
 
         const ts = [];
         for (const task of tasks) {
-            const t = { ...task };
+            const t = mergeDeep({}, task);
             t.status = getTaskStatus(t, forceDay);
             const guess = guesses.find((g) => g.day == t.day);
             if (guess) {
@@ -46,7 +47,7 @@ class TasksController {
     }
     public static getTask = async (req: Request, res: Response): Promise<void> => {
         const day = parseInt(req.params.day, 10);
-        const t = { ...tasks.find((ts) => ts.day == day) };
+        const t = mergeDeep({}, tasks.find((ts) => ts.day == day));
         const forceDay = getForceDay(req, res);
         t.status = getTaskStatus(t, forceDay);
         if (t.status == TaskStatus.LOCKED) {
@@ -83,7 +84,7 @@ class TasksController {
 
     public static getImage = async (req: Request, res: Response): Promise<void> => {
         const day = parseInt(req.params.day, 10);
-        const t = { ...tasks.find((ts) => ts.day == day) };
+        const t = mergeDeep({}, tasks.find((ts) => ts.day == day));
         const forceDay = getForceDay(req, res);
         t.status = getTaskStatus(t, forceDay);
         if (t.status == TaskStatus.LOCKED) {
@@ -95,7 +96,7 @@ class TasksController {
 
     public static saveSolution = async (req: Request, res: Response): Promise<void> => {
         const day = parseInt(req.params.day, 10);
-        const t = { ...tasks.find((ts) => ts.day == day) };
+        const t = mergeDeep({}, tasks.find((ts) => ts.day == day));
         const forceDay = getForceDay(req, res);
         t.status = getTaskStatus(t, forceDay);
         if (t.status == TaskStatus.LOCKED) {

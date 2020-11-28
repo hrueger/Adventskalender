@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { User } from "../entity/User";
+import { mergeDeep } from "../helpers/merge-deep";
 import { tasks } from "../resources/tasks";
 import { taskSolvedCorrectly } from "./TasksController";
 
@@ -109,7 +110,7 @@ class UserController {
             }
             u.points = 0;
             for (const guess of u.solutions) {
-                const task = { ...tasks.find((t) => t.day == guess.day) };
+                const task = mergeDeep({}, tasks.find((t) => t.day == guess.day));
                 task.guess = guess;
                 if (taskSolvedCorrectly(u, task)) {
                     for (const [lastDay, points] of Object.entries(weeksAndPoints)) {
