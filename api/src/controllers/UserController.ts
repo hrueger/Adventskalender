@@ -5,10 +5,11 @@ import { tasks } from "../resources/tasks";
 import { taskSolvedCorrectly } from "./TasksController";
 
 const weeksAndPoints: Record<number, number> = { // lastDay with those points
-    8: 10,
-    15: 20,
-    23: 30,
-    24: 40,
+    6: 10,
+    13: 20,
+    20: 30,
+    23: 40,
+    24: 60,
 };
 
 class UserController {
