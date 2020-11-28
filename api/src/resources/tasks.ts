@@ -1,6 +1,6 @@
 import { Task } from "../entity/Task";
 
-export const tasks: Task[] = [
+export const tasks: readonly Task[] = Object.freeze([
     {
         day: 1,
         young: {
@@ -265,4 +265,4 @@ export const tasks: Task[] = [
             solutions: [{ col: "C", row: 6 }, { col: "D", row: 6 }],
         },
     },
-];
+]);
