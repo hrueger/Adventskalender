@@ -108,7 +108,7 @@ class UserController {
             }
             u.points = 0;
             for (const guess of u.solutions) {
-                const task = tasks.find((t) => t.day == guess.day);
+                const task = { ...tasks.find((t) => t.day == guess.day) };
                 task.guess = guess;
                 if (taskSolvedCorrectly(u, task)) {
                     for (const [lastDay, points] of Object.entries(weeksAndPoints)) {
