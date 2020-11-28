@@ -26,7 +26,7 @@ export const tasks: readonly Task[] = Object.freeze([
     {
         day: 3,
         young: {
-            description: "Tablets ohne WLAN-Anschluss",
+            description: "Tablets - garantiert ohne WLAN!",
             solutions: [{ col: "F", row: 5 }, { col: "F", row: 6 }],
         },
         old: {
