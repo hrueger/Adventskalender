@@ -30,7 +30,7 @@ export const tasks: readonly Task[] = Object.freeze([
             solutions: [{ col: "F", row: 5 }, { col: "F", row: 6 }],
         },
         old: {
-            description: "Kurvenreiche Holzarbeit: Gedacht für Gläser, Tassen und Blumentöpfe, aber nicht für die Füße!",
+            description: "Kurvenreiche Holzarbeit: Gedacht für Gläser, Tassen und Blumentöpfe, aber nicht für müde Füße!",
             solutions: [{ col: "F", row: 5 }],
         },
     },
@@ -85,7 +85,7 @@ export const tasks: readonly Task[] = Object.freeze([
             solutions: [{ col: "G", row: 3 }],
         },
         old: {
-            description: "Glänzende Einblicke aus westlicher Richtung",
+            description: "Glänzende Einblicke, vor allem im Abendlicht",
             solutions: [{ col: "G", row: 5 }],
         },
     },
@@ -118,7 +118,7 @@ export const tasks: readonly Task[] = Object.freeze([
             solutions: [{ col: "E", row: 5 }],
         },
         old: {
-            description: "Schraube locker? Nicht am AG!",
+            description: "Keine überragende Schönheit!",
             solutions: [{ col: "B", row: 9 }],
         },
     },
@@ -140,7 +140,7 @@ export const tasks: readonly Task[] = Object.freeze([
             solutions: [{ col: "E", row: 6 }],
         },
         old: {
-            description: "Sehr nahe, aber übersieht man leicht im Gebüsch",
+            description: "Ganz nahe, aber übersieht man leicht im Gebüsch",
             solutions: [{ col: "I", row: 1 }],
         },
     },
@@ -173,7 +173,7 @@ export const tasks: readonly Task[] = Object.freeze([
             solutions: [{ col: "C", row: 6 }],
         },
         old: {
-            description: "Schau es Dir doch von der Nähe an - aber schwindle nicht!",
+            description: "Hier muss du frei von Schwindel sein!",
             solutions: [{ col: "H", row: 6 }],
         },
     },
@@ -195,7 +195,7 @@ export const tasks: readonly Task[] = Object.freeze([
             solutions: [{ col: "E", row: 6 }],
         },
         old: {
-            description: "Ein Eck zum Ostereier Verstecken",
+            description: "Ein Treppengeländer, wo man's nicht vermutet",
             solutions: [{ col: "D", row: 5 }],
         },
     },
@@ -206,7 +206,7 @@ export const tasks: readonly Task[] = Object.freeze([
             solutions: [{ col: "D", row: 5 }, { col: "E", row: 5 }],
         },
         old: {
-            description: "Was ist hier wohl angekettet, um nicht wegzulaufen zu können?",
+            description: "Was wird hier an die Kette gelegt?",
             solutions: [{ col: "G", row: 2 }],
         },
     },
