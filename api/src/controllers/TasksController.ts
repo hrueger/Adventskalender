@@ -95,7 +95,7 @@ class TasksController {
                 openTasks.push(t);
             }
         }
-        const getTdTag = (t: Task, old = false) => `<td class="img-holder"><span class="overlay">${t.day}</span><img class="img-responsive" src="data:image/jpg;base64,${fs.readFileSync(path.join(__dirname, "../../assets/images/", `${t.day}_${old ? "alt" : "jung"}_raetsel.jpg`)).toString("base64")}"></td>`;
+        const getTdTag = (t: Task, old = false) => `<td class="img-holder"><div class="overlay"><span class="day">${t.day}</span><br><span class="description">${t[old ? "old" : "young"].description}</span></div><img class="img-responsive" src="data:image/jpg;base64,${fs.readFileSync(path.join(__dirname, "../../assets/images/", `${t.day}_${old ? "alt" : "jung"}_raetsel.jpg`)).toString("base64")}"></td>`;
         const genTable = () => `<table>
             <tbody>
                 <tr class="text text-center">
@@ -143,21 +143,30 @@ class TasksController {
                         height: 40%;
                         position: relative;
                     }
-                    span.overlay {
+                    div.overlay {
                         position: absolute;
                         bottom: 0;
                         width: 100%;
                         text-align: center;
+                    }
+                    div.overlay span.day {
                         font-size: 5rem;
                         color: #fff;
                         text-shadow: -2px 0 black, 0 1px black, 2px 0 black, 0 -2px black;
-
+                    }
+                    div.overlay span.description {
+                        font-size: 1rem;
+                        background-color: white;
+                        padding: 0.5rem;
+                        line-height: 2rem;
+                        font-weight: bold;
                     }
                     .img-responsive {
                         max-width: 100%;
                         max-height: 100%;
                         display: block;
                         margin: 0 auto;
+                        padding-bottom: 2.5rem;
                     }
 
                     img.header {
