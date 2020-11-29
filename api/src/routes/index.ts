@@ -2,12 +2,14 @@ import { Request, Response, Router } from "express";
 import auth from "./auth";
 import users from "./users";
 import tasks from "./tasks";
+import kiosk from "./kiosk";
 
 const routes = Router();
 
 routes.use("/auth", auth);
 routes.use("/users", users);
 routes.use("/tasks", tasks);
+routes.use("/kiosk", kiosk);
 routes.get("/testmode", (req: Request, res: Response) => {
     if (req.app.locals.config.TEST_MODE) {
         res.send(`

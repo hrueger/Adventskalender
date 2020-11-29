@@ -2,6 +2,7 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import * as path from "path";
+import * as fs from "fs";
 import { SolutionStatus, Task, TaskStatus } from "../entity/Task";
 import { TaskSolution } from "../entity/TaskSolution";
 import { User } from "../entity/User";
@@ -80,6 +81,99 @@ class TasksController {
             t.old.solutions = undefined;
         }
         res.send(t);
+    }
+
+    public static kiosk = async (req: Request, res: Response): Promise<void> => {
+        let forceDay: number;
+        if (req.app.locals.config.TEST_MODE && req.query.forceDay) {
+            forceDay = parseInt(req.query.forceDay, 10);
+        }
+        const openTasks: Task[] = [];
+        for (const t of tasks) {
+            const task = mergeDeep({}, t);
+            if (getTaskStatus(task, forceDay) == TaskStatus.OPEN) {
+                openTasks.push(t);
+            }
+        }
+        const getTdTag = (t: Task, old = false) => `<td class="img-holder"><span class="overlay">${t.day}</span><img class="img-responsive" src="data:image/jpg;base64,${fs.readFileSync(path.join(__dirname, "../../assets/images/", `${t.day}_${old ? "alt" : "jung"}_raetsel.jpg`)).toString("base64")}"></td>`;
+        res.send(`
+        <!DOCTYPE html>
+        <html>
+            <head>
+                <title>AGventskalender</title>
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+                <style>
+                    body {
+                        
+                    }
+                    html, body, div.container-fluid, div.row, table, tbody {
+                        height: 100vh;
+                        width: 100vw;
+                        overflow: hidden;
+                    }
+                    tr.text {
+                        height: 10%;
+                    }
+                    tr.images {
+                        height: 40%;
+                    }
+                    td.img-holder {
+                        height: 40%;
+                        position: relative;
+                    }
+                    span.overlay {
+                        position: absolute;
+                        bottom: 0;
+                        width: 100%;
+                        text-align: center;
+                        font-size: 5rem;
+                        color: #fff;
+                        text-shadow: -2px 0 black, 0 1px black, 2px 0 black, 0 -2px black;
+
+                    }
+                    .img-responsive {
+                        max-width: 100%;
+                        max-height: 100%;
+                        display: block;
+                        margin: 0 auto;
+                    }
+
+                    img.header {
+                        height: 6rem;
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="container-fluid">
+                    <div class="row">
+                        ${openTasks.length == 0 ? "Der AGventskalender startet am 01.12.2020!" : ""}
+                        <table>
+                            <tbody>
+                                <tr class="text text-center">
+                                    <td colspan="${openTasks.length}">
+                                        <div class="d-flex justify-content-between">
+                                            <img class="header" src="http://localhost:3000/assets/logos/header.png">
+                                            <h1 class="mt-4">Klasse 5 und 6</h1>
+                                            <h4 class="mr-2 mt-2">Stand: ${new Date().toLocaleString()} Uhr</h4>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="images">
+                                    ${openTasks.map((t) => getTdTag(t)).join("")}
+                                </tr>
+                                <tr class="text text-center">
+                                    <td colspan="${openTasks.length}"><h1>Klasse 7 bis 12</h1></td>
+                                </tr>
+                                <tr class="images">
+                                    ${openTasks.map((t) => getTdTag(t, true)).join("")}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </body>
+        </html>
+        `);
     }
 
     public static getImage = async (req: Request, res: Response): Promise<void> => {
