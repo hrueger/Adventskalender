@@ -85,7 +85,7 @@ class TasksController {
 
     public static kiosk = async (req: Request, res: Response): Promise<void> => {
         let forceDay: number;
-        if (req.app.locals.config.TEST_MODE && req.query.forceDay) {
+        if (!req.app.locals.config.TEST_MODE && req.query.forceDay) {
             forceDay = parseInt(req.query.forceDay, 10);
         }
         const openTasks: Task[] = [];
@@ -96,6 +96,28 @@ class TasksController {
             }
         }
         const getTdTag = (t: Task, old = false) => `<td class="img-holder"><span class="overlay">${t.day}</span><img class="img-responsive" src="data:image/jpg;base64,${fs.readFileSync(path.join(__dirname, "../../assets/images/", `${t.day}_${old ? "alt" : "jung"}_raetsel.jpg`)).toString("base64")}"></td>`;
+        const genTable = () => `<table>
+            <tbody>
+                <tr class="text text-center">
+                    <td colspan="${openTasks.length}">
+                        <div class="d-flex justify-content-between">
+                            <img class="header" src="http://localhost:3000/assets/logos/header.png">
+                            <h1 class="mt-4">Klasse 5 und 6</h1>
+                            <h4 class="mr-2 mt-2">Stand: ${new Date().toLocaleString()} Uhr</h4>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="images">
+                    ${openTasks.map((t) => getTdTag(t)).join("")}
+                </tr>
+                <tr class="text text-center">
+                    <td colspan="${openTasks.length}"><h1>Klasse 7 bis 12</h1></td>
+                </tr>
+                <tr class="images">
+                    ${openTasks.map((t) => getTdTag(t, true)).join("")}
+                </tr>
+            </tbody>
+        </table>`;
         res.send(`
         <!DOCTYPE html>
         <html>
@@ -146,29 +168,7 @@ class TasksController {
             <body>
                 <div class="container-fluid">
                     <div class="row">
-                        ${openTasks.length == 0 ? "Der AGventskalender startet am 01.12.2020!" : ""}
-                        <table>
-                            <tbody>
-                                <tr class="text text-center">
-                                    <td colspan="${openTasks.length}">
-                                        <div class="d-flex justify-content-between">
-                                            <img class="header" src="http://localhost:3000/assets/logos/header.png">
-                                            <h1 class="mt-4">Klasse 5 und 6</h1>
-                                            <h4 class="mr-2 mt-2">Stand: ${new Date().toLocaleString()} Uhr</h4>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="images">
-                                    ${openTasks.map((t) => getTdTag(t)).join("")}
-                                </tr>
-                                <tr class="text text-center">
-                                    <td colspan="${openTasks.length}"><h1>Klasse 7 bis 12</h1></td>
-                                </tr>
-                                <tr class="images">
-                                    ${openTasks.map((t) => getTdTag(t, true)).join("")}
-                                </tr>
-                            </tbody>
-                        </table>
+                        ${openTasks.length == 0 ? "<div class='jumbotron mb-0 w-100 text-center pt-5'><h1 class='mt-5 pt-5'><img class='py-5' src='http://localhost:3000/assets/logos/header.png'><br>Der AGventskalender startet am 01.12.2020!</h1></div>" : genTable()}
                     </div>
                 </div>
             </body>
