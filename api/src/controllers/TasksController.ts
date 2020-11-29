@@ -101,7 +101,7 @@ class TasksController {
                 <tr class="text text-center">
                     <td colspan="${openTasks.length}">
                         <div class="d-flex justify-content-between">
-                            <img class="header" src="http://localhost:3000/assets/logos/header.png">
+                            <img class="header" src="/assets/logos/header.png">
                             <h1 class="mt-4">Klasse 5 und 6</h1>
                             <h4 class="mr-2 mt-2">Stand: ${new Date().toLocaleString()} Uhr</h4>
                         </div>
@@ -177,7 +177,7 @@ class TasksController {
             <body>
                 <div class="container-fluid">
                     <div class="row">
-                        ${openTasks.length == 0 ? "<div class='jumbotron mb-0 w-100 text-center pt-5'><h1 class='mt-5 pt-5'><img class='py-5' src='http://localhost:3000/assets/logos/header.png'><br>Der AGventskalender startet am 01.12.2020!</h1></div>" : genTable()}
+                        ${openTasks.length == 0 ? "<div class='jumbotron mb-0 w-100 text-center pt-5'><h1 class='mt-5 pt-5'><img class='py-5' src='/assets/logos/header.png'><br>Der AGventskalender startet am 01.12.2020!</h1></div>" : genTable()}
                     </div>
                 </div>
             </body>
