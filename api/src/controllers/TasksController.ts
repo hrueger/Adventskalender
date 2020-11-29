@@ -85,7 +85,7 @@ class TasksController {
 
     public static kiosk = async (req: Request, res: Response): Promise<void> => {
         let forceDay: number;
-        if (!req.app.locals.config.TEST_MODE && req.query.forceDay) {
+        if (req.app.locals.config.TEST_MODE && req.query.forceDay) {
             forceDay = parseInt(req.query.forceDay, 10);
         }
         const openTasks: Task[] = [];
