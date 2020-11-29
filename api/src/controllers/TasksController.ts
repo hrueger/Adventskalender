@@ -95,7 +95,12 @@ class TasksController {
                 openTasks.push(t);
             }
         }
-        const getTdTag = (t: Task, old = false) => `<td class="img-holder"><div class="overlay"><span class="day">${t.day}</span><br><span class="description">${t[old ? "old" : "young"].description}</span></div><img class="img-responsive" src="data:image/jpg;base64,${fs.readFileSync(path.join(__dirname, "../../assets/images/", `${t.day}_${old ? "alt" : "jung"}_raetsel.jpg`)).toString("base64")}"></td>`;
+        const getTdTag = (t: Task, old: boolean) => {
+            const filename = `${t.day}_${old ? "alt" : "jung"}_raetsel.jpg`;
+            const { description } = t[old ? "old" : "young"];
+            const filedata = fs.readFileSync(path.join(__dirname, "../../assets/images/", filename)).toString("base64");
+            return `<td class="img-holder"><div class="overlay"><span class="day">${t.day}</span><br><span class="description">${description}</span></div><img class="img-responsive" src="data:image/jpg;base64,${filedata}"></td>`;
+        };
         const genTable = () => `<table>
             <tbody>
                 <tr class="text text-center">
@@ -108,7 +113,7 @@ class TasksController {
                     </td>
                 </tr>
                 <tr class="images">
-                    ${openTasks.map((t) => getTdTag(t)).join("")}
+                    ${openTasks.map((t) => getTdTag(t, false)).join("")}
                 </tr>
                 <tr class="text text-center">
                     <td colspan="${openTasks.length}"><h1>Klasse 7 bis 12</h1></td>
