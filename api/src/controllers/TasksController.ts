@@ -155,7 +155,7 @@ class TasksController {
                         text-align: center;
                     }
                     div.overlay span.day {
-                        font-size: 5rem;
+                        font-size: 3rem;
                         color: #fff;
                         text-shadow: -2px 0 black, 0 1px black, 2px 0 black, 0 -2px black;
                     }
@@ -167,6 +167,7 @@ class TasksController {
                         font-weight: bold;
                     }
                     .img-responsive {
+                        height: 13rem;
                         max-width: 100%;
                         max-height: 100%;
                         display: block;
