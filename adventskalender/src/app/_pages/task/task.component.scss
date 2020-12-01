@@ -5,19 +5,24 @@
         top: 0;
         width: 100%;
         height: 100%;
-        .field,
-        .space-field {
-            transition: background-color .3s ease;
-            // background-color: rgba(255, 60, 0, 0.349);
-            // border: 2px solid green;
-            margin: 0;
+        tr {
+            height: 10%;
+            .field,
+            .space-field {
+                transition: background-color .3s ease;
+                background-color: rgba(255, 60, 0, 0.349);
+                border: 2px solid green;
+                margin: 0;
+                height: 10%;
+                width: 10%;
+            }
+            .field.selected {
+                background-color: rgba(255, 255, 255, 0.644);
+            }
+            /* .space-field {
+                background-color: rgba(229, 255, 0, 0.349);
+                border: 2px solid blue;
+            } */
         }
-        .field.selected {
-            background-color: rgba(255, 255, 255, 0.644);
-        }
-        /* .space-field {
-            background-color: rgba(229, 255, 0, 0.349);
-            border: 2px solid blue;
-        } */
     }
 }
