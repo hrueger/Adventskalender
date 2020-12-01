@@ -1,9 +1,11 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
+import { TaskStatus } from "../entity/Task";
 import { User } from "../entity/User";
 import { mergeDeep } from "../helpers/merge-deep";
+import { getTaskStatus } from "../helpers/task-status";
 import { tasks } from "../resources/tasks";
-import { taskSolvedCorrectly } from "./TasksController";
+import { getForceDay, taskSolvedCorrectly } from "./TasksController";
 
 const weeksAndPoints: Record<number, number> = { // lastDay with those points
     6: 10,
@@ -15,10 +17,10 @@ const weeksAndPoints: Record<number, number> = { // lastDay with those points
 
 class UserController {
     public static listUsers = async (req: Request, res: Response): Promise<void> => {
-        await UserController.getAllUsers(res);
+        await UserController.getAllUsers(req, res);
     }
     public static listUsersAdmin = async (req: Request, res: Response): Promise<void> => {
-        await UserController.getAllUsers(res, true);
+        await UserController.getAllUsers(req, res, true);
     }
 
     public static newUser = async (req: Request, res: Response): Promise<void> => {
@@ -97,11 +99,15 @@ class UserController {
         res.status(200).send({ success: true });
     }
 
-    private static async getAllUsers(res: Response, forAdmin = false) {
+    private static async getAllUsers(req: Request, res: Response, forAdmin = false) {
         const userRepository = getRepository(User);
         const users = await userRepository.find({
             relations: ["solutions"],
         });
+        const solvedTasks = tasks.filter((t) => getTaskStatus(
+            t, getForceDay(req, res),
+        ) == TaskStatus.SOLVED)
+            .map((t) => t.day);
         res.send(users.map((u) => {
             if (!forAdmin) {
                 u.realname = undefined;
@@ -109,7 +115,7 @@ class UserController {
                 u.isAdmin = undefined;
             }
             u.points = 0;
-            for (const guess of u.solutions) {
+            for (const guess of u.solutions.filter((s) => solvedTasks.includes(s.day))) {
                 const task = mergeDeep({}, tasks.find((t) => t.day == guess.day));
                 task.guess = guess;
                 if (taskSolvedCorrectly(u, task)) {
