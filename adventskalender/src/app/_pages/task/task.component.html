@@ -25,18 +25,18 @@
                 </ng-container>
             </div>
 
-            <div class="map-holder">
-                <img src="assets/coordinates/map.jpg" class="img-fluid">
-                <table class="fields">
-                    <tr *ngFor="let row of rows; index as colIdx">
-                        <td class="space-field"></td>
-                        <td class="field" [class.cursor-pointer]="task.status == 'OPEN'" [class.selected]="selectedField && row == selectedField.row && col == selectedField.col" (click)="selectField(col, row)" [title]="col + ' ' + row" *ngFor="let col of cols; index as rowIdx"></td>
-                    </tr>
-                    <tr>
-                        <td class="space-field"></td>
-                        <td *ngFor="let row of rows; index as colIdx" class="space-field"></td>
-                    </tr>
-                </table>
+            <div class="map-holder d-flex">
+                <img src="assets/coordinates/map.jpg" class="img-fluid flex-grow-1">
+                <div class="fields">
+                    <div class="fieldRow" *ngFor="let row of rows; index as colIdx">
+                        <div class="space-field"></div>
+                        <div class="field" [class.cursor-pointer]="task.status == 'OPEN'" [class.selected]="selectedField && row == selectedField.row && col == selectedField.col" (click)="selectField(col, row)" [title]="col + ' ' + row" *ngFor="let col of cols; index as rowIdx"></div>
+                    </div>
+                    <div class="fieldRow">
+                        <div class="space-field"></div>
+                        <div *ngFor="let row of rows; index as colIdx" class="space-field"></div>
+                    </div>
+                </div>
             </div>
 
             <!--<map name="image-map">usemap="#image-map"

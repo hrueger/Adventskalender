@@ -3,18 +3,22 @@
     .fields {
         position: absolute;
         top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         width: 100%;
         height: 100%;
-        tr {
+        div.fieldRow {
             height: 10%;
             .field,
             .space-field {
                 transition: background-color .3s ease;
-                // background-color: rgba(255, 60, 0, 0.349);
-                // border: 2px solid green;
+                //background-color: rgba(255, 60, 0, 0.349);
+                //border: 2px solid green;
                 margin: 0;
-                height: 10%;
+                height: 100%;
                 width: 10%;
+                display: inline-block;
             }
             .field.selected {
                 background-color: rgba(255, 255, 255, 0.644);
