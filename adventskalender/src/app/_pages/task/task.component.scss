@@ -10,8 +10,8 @@
             .field,
             .space-field {
                 transition: background-color .3s ease;
-                background-color: rgba(255, 60, 0, 0.349);
-                border: 2px solid green;
+                // background-color: rgba(255, 60, 0, 0.349);
+                // border: 2px solid green;
                 margin: 0;
                 height: 10%;
                 width: 10%;
@@ -25,4 +25,9 @@
             } */
         }
     }
+}
+
+.fix-box {
+    max-width: 5rem;
+    display: inline-block;
 }

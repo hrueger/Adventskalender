@@ -15,7 +15,7 @@ export class TaskComponent {
     public task: Task;
     public loading = true;
     public due: Date = new Date();
-    public selectedField: { col: string, row: number };
+    public selectedField: { col: string, row: number } = {} as any;
     public cols = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
     public rows = [9, 8, 7, 6, 5, 4, 3, 2, 1];
     constructor(

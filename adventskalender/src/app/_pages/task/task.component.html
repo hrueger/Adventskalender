@@ -45,7 +45,35 @@
                 </ng-container>
             </map>-->
 
-            <div class="alert alert-primary" *ngIf="selectedField && task.status == 'OPEN'">
+            <div class="card p-3 my-2 text-left">
+                Bei Dir funktioniert das Anklicken der Quadrate nicht? Dann benutze doch diese Auswahlfelder:
+                <div>
+                    <select class="form-control fix-box" [(ngModel)]="selectedField.col">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                        <option value="I">I</option>
+                    </select>
+                    <select class="form-control fix-box" [(ngModel)]="selectedField.row">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="alert alert-primary" *ngIf="selectedField.row && selectedField.col && task.status == 'OPEN'">
                 Du hast das Feld <b>{{selectedField.col}}{{selectedField.row}}</b> ausgewählt. Ist das korrekt?<br>Dann klicke auf <i>Speichern</i>.<br>Du kannst diese Lösung noch bis zum <b>{{due | date:'EEEE, dd.MM.yyyy'}}, 23:59 Uhr</b> ändern.
             </div>
         </div>
