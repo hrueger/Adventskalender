@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import { TaskStatus } from "../entity/Task";
+import { TaskSolution } from "../entity/TaskSolution";
 import { User } from "../entity/User";
 import { mergeDeep } from "../helpers/merge-deep";
 import { getTaskStatus } from "../helpers/task-status";
@@ -69,7 +70,12 @@ class UserController {
         const { id } = req.params;
 
         const userRepository = getRepository(User);
+        const solutionRepository = getRepository(TaskSolution);
         try {
+            const user = await userRepository.findOneOrFail(id);
+            await solutionRepository.delete({
+                user,
+            });
             await userRepository.delete(id);
         } catch (e) {
             res.status(500).send({ message: "Konnte den Benutzer nicht löschen!" });
