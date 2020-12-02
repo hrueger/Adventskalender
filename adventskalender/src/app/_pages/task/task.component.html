@@ -45,7 +45,7 @@
                 </ng-container>
             </map>-->
 
-            <div class="card p-3 my-2 text-left">
+            <div class="card p-3 my-2 text-left" *ngIf="task.status == 'OPEN'">
                 Bei Dir funktioniert das Anklicken der Quadrate nicht? Dann benutze doch diese Auswahlfelder:
                 <div>
                     <select class="form-control fix-box" [(ngModel)]="selectedField.col">
