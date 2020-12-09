@@ -14,6 +14,7 @@ import { getTaskStatus } from "../../_helpers/task-status";
 export class TaskComponent {
     public task: Task;
     public loading = true;
+    public saving = false;
     public due: Date = new Date();
     public selectedField: { col: string, row: number } = {} as any;
     public cols = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
@@ -75,11 +76,13 @@ export class TaskComponent {
     }
 
     public save(): void {
+        this.saving = true;
         this.remoteService.post(`tasks/${this.task.day}`, { ...this.selectedField }).subscribe((d) => {
             if (d?.success) {
                 this.alertService.success("Deine Lösung wurde erfolgreich gespeichert!");
                 this.router.navigate(["/tasks"]);
             }
+            this.saving = false;
         });
     }
 }
