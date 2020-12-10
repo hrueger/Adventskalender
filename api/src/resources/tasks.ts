@@ -53,7 +53,7 @@ export const tasks: readonly Task[] = Object.freeze([
         },
         old: {
             description: "Baumlochschnecke?",
-            solutions: [{ col: "D", row: 2 }],
+            solutions: [{ col: "D", row: 2 }, { col: "E", row: 1 }],
         },
     },
     {
@@ -64,7 +64,7 @@ export const tasks: readonly Task[] = Object.freeze([
         },
         old: {
             description: "Eine Thermoskanne für Picknicks auf flachen Dächern?",
-            solutions: [{ col: "E", row: 3 }],
+            solutions: [{ col: "E", row: 3 }, { col: "F", row: 3 }],
         },
     },
     {
