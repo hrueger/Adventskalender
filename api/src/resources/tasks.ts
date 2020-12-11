@@ -86,7 +86,7 @@ export const tasks: readonly Task[] = Object.freeze([
         },
         old: {
             description: "Glänzende Einblicke, vor allem im Abendlicht",
-            solutions: [{ col: "G", row: 5 }],
+            solutions: [{ col: "G", row: 5 }, { col: "G", row: 6 }],
         },
     },
     {
