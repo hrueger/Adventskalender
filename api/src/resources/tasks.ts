@@ -174,7 +174,7 @@ export const tasks: readonly Task[] = Object.freeze([
         },
         old: {
             description: "Hier muss du frei von Schwindel sein!",
-            solutions: [{ col: "H", row: 6 }],
+            solutions: [{ col: "H", row: 5 }, { col: "H", row: 6 }],
         },
     },
     {
