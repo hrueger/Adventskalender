@@ -207,7 +207,7 @@ export const tasks: readonly Task[] = Object.freeze([
         },
         old: {
             description: "Was wird hier an die Kette gelegt?",
-            solutions: [{ col: "G", row: 2 }],
+            solutions: [{ col: "G", row: 2 }, { col: "F", row: 2 }],
         },
     },
     {
@@ -218,7 +218,7 @@ export const tasks: readonly Task[] = Object.freeze([
         },
         old: {
             description: "Was für ein Stangensalat!",
-            solutions: [{ col: "I", row: 2 }],
+            solutions: [{ col: "I", row: 4 }],
         },
     },
     {
@@ -229,7 +229,7 @@ export const tasks: readonly Task[] = Object.freeze([
         },
         old: {
             description: "Schau in den Kasten: Ein versteinerter Blumenkohl aus der Schulküche?",
-            solutions: [{ col: "F", row: 8 }],
+            solutions: [{ col: "F", row: 5 }],
         },
     },
     {
